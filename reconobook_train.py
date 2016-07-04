@@ -24,7 +24,7 @@ FLAGS = tf.app.flags.FLAGS
 tf.app.flags.DEFINE_boolean('log_device_placement', False, "Whether to log device placement.")
 tf.app.flags.DEFINE_string('summary_dir', './summary_train', "Directory where to write event logs")
 tf.app.flags.DEFINE_string('checkpoint_dir', './checkpoints', "Directory where to write checkpoint.")
-tf.app.flags.DEFINE_integer('max_steps', 6000, "Number of batches to run.")
+tf.app.flags.DEFINE_integer('max_steps', 10000, "Number of batches to run.")
 tf.app.flags.DEFINE_integer("batch_size", 100, "Cantidad de imagenes que se procesan en un batch")
 tf.app.flags.DEFINE_integer('num_epochs', 500, 'Cantidad de epocas')
 
