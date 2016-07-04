@@ -4,3 +4,6 @@
 /summary_train/*
 *.pyc
 */*.pyc
+/imagenes_jpg/test/*
+/imagenes_jpg/train/*
+/imagenes_jpg/labels.txt
