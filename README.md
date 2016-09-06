@@ -2,6 +2,7 @@
 ##Un proyecto open source de visión artificial para reconocer la portada de libros.
 
 **Conocimientos aplicados:** Machine Learning, Deep Learning, Convolutional neural networks.
+
 **Herramientras aplicadas:** TensorFlow by Google, Python.
 
 
