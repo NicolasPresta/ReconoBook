@@ -7,6 +7,9 @@
 
 
 ###Indice del repositorio:
+
+**Archivos vinculados al armado y evaluación del modelo:**
+
 - **base_dataset.py ->** Clase base de un dataset. No tiene mayor importancia.
 - **reconobook_dataset.py ->** Clase que representa el dataset de Reconobook. Hereda de dataset. No tiene mayor ciencia.
 - **reconobook_eval.py ->** Contiene métodos para evalular un modelo.
@@ -18,6 +21,21 @@
   - loss: calcula la perdida de una predicción.
   - train: backpropagation! (GradientDescentOptimizer)
 - **reconobook_train.py ->** Orquesta el entrenamiento del modelo
+
+**Archivos vinculados al dataset (procesar los .jpg y armar un dataset):**
+
+- **imagenes_jpg/* ->** Imagenes jpg en crudo organizadas por clases.
+- **dataset_scripts/split_dataset.py ->** divide el conjunto de imagenes en 2 conjuntos: uno de test y otro de evaluación.
+- **dataset_scripts/build_dataset.py ->** luego de divididas las imagenes en 2 carpetas, crea 2 datasets. (jpg -> dataset).
+- **datasets/* ->** Datasets armados y listos para ser pasados al modelo!
+
+**Archivos vinculados al modelo ya entrenado:**
+
+- **checkpoints/* ->** Modelo ya entrenado, listo para ser evaluado.
+
+
+
+
 
 
 
