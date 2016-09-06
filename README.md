@@ -38,7 +38,7 @@
 -----------------------------------------------------------
 
 
-Paso a paso, desde imagenes a modelo entrenado:
+###Paso a paso, desde imagenes a modelo entrenado:
 
 1. **Cargar imagenes en la carpeta /imagenes_jpg**
   - Con una subcarpeta por cada caterogia.
