@@ -59,8 +59,29 @@
   - Parametros modificable: unique, indica si se evaluan todas imagenes juntas o una por vez.
 
 
+-----------------------------------------------------------
+
+
+### Utils:
+
+**Abrir IDE**
+```
+cd Downloads/pycharm-community-2016.1.2/bin/
+./pycharm.sh
+```
+
+**Visualizar TensorBoard**
+```
+tensorboard --logdir=/home/presta/ReconoBook/summary_train
+
+o
+
+tensorboard --logdir=/home/presta/ReconoBook/summary_eval
+```
+
 
 -----------------------------------------------------------
+
 
 
 
