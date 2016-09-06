@@ -30,6 +30,7 @@ tf.app.flags.DEFINE_integer('eval_interval_secs', 60 * 5, "How often to run the 
 tf.app.flags.DEFINE_integer('num_examples', 2000, "Number of examples to run.")
 tf.app.flags.DEFINE_string('checkpoint_dir', './checkpoints', "Directory where to write checkpoint.")
 tf.app.flags.DEFINE_boolean('run_once', True, "Whether to run eval only once.")
+tf.app.flags.DEFINE_boolean('unique', True, "Ejecutar revisión imagen por imagen")
 tf.app.flags.DEFINE_integer("batch_size", 100, "Cantidad de imagenes que se procesan en un batch")
 tf.app.flags.DEFINE_integer('num_epochs', 1, 'Cantidad de epocas')
 
@@ -213,8 +214,10 @@ def evaluate_unique(dataset):
 def main(argv=None):
     dataset = ReconoBookData(subset='validation')
 
-    #evaluate(dataset)
-    evaluate_unique(dataset)
+    if FLAGS.unique:
+        evaluate_unique(dataset)
+    else:
+        evaluate(dataset)
 
 if __name__ == '__main__':
     tf.app.run()

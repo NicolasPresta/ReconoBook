@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="23beb77d-b818-479e-a49a-9d1df923d9bf" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reconobook_eval.py" afterPath="$PROJECT_DIR$/reconobook_eval.py" />
     </list>
     <ignored path="ReconoBook.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,20 +28,9 @@
       <file leaf-file-name="split_dataset.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dataset_scripts/split_dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="810">
-              <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-              <folding>
-                <marker date="1467599452273" expanded="true" signature="98:1031" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-                <marker date="1467599452273" expanded="false" signature="1115:1314" placeholder="import ..." />
-                <marker date="1467599452273" expanded="true" signature="2033:2878" placeholder="..." />
-                <marker date="1467599452273" expanded="true" signature="2913:3030" placeholder="..." />
-                <marker date="1467599452273" expanded="true" signature="3055:5035" placeholder="..." />
-                <marker date="1467599452273" expanded="true" signature="3236:3371" placeholder="..." />
-                <marker date="1467599452273" expanded="true" signature="3431:3564" placeholder="..." />
-                <marker date="1467599452273" expanded="true" signature="4294:4952" placeholder="..." />
-                <marker date="1467599452273" expanded="true" signature="4817:4890" placeholder="..." />
-                <marker date="1467599452273" expanded="true" signature="5038:5125" placeholder="..." />
-              </folding>
+            <state relative-caret-position="327">
+              <caret line="58" column="47" selection-start-line="58" selection-start-column="28" selection-end-line="58" selection-end-column="47" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -47,8 +38,8 @@
       <file leaf-file-name="build_datasets.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dataset_scripts/build_datasets.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1584">
-              <caret line="88" column="32" selection-start-line="88" selection-start-column="32" selection-end-line="88" selection-end-column="32" />
+            <state relative-caret-position="4781">
+              <caret line="342" column="43" selection-start-line="342" selection-start-column="32" selection-end-line="342" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -57,7 +48,7 @@
       <file leaf-file-name="reconobook_train.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/reconobook_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
+            <state relative-caret-position="773">
               <caret line="50" column="13" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="13" />
               <folding>
                 <element signature="e#212#250#0" expanded="true" />
@@ -120,8 +111,8 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="5" column="58" selection-start-line="5" selection-start-column="58" selection-end-line="5" selection-end-column="58" />
+            <state relative-caret-position="193">
+              <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -130,8 +121,8 @@
       <file leaf-file-name="reconobook_eval.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/reconobook_eval.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1749">
-              <caret line="99" column="12" selection-start-line="99" selection-start-column="4" selection-end-line="99" selection-end-column="12" />
+            <state relative-caret-position="310">
+              <caret line="39" column="27" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -140,8 +131,8 @@
       <file leaf-file-name="reconobook_dataset.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/reconobook_dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="27" column="25" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
+            <state relative-caret-position="131">
+              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="19" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -150,7 +141,7 @@
       <file leaf-file-name="base_dataset.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/base_dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-261">
+            <state relative-caret-position="-77">
               <caret line="36" column="31" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="31" />
               <folding />
             </state>
@@ -167,10 +158,10 @@
       <list>
         <option value="$PROJECT_DIR$/dataset_scripts/split_dataset.py" />
         <option value="$PROJECT_DIR$/dataset_scripts/build_datasets.py" />
-        <option value="$PROJECT_DIR$/reconobook_eval.py" />
         <option value="$PROJECT_DIR$/reconobook_modelo.py" />
         <option value="$PROJECT_DIR$/reconobook_train.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/reconobook_eval.py" />
         <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
@@ -231,6 +222,34 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ReconoBook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ReconoBook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ReconoBook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="datasets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ReconoBook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ReconoBook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dataset_scripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -519,12 +538,26 @@
       <option name="project" value="LOCAL" />
       <updated>1473133640609</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="La evaluación en linea funciona ok">
+      <created>1473133652352</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1473133652352</updated>
+    </task>
+    <task id="LOCAL-00011" summary="La evaluación en linea funciona ok">
+      <created>1473133713218</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1473133713218</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1299" height="640" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21862972" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -575,18 +608,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="828">
           <caret line="54" column="42" selection-start-line="54" selection-start-column="42" selection-end-line="54" selection-end-column="42" />
-          <folding>
-            <marker date="1467599452273" expanded="true" signature="98:1031" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-            <marker date="1467599452273" expanded="false" signature="1115:1314" placeholder="import ..." />
-            <marker date="1467599452273" expanded="true" signature="2033:2878" placeholder="..." />
-            <marker date="1467599452273" expanded="true" signature="2913:3030" placeholder="..." />
-            <marker date="1467599452273" expanded="true" signature="3055:5035" placeholder="..." />
-            <marker date="1467599452273" expanded="true" signature="3236:3371" placeholder="..." />
-            <marker date="1467599452273" expanded="true" signature="3431:3564" placeholder="..." />
-            <marker date="1467599452273" expanded="true" signature="4294:4952" placeholder="..." />
-            <marker date="1467599452273" expanded="true" signature="4817:4890" placeholder="..." />
-            <marker date="1467599452273" expanded="true" signature="5038:5125" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -677,53 +699,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dataset_scripts/split_dataset.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding>
-            <marker date="1467599452273" expanded="true" signature="98:1031" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-            <marker date="1467599452273" expanded="false" signature="1115:1314" placeholder="import ..." />
-            <marker date="1467599452273" expanded="true" signature="2033:2878" placeholder="..." />
-            <marker date="1467599452273" expanded="true" signature="2913:3030" placeholder="..." />
-            <marker date="1467599452273" expanded="true" signature="3055:5035" placeholder="..." />
-            <marker date="1467599452273" expanded="true" signature="3236:3371" placeholder="..." />
-            <marker date="1467599452273" expanded="true" signature="3431:3564" placeholder="..." />
-            <marker date="1467599452273" expanded="true" signature="4294:4952" placeholder="..." />
-            <marker date="1467599452273" expanded="true" signature="4817:4890" placeholder="..." />
-            <marker date="1467599452273" expanded="true" signature="5038:5125" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dataset_scripts/build_datasets.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1584">
-          <caret line="88" column="32" selection-start-line="88" selection-start-column="32" selection-end-line="88" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
           <caret line="3" column="7" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reconobook_dataset.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="27" column="25" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reconobook_eval.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1749">
-          <caret line="99" column="12" selection-start-line="99" selection-start-column="4" selection-end-line="99" selection-end-column="12" />
           <folding />
         </state>
       </provider>
@@ -748,10 +727,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dataset_scripts/split_dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="58" column="47" selection-start-line="58" selection-start-column="28" selection-end-line="58" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataset_scripts/build_datasets.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4781">
+          <caret line="342" column="43" selection-start-line="342" selection-start-column="32" selection-end-line="342" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/base_dataset.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-261">
+        <state relative-caret-position="-77">
           <caret line="36" column="31" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reconobook_dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="19" selection-end-column="15" />
           <folding />
         </state>
       </provider>
@@ -775,7 +778,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/reconobook_train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
+        <state relative-caret-position="773">
           <caret line="50" column="13" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="13" />
           <folding>
             <element signature="e#212#250#0" expanded="true" />
@@ -783,10 +786,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/reconobook_eval.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="39" column="27" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="58" selection-start-line="5" selection-start-column="58" selection-end-line="5" selection-end-column="58" />
+        <state relative-caret-position="193">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding />
         </state>
       </provider>

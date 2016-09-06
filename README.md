@@ -38,6 +38,31 @@
 -----------------------------------------------------------
 
 
+Paso a paso, desde imagenes a modelo entrenado:
+
+1. **Cargar imagenes en la carpeta /imagenes_jpg**
+  - Con una subcarpeta por cada caterogia.
+2. **Run dataset_scripts/split_dataset.py**,
+  - Completar labels.txt
+  - Parametro Modificable: porcentaje_img_test
+  - Al finalizar se crean carpetas de train y test.
+3. **Run dataset_build_datasets.py**, se crean los datasets de train y validation en /datasets
+  - Parametro modificable: porcentaje_img_test
+4. **Configurar Dataset**:
+  - NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = (cantidad de imagenes de entrenamiento)
+  - NUM_EXAMPLES_PER_EPOCH_FOR_EVAL = (cantidad de imagenes para evaluar)
+  - NUM_CLASES = (cantidad de clases)
+5. **Run reconobook_train.py**
+  - Hay algunos parametros que se pueden modificar, revisar.
+6. **Run reconobook_eval.py**
+  - Parametros modificable: unique, indica si se evaluan todas imagenes juntas o una por vez.
+
+
+
+-----------------------------------------------------------
+
+
+
 
 
 
