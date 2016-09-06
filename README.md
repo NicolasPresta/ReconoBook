@@ -5,10 +5,9 @@
 
 **Herramientras aplicadas:** TensorFlow by Google, Python.
 
-
 -----------------------------------------------------------
 
-##Indice del repositorio:
+###Indice del repositorio:
 
 **Archivos vinculados al armado y evaluación del modelo:**
 
