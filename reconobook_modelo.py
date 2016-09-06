@@ -131,6 +131,10 @@ def eval_inputs(dataset, batchSize, numEpochs):
     return reconobook_input.eval_inputs(dataset, batch_size=batchSize, num_epochs=numEpochs)
 
 
+def unique_input(dataset):
+    return reconobook_input.unique_input(dataset)
+
+
 # Armado del modelo:
 def inference(images):
     """ Armamos el modelo
@@ -141,43 +145,52 @@ def inference(images):
     """
 
     # Primer capa convolucional
-    kernels_conv1 = _variable_with_weight_decay("kernels_conv1", [5, 5, 3, 40], stddev=1e-4, wd=0.0)
-    bias_conv1 = _variable_on_cpu("bias_conv1", [40], tf.constant_initializer(0.0))
-    conv1 = tf.nn.relu(_conv2d(images, kernels_conv1) + bias_conv1, name="conv1")
-    _activation_summary(conv1)
+    with tf.name_scope("CONV-1"):
+        kernels_conv1 = _variable_with_weight_decay("kernels_conv1", [5, 5, 3, 40], stddev=1e-4, wd=0.0)
+        bias_conv1 = _variable_on_cpu("bias_conv1", [40], tf.constant_initializer(0.0))
+        conv1 = tf.nn.relu(_conv2d(images, kernels_conv1) + bias_conv1, name="conv1")
+        #_activation_summary(conv1)
 
     # max pool 1
-    pool1 = _max_pool_2x2(conv1, "pool1")
+    with tf.name_scope("MAXPOOL-1"):
+        pool1 = _max_pool_2x2(conv1, "pool1")
 
     # normalización 1
-    norm1 = tf.nn.lrn(pool1, 4, bias=1.0, alpha=0.001 / 9.0, beta=0.75, name='norm1')
+    with tf.name_scope("NORM-1"):
+        norm1 = tf.nn.lrn(pool1, 4, bias=1.0, alpha=0.001 / 9.0, beta=0.75, name='norm1')
 
     # Segunda capa convolucional
-    kernels_conv2 = _variable_with_weight_decay("kernels_conv2", shape=[5, 5, 40, 50], stddev=1e-4, wd=0.0)
-    bias_conv2 = _variable_on_cpu("bias_conv2", [50], tf.constant_initializer(0.1))
-    conv2 = tf.nn.relu(_conv2d(norm1, kernels_conv2) + bias_conv2, name="conv2")
-    _activation_summary(conv2)
+    with tf.name_scope("CONV-2"):
+        kernels_conv2 = _variable_with_weight_decay("kernels_conv2", shape=[5, 5, 40, 50], stddev=1e-4, wd=0.0)
+        bias_conv2 = _variable_on_cpu("bias_conv2", [50], tf.constant_initializer(0.1))
+        conv2 = tf.nn.relu(_conv2d(norm1, kernels_conv2) + bias_conv2, name="conv2")
+        #_activation_summary(conv2)
 
     # normalización 2
-    norm2 = tf.nn.lrn(conv2, 4, bias=1.0, alpha=0.001 / 9.0, beta=0.75, name='norm2')
+    with tf.name_scope("NORM-2"):
+        norm2 = tf.nn.lrn(conv2, 4, bias=1.0, alpha=0.001 / 9.0, beta=0.75, name='norm2')
 
     # max pool 1
-    pool2 = _max_pool_2x2(norm2, "pool2")
+    with tf.name_scope("MAXPOOL-2"):
+        pool2 = _max_pool_2x2(norm2, "pool2")
 
     # primer capa full conected
-    pool2_flat = tf.reshape(pool2, [-1, 7 * 7 * 50])
-    W_fc1 = _variable_with_weight_decay("W_fc1", shape=[7 * 7 * 50, 500], stddev=0.04, wd=0.004)
-    b_fc1 = _variable_on_cpu("b_fc1", [500], tf.constant_initializer(0.1))
-    local1 = tf.nn.relu(tf.matmul(pool2_flat, W_fc1) + b_fc1, name="local1")
-    _activation_summary(local1)
+    with tf.name_scope("FC-1"):
+        pool2_flat = tf.reshape(pool2, [-1, 7 * 7 * 50])
+        W_fc1 = _variable_with_weight_decay("W_fc1", shape=[7 * 7 * 50, 500], stddev=0.04, wd=0.004)
+        b_fc1 = _variable_on_cpu("b_fc1", [500], tf.constant_initializer(0.1))
+        local1 = tf.nn.relu(tf.matmul(pool2_flat, W_fc1) + b_fc1, name="local1")
+        #_activation_summary(local1)
 
     # segunda capa full conected
-    W_fc2 = _variable_with_weight_decay("W_fc2", shape=[500, 10], stddev=0.04, wd=0.004)
-    b_fc2 = _variable_on_cpu("b_fc2", [10], tf.constant_initializer(0.1))
-    softmax_linear = tf.nn.softmax(tf.matmul(local1, W_fc2) + b_fc2)
-    _activation_summary(softmax_linear)
+    with tf.name_scope("FC-2"):
+        W_fc2 = _variable_with_weight_decay("W_fc2", shape=[500, 10], stddev=0.04, wd=0.004)
+        b_fc2 = _variable_on_cpu("b_fc2", [10], tf.constant_initializer(0.1))
+        # softmax_linear = tf.nn.softmax(tf.matmul(local1, W_fc2) + b_fc2)
+        #_activation_summary(softmax_linear)
+        logits = tf.matmul(local1, W_fc2) + b_fc2
 
-    return softmax_linear
+    return logits
 
 
 def loss(logits, labels):
@@ -192,8 +205,7 @@ def loss(logits, labels):
     """
     # Calculate the average cross entropy loss across the batch.
     labels = tf.cast(labels, tf.int64)
-    cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(
-      logits, labels, name='cross_entropy_per_example')
+    cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(logits, labels, name='cross_entropy_per_example')
     cross_entropy_mean = tf.reduce_mean(cross_entropy, name='cross_entropy')
     tf.add_to_collection('losses', cross_entropy_mean)
 
@@ -219,11 +231,13 @@ def train(total_loss, global_step):
     # Decay the learning rate exponentially based on the number of steps.
     lr = tf.train.exponential_decay(INITIAL_LEARNING_RATE,
                                     global_step,
-                                    decay_steps,
-                                    LEARNING_RATE_DECAY_FACTOR,
+                                    500,
+                                    0.9,
                                     staircase=True)
 
     tf.scalar_summary('learning_rate', lr)
+    tf.scalar_summary('global_step', global_step)
+    tf.scalar_summary('decay_steps', decay_steps)
 
     # Generate moving averages of all losses and associated summaries.
     loss_averages_op = _add_loss_summaries(total_loss)
@@ -249,6 +263,8 @@ def train(total_loss, global_step):
     variable_averages = tf.train.ExponentialMovingAverage(MOVING_AVERAGE_DECAY, global_step)
     variables_averages_op = variable_averages.apply(tf.trainable_variables())
 
+    # Control_dependencies lo que hace es obligaar a ejecutar las acciones que se pasan por parametro antes
+    # de las que estan dentro del with.
     with tf.control_dependencies([apply_gradient_op, variables_averages_op]):
         train_op = tf.no_op(name='train')
 

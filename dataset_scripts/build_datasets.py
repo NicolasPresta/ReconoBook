@@ -21,7 +21,7 @@ ENTRADA:
     Donde el subdirectorio es la etiqueta unica asociada a cada imagen.
 
 SALIDA:
-    Este script convierte las imagenes en datasets particonados
+    Este script convierte las imagenes en datasets particionados
     Cada dataset consiste de un conjunto de registros TF
 
         -------------------------
@@ -84,9 +84,9 @@ import tensorflow as tf
 
 # -----------------------------------------------------------------------------------------------
 
-tf.app.flags.DEFINE_string('train_directory', '../imagenes_jpg/train/', 'Directorio con las imagenes de entrenamiento')
-tf.app.flags.DEFINE_string('validation_directory', '../imagenes_jpg/test/', 'Directorio con las imagenes de validación')
-tf.app.flags.DEFINE_string('output_directory', '../datasets/', 'Directorio de salida')
+tf.app.flags.DEFINE_string('train_directory', './imagenes_jpg/train/', 'Directorio con las imagenes de entrenamiento')
+tf.app.flags.DEFINE_string('validation_directory', './imagenes_jpg/test/', 'Directorio con las imagenes de validación')
+tf.app.flags.DEFINE_string('output_directory', './datasets/', 'Directorio de salida')
 
 tf.app.flags.DEFINE_integer('train_shards', 1, 'Numero de particiones del dataset de entrenamiento')
 tf.app.flags.DEFINE_integer('validation_shards', 1, 'Numero de particiones del dataset de validación')

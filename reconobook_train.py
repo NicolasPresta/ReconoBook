@@ -24,7 +24,7 @@ FLAGS = tf.app.flags.FLAGS
 tf.app.flags.DEFINE_boolean('log_device_placement', False, "Whether to log device placement.")
 tf.app.flags.DEFINE_string('summary_dir', './summary_train', "Directory where to write event logs")
 tf.app.flags.DEFINE_string('checkpoint_dir', './checkpoints', "Directory where to write checkpoint.")
-tf.app.flags.DEFINE_integer('max_steps', 10000, "Number of batches to run.")
+tf.app.flags.DEFINE_integer('max_steps', 6000, "Number of batches to run.")
 tf.app.flags.DEFINE_integer("batch_size", 100, "Cantidad de imagenes que se procesan en un batch")
 tf.app.flags.DEFINE_integer('num_epochs', 500, 'Cantidad de epocas')
 
@@ -32,17 +32,19 @@ tf.app.flags.DEFINE_integer('num_epochs', 500, 'Cantidad de epocas')
 
 
 def train(dataset):
-    """Train CIFAR-10 for a number of steps."""
+
     with tf.Graph().as_default():
         global_step = tf.Variable(0, trainable=False)
 
-        # Get images and labels
+        # Obtenemos imagenes y labels.
         images, labels = reconobook_modelo.train_inputs(dataset, FLAGS.batch_size, FLAGS.num_epochs)
+        image_shape = tf.reshape(images, [-1, 28, 28, 3])
+        tf.image_summary('input', image_shape, 3)
 
-        # Build a Graph that computes the logits predictions from the inference model.
+        # Dadas las imagenes obtiene la probabilidad que tiene cada imagen de pertener a cada clase.
         logits = reconobook_modelo.inference(images)
 
-        # Calculate loss.
+        # Calulamos el costo.
         loss = reconobook_modelo.loss(logits, labels)
 
         # Build a Graph that trains the model with one batch of examples and updates the model parameters.
@@ -64,6 +66,7 @@ def train(dataset):
         # Start the queue runners.
         tf.train.start_queue_runners(sess=sess)
 
+        # Create a summary writer
         summary_writer = tf.train.SummaryWriter(FLAGS.summary_dir, sess.graph)
 
         for step in xrange(FLAGS.max_steps):
@@ -81,7 +84,7 @@ def train(dataset):
                 format_str = '%s: step %d, loss = %.2f (%.1f examples/sec; %.3f sec/batch)'
                 print (format_str % (datetime.now(), step, loss_value, examples_per_sec, sec_per_batch))
 
-            if step % 100 == 0:
+            if step % 50 == 0:
                 summary_str = sess.run(summary_op)
                 summary_writer.add_summary(summary_str, step)
 

@@ -42,6 +42,16 @@ tf.app.flags.DEFINE_integer('num_readers', 4, 'Numero de readers')
 # ==============================================================================
 
 
+def unique_input(dataset):
+    with tf.device('/cpu:0'):
+        images, labels = batch_inputs(dataset,
+                                      batch_size=1,
+                                      train=False,
+                                      num_epochs=1)
+
+    return images, labels
+
+
 def eval_inputs(dataset, batch_size=None, num_epochs=1):
     """Generate batches of ImageNet images for evaluation.
     Use this function as the inputs for evaluating a network.

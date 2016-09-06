@@ -52,7 +52,7 @@ from random import shuffle
 
 # ==============================================================================
 
-tf.app.flags.DEFINE_string('data_dir', '../imagenes_jpg/', 'Directorio con las imagenes')
+tf.app.flags.DEFINE_string('data_dir', './imagenes_jpg/', 'Directorio con las imagenes')
 tf.app.flags.DEFINE_string('train_folder', 'train', 'Directorio con las imagenes')
 tf.app.flags.DEFINE_string('test_folder', 'test', 'Directorio con las imagenes')
 tf.app.flags.DEFINE_string('labels_file_name', 'labels.txt', 'Labels file')
