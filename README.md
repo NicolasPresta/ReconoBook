@@ -46,8 +46,9 @@
   - Completar labels.txt
   - Parametro Modificable: porcentaje_img_test
   - Al finalizar se crean carpetas de train y test.
-3. **Run dataset_build_datasets.py**, se crean los datasets de train y validation en /datasets
+3. **Run dataset_build_datasets.py**
   - Parametro modificable: porcentaje_img_test
+  - Al finalizar se crean los datasets de train y validation en /datasets
 4. **Configurar Dataset**:
   - NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = (cantidad de imagenes de entrenamiento)
   - NUM_EXAMPLES_PER_EPOCH_FOR_EVAL = (cantidad de imagenes para evaluar)
