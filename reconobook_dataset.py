@@ -15,8 +15,8 @@ from base_dataset import Dataset
 # ==============================================================================
 
 # Constantes importantes:
-NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = 5463
-NUM_EXAMPLES_PER_EPOCH_FOR_EVAL = 3641
+NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = 3259
+NUM_EXAMPLES_PER_EPOCH_FOR_EVAL = 2167
 NUM_CLASES = 10
 
 # ==============================================================================

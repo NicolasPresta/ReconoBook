@@ -195,7 +195,7 @@ def evaluate_unique(dataset):
 
                     # cargamos imagen
                     #imagenCargada = load_image("./test_img/2.jpeg")
-                    imagenCargada = load_image("./imagenes_jpg/1/1 001.jpg")
+                    imagenCargada = load_image("./imagenes_jpg/2/2A 020.jpg")
 
                     # La pasamos por el modelo de predicción
                     prediccion = sess.run([logits], feed_dict={_images: imagenCargada})

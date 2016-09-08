@@ -24,9 +24,12 @@ FLAGS = tf.app.flags.FLAGS
 tf.app.flags.DEFINE_boolean('log_device_placement', False, "Whether to log device placement.")
 tf.app.flags.DEFINE_string('summary_dir', './summary_train', "Directory where to write event logs")
 tf.app.flags.DEFINE_string('checkpoint_dir', './checkpoints', "Directory where to write checkpoint.")
+
+# La (NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN) * (num_epochs) > (batch_size) * (max_steps)
 tf.app.flags.DEFINE_integer('max_steps', 6000, "Number of batches to run.")
 tf.app.flags.DEFINE_integer("batch_size", 100, "Cantidad de imagenes que se procesan en un batch")
 tf.app.flags.DEFINE_integer('num_epochs', 500, 'Cantidad de epocas')
+
 
 # ==============================================================================
 
@@ -38,8 +41,6 @@ def train(dataset):
 
         # Obtenemos imagenes y labels.
         images, labels = reconobook_modelo.train_inputs(dataset, FLAGS.batch_size, FLAGS.num_epochs)
-        image_shape = tf.reshape(images, [-1, 28, 28, 3])
-        tf.image_summary('input', image_shape, 3)
 
         # Dadas las imagenes obtiene la probabilidad que tiene cada imagen de pertener a cada clase.
         logits = reconobook_modelo.inference(images)
@@ -84,7 +85,7 @@ def train(dataset):
                 format_str = '%s: step %d, loss = %.2f (%.1f examples/sec; %.3f sec/batch)'
                 print (format_str % (datetime.now(), step, loss_value, examples_per_sec, sec_per_batch))
 
-            if step % 50 == 0:
+            if step % 100 == 0:
                 summary_str = sess.run(summary_op)
                 summary_writer.add_summary(summary_str, step)
 
