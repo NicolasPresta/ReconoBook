@@ -29,15 +29,12 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
+import random
+import config
 
 # ==============================================================================
 
 FLAGS = tf.app.flags.FLAGS
-
-tf.app.flags.DEFINE_integer('image_height', 28, 'Alto imagen')
-tf.app.flags.DEFINE_integer('image_width', 28, 'Ancho imagen')
-tf.app.flags.DEFINE_integer('num_preprocess_threads', 4, 'Numero de hilos que hacen el preprocesado')
-tf.app.flags.DEFINE_integer('num_readers', 4, 'Numero de readers')
 
 # ==============================================================================
 
@@ -65,8 +62,6 @@ def eval_inputs(dataset, batch_size=None, num_epochs=1):
         images: Images. 4D tensor of size [batch_size, FLAGS.image_height, image_width, 3].
         labels: 1-D integer Tensor of [FLAGS.batch_size].
     """
-    if not batch_size:
-        batch_size = FLAGS.batch_size
 
     # Force all input processing onto CPU in order to reserve the GPU for
     # the forward inference and back-propagation.
@@ -181,6 +176,15 @@ def distort_image(image, height, width, thread_id=0, scope=None):
 
     with tf.op_scope([image, height, width], scope, 'distort_image'):
 
+        # distort the image
+        if FLAGS.train_distort:
+            image = tf.image.random_contrast(image, 0.5, 1)
+            image = tf.image.random_hue(image, 0.15)
+            image = tf.image.random_saturation(image, 0.5, 1)
+
+        if FLAGS.train_crop:
+            image = tf.image.central_crop(image, (random.randint(7, 10) / 10))
+
         # Resize the image to the original height and width.
         image = tf.expand_dims(image, 0)
         image = tf.image.resize_bilinear(image, [height, width], align_corners=False)
@@ -212,6 +216,14 @@ def eval_image(image, height, width, scope=None):
         # Crop the central region of the image with an area containing 87.5% of
         # the original image.
         # image = tf.image.central_crop(image, central_fraction=0.875)
+
+        if FLAGS.eval_distort:
+            image = tf.image.random_contrast(image, 0.5, 1)
+            image = tf.image.random_hue(image, 0.15)
+            image = tf.image.random_saturation(image, 0.5, 1)
+
+        if FLAGS.eval_crop:
+            image = tf.image.central_crop(image, (random.randint(7, 10) / 10))
 
         # Resize the image to the original height and width.
         image = tf.expand_dims(image, 0)
@@ -330,7 +342,7 @@ def batch_inputs(dataset, batch_size, train, num_epochs=1):
 
         # Preprocesado
         images_and_labels = []
-        for thread_id in range(FLAGS.num_preprocess_threads):
+        for thread_id in range(FLAGS.input_num_preprocess_threads):
             # Deserealizamos el string con el objeto example
             image_buffer, label_index, _ = parse_example_proto(example_serialized)
             # Preprocesamos la imagen
@@ -341,7 +353,7 @@ def batch_inputs(dataset, batch_size, train, num_epochs=1):
         # Creamos el batch
         images, label_index_batch = tf.train.batch_join(images_and_labels,
                                                         batch_size=batch_size,
-                                                        capacity=2 * FLAGS.num_preprocess_threads * batch_size)
+                                                        capacity=2 * FLAGS.input_num_preprocess_threads * batch_size)
 
         # Redimensionamos a las dimensiones establecidas
         height = FLAGS.image_height

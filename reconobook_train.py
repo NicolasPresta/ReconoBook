@@ -17,19 +17,11 @@ from datetime import datetime
 import os.path
 import time
 import numpy as np
+import config
 
 # ==============================================================================
 
 FLAGS = tf.app.flags.FLAGS
-tf.app.flags.DEFINE_boolean('log_device_placement', False, "Whether to log device placement.")
-tf.app.flags.DEFINE_string('summary_dir', './summary_train', "Directory where to write event logs")
-tf.app.flags.DEFINE_string('checkpoint_dir', './checkpoints', "Directory where to write checkpoint.")
-
-# La (NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN) * (num_epochs) > (batch_size) * (max_steps)
-tf.app.flags.DEFINE_integer('max_steps', 6000, "Number of batches to run.")
-tf.app.flags.DEFINE_integer("batch_size", 100, "Cantidad de imagenes que se procesan en un batch")
-tf.app.flags.DEFINE_integer('num_epochs', 500, 'Cantidad de epocas')
-
 
 # ==============================================================================
 
@@ -40,7 +32,7 @@ def train(dataset):
         global_step = tf.Variable(0, trainable=False)
 
         # Obtenemos imagenes y labels.
-        images, labels = reconobook_modelo.train_inputs(dataset, FLAGS.batch_size, FLAGS.num_epochs)
+        images, labels = reconobook_modelo.train_inputs(dataset, FLAGS.train_batch_size, FLAGS.train_num_epochs)
 
         # Dadas las imagenes obtiene la probabilidad que tiene cada imagen de pertener a cada clase.
         logits = reconobook_modelo.inference(images)
@@ -68,9 +60,9 @@ def train(dataset):
         tf.train.start_queue_runners(sess=sess)
 
         # Create a summary writer
-        summary_writer = tf.train.SummaryWriter(FLAGS.summary_dir, sess.graph)
+        summary_writer = tf.train.SummaryWriter(FLAGS.summary_dir_train, sess.graph)
 
-        for step in xrange(FLAGS.max_steps):
+        for step in xrange(FLAGS.train_max_steps):
             start_time = time.time()
             _, loss_value = sess.run([train_op, loss])
             duration = time.time() - start_time
@@ -78,7 +70,7 @@ def train(dataset):
             assert not np.isnan(loss_value), 'Model diverged with loss = NaN'
 
             if step % 10 == 0:
-                num_examples_per_step = FLAGS.batch_size
+                num_examples_per_step = FLAGS.train_batch_size
                 examples_per_sec = num_examples_per_step / duration
                 sec_per_batch = float(duration)
 
@@ -90,7 +82,7 @@ def train(dataset):
                 summary_writer.add_summary(summary_str, step)
 
             # Save the model checkpoint periodically.
-            if step % 1000 == 0 or (step + 1) == FLAGS.max_steps:
+            if step % 500 == 0 or (step + 1) == FLAGS.train_max_steps:
                 checkpoint_path = os.path.join(FLAGS.checkpoint_dir, 'model.ckpt')
                 saver.save(sess, checkpoint_path, global_step=step)
 

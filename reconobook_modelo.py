@@ -13,25 +13,12 @@ from __future__ import print_function
 import tensorflow as tf
 import reconobook_input
 import re
-import reconobook_dataset
+import config
 
 # ==============================================================================
 
 FLAGS = tf.app.flags.FLAGS
-tf.app.flags.DEFINE_string('train_dir', './data/train', 'Directorio con las imagenes')
 
-# Global constants describing the CIFAR-10 data set.
-NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = reconobook_dataset.NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN
-NUM_EXAMPLES_PER_EPOCH_FOR_EVAL = reconobook_dataset.NUM_EXAMPLES_PER_EPOCH_FOR_EVAL
-
-# Constants describing the training process.
-MOVING_AVERAGE_DECAY = 0.9999     # The decay to use for the moving average.
-NUM_EPOCHS_PER_DECAY = 350.0      # Epochs after which learning rate decays.
-LEARNING_RATE_DECAY_FACTOR = 0.1  # Learning rate decay factor.
-INITIAL_LEARNING_RATE = 0.1       # Initial learning rate.
-
-# Others constants
-TOWER_NAME = 'tower'
 # ==============================================================================
 
 
@@ -46,7 +33,7 @@ def _activation_summary(x):
     """
     # Remove 'tower_[0-9]/' from the name in case this is a multi-GPU training
     # session. This helps the clarity of presentation on tensorboard.
-    tensor_name = re.sub('%s_[0-9]*/' % TOWER_NAME, '', x.op.name)
+    tensor_name = re.sub('%s_[0-9]*/' % "tower", '', x.op.name)
     tf.histogram_summary(tensor_name + '/activations', x)
     tf.scalar_summary(tensor_name + '/sparsity', tf.nn.zero_fraction(x))
 
@@ -146,8 +133,8 @@ def inference(images):
 
     # Primer capa convolucional
     with tf.name_scope("CONV-1"):
-        kernels_conv1 = _variable_with_weight_decay("kernels_conv1", [5, 5, 3, 40], stddev=1e-4, wd=0.0)
-        bias_conv1 = _variable_on_cpu("bias_conv1", [40], tf.constant_initializer(0.0))
+        kernels_conv1 = _variable_with_weight_decay("kernels_conv1", [5, 5, 3, 150], stddev=1e-4, wd=0.0)
+        bias_conv1 = _variable_on_cpu("bias_conv1", [150], tf.constant_initializer(0.0))
         conv1 = tf.nn.relu(_conv2d(images, kernels_conv1) + bias_conv1, name="conv1")
         #_activation_summary(conv1)
 
@@ -161,8 +148,8 @@ def inference(images):
 
     # Segunda capa convolucional
     with tf.name_scope("CONV-2"):
-        kernels_conv2 = _variable_with_weight_decay("kernels_conv2", shape=[5, 5, 40, 50], stddev=1e-4, wd=0.0)
-        bias_conv2 = _variable_on_cpu("bias_conv2", [50], tf.constant_initializer(0.1))
+        kernels_conv2 = _variable_with_weight_decay("kernels_conv2", shape=[3, 3, 150, 300], stddev=1e-4, wd=0.0)
+        bias_conv2 = _variable_on_cpu("bias_conv2", [300], tf.constant_initializer(0.1))
         conv2 = tf.nn.relu(_conv2d(norm1, kernels_conv2) + bias_conv2, name="conv2")
         #_activation_summary(conv2)
 
@@ -176,16 +163,16 @@ def inference(images):
 
     # primer capa full conected
     with tf.name_scope("FC-1"):
-        pool2_flat = tf.reshape(pool2, [-1, 7 * 7 * 50])
-        W_fc1 = _variable_with_weight_decay("W_fc1", shape=[7 * 7 * 50, 500], stddev=0.04, wd=0.004)
-        b_fc1 = _variable_on_cpu("b_fc1", [500], tf.constant_initializer(0.1))
+        pool2_flat = tf.reshape(pool2, [-1, 10 * 10 * 300])
+        W_fc1 = _variable_with_weight_decay("W_fc1", shape=[10 * 10 * 300, 800], stddev=0.04, wd=0.004)
+        b_fc1 = _variable_on_cpu("b_fc1", [800], tf.constant_initializer(0.1))
         local1 = tf.nn.relu(tf.matmul(pool2_flat, W_fc1) + b_fc1, name="local1")
         #_activation_summary(local1)
 
     # segunda capa full conected
     with tf.name_scope("FC-2"):
-        W_fc2 = _variable_with_weight_decay("W_fc2", shape=[500, 10], stddev=0.04, wd=0.004)
-        b_fc2 = _variable_on_cpu("b_fc2", [10], tf.constant_initializer(0.1))
+        W_fc2 = _variable_with_weight_decay("W_fc2", shape=[800, FLAGS.cantidad_clases], stddev=0.04, wd=0.004)
+        b_fc2 = _variable_on_cpu("b_fc2", [FLAGS.cantidad_clases], tf.constant_initializer(0.1))
         # softmax_linear = tf.nn.softmax(tf.matmul(local1, W_fc2) + b_fc2)
         #_activation_summary(softmax_linear)
         logits = tf.matmul(local1, W_fc2) + b_fc2
@@ -224,20 +211,16 @@ def train(total_loss, global_step):
     Returns:
         train_op: op for training.
     """
-    # Variables that affect learning rate.
-    num_batches_per_epoch = NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN / FLAGS.batch_size
-    decay_steps = int(num_batches_per_epoch * NUM_EPOCHS_PER_DECAY)
 
     # Decay the learning rate exponentially based on the number of steps.
-    lr = tf.train.exponential_decay(INITIAL_LEARNING_RATE,
+    lr = tf.train.exponential_decay(FLAGS.initial_learning_rate,
                                     global_step,
-                                    500,
-                                    0.9,
+                                    FLAGS.decay_steps,
+                                    FLAGS.decay_rate,
                                     staircase=True)
 
     tf.scalar_summary('learning_rate', lr)
     tf.scalar_summary('global_step', global_step)
-    tf.scalar_summary('decay_steps', decay_steps)
 
     # Generate moving averages of all losses and associated summaries.
     loss_averages_op = _add_loss_summaries(total_loss)
@@ -260,7 +243,7 @@ def train(total_loss, global_step):
             tf.histogram_summary(var.op.name + '/gradients', grad)
 
     # Track the moving averages of all trainable variables.
-    variable_averages = tf.train.ExponentialMovingAverage(MOVING_AVERAGE_DECAY, global_step)
+    variable_averages = tf.train.ExponentialMovingAverage(FLAGS.moving_average_decay, global_step)
     variables_averages_op = variable_averages.apply(tf.trainable_variables())
 
     # Control_dependencies lo que hace es obligaar a ejecutar las acciones que se pasan por parametro antes

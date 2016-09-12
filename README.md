@@ -34,6 +34,13 @@
 
 - **checkpoints/* ->** Modelo ya entrenado, listo para ser evaluado.
 
+**Archivos vinculados a la configuración general:**
+
+- **config.py ->** Contiene todas las constantes parametrizables del sistema (FLAGS).
+
+**Archivos de modelos y datasets viejos:**
+
+- **Resguardo/* ->** Contiene modelos y datasets que no son el corriente.
 
 -----------------------------------------------------------
 
@@ -43,20 +50,17 @@
 1. **Cargar imagenes en la carpeta /imagenes_jpg**
   - Con una subcarpeta por cada caterogia.
 2. **Run dataset_scripts/split_dataset.py**,
-  - Completar labels.txt
   - Parametro Modificable: porcentaje_img_test
-  - Al finalizar se crean carpetas de train y test.
+  - Al finalizar se crean carpetas de train y test y el archivo con los labels.
 3. **Run dataset_build_datasets.py**
   - Parametro modificable: porcentaje_img_test
   - Al finalizar se crean los datasets de train y validation en /datasets
 4. **Configurar Dataset**:
-  - NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = (cantidad de imagenes de entrenamiento)
-  - NUM_EXAMPLES_PER_EPOCH_FOR_EVAL = (cantidad de imagenes para evaluar)
-  - NUM_CLASES = (cantidad de clases)
+  - ir a config.py y completar cantidad_imagenes_train y cantidad_imagenes_eval de acuerdo a las imagenes en las carpetas
 5. **Run reconobook_train.py**
-  - Hay algunos parametros que se pueden modificar, revisar.
+  - Hay algunos parametros que se pueden modificar en config.py, revisar.
 6. **Run reconobook_eval.py**
-  - Parametros modificable: unique, indica si se evaluan todas imagenes juntas o una por vez.
+  - Parametros modificable: config.py->eval_unique, indica si se evaluan todas imagenes juntas o una por vez.
 
 
 -----------------------------------------------------------

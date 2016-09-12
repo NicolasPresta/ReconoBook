@@ -1,4 +1,9 @@
 /summary_eval/*
 /summary_train/*
+/datasets/*
+/checkpoints/*
+/Resguardo/*
+/imagenes_jpg/*/*.jpg
+/test_img/*.jpg
 *.pyc
 */*.pyc

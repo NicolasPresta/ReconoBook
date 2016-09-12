@@ -10,42 +10,43 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from datetime import datetime
 import math
-import time
 import matplotlib.pyplot as plt
 import tensorflow as tf
 import numpy as np
 from reconobook_dataset import ReconoBookData
 import reconobook_modelo
-import PIL
 from PIL import Image
+import random
+import config
 
 # ==============================================================================
 
 FLAGS = tf.app.flags.FLAGS
 
-tf.app.flags.DEFINE_string('summary_dir', './summary_eval', "Directory where to write event logs.")
-tf.app.flags.DEFINE_integer('eval_interval_secs', 60 * 5, "How often to run the eval.")
-tf.app.flags.DEFINE_integer('num_examples', 2000, "Number of examples to run.")
-tf.app.flags.DEFINE_string('checkpoint_dir', './checkpoints', "Directory where to write checkpoint.")
-tf.app.flags.DEFINE_boolean('run_once', True, "Whether to run eval only once.")
-tf.app.flags.DEFINE_boolean('unique', True, "Ejecutar revisión imagen por imagen")
-tf.app.flags.DEFINE_integer("batch_size", 100, "Cantidad de imagenes que se procesan en un batch")
-tf.app.flags.DEFINE_integer('num_epochs', 1, 'Cantidad de epocas')
-
 titulos = [
-            "Einstein",
-            "Analisis matematico (Volumen 2)",
-            "Sistemas inteligentes",
-            "Mineria de datos a traves de ejemplos",
-            "Analisis matematico (Volumen 3)",
-            "Introducción a la Mineria de datos",
-            "Big data",
-            "Patrones de diseño",
-            "Fisica universitaria",
-            "Sistemas expertos",
-           ]
+    "Einstein",
+    "Liderazgo Guardiola",
+    "En cambio",
+    "Analisis matematico (Amarillo)",
+    "Sistemas inteligentes",
+    "Empresas de consultoría",
+    "Mineria de datos a traves de ejemplos",
+    "Analisis matematico (Azul)",
+    "Teoria de control",
+    "Introducción a Mineria de datos",
+    "Legislación",
+    "El arte de conversar",
+    "Big data",
+    "Revista: Lado oscuro del cosmos",
+    "Revista: Epigenetica",
+    "Patrones de diseño",
+    "Fisica universita",
+    "Constitución Argentina",
+    "El señor de las moscas",
+    "Sistemas expertos",
+]
+
 # ==============================================================================
 
 
@@ -53,8 +54,15 @@ def load_image(filename):
     img = Image.open(filename)
     img.load()
     data = np.asarray(img, dtype="int32")
+    if FLAGS.eval_distort:
+        tf.set_random_seed(3251)
+        data = tf.image.random_contrast(data, 0.5, 1)
+        data = tf.image.random_hue(data, 0.15)
+        data = tf.image.random_saturation(data, 0.5, 1)
+    if FLAGS.eval_crop:
+        data = tf.image.central_crop(data, (random.randint(7, 10)/10))
     data = tf.expand_dims(data, 0)
-    data = tf.image.resize_bilinear(data, [28, 28], align_corners=False)
+    data = tf.image.resize_bilinear(data, [FLAGS.image_height, FLAGS.image_width], align_corners=False)
     data = tf.image.convert_image_dtype(data, dtype=tf.float32)
     data = data.eval()
     # reescalamos la imagen
@@ -90,9 +98,9 @@ def eval_once(saver, summary_writer, top_k_op, summary_op):
             for qr in tf.get_collection(tf.GraphKeys.QUEUE_RUNNERS):
                 threads.extend(qr.create_threads(sess, coord=coord, daemon=True, start=True))
 
-            num_iter = int(math.ceil(FLAGS.num_examples / FLAGS.batch_size))
+            num_iter = int(math.ceil(FLAGS.eval_num_examples / FLAGS.eval_batch_size))
             true_count = 0  # Counts the number of correct predictions.
-            total_sample_count = num_iter * FLAGS.batch_size
+            total_sample_count = num_iter * FLAGS.eval_batch_size
             step = 0
             while step < num_iter and not coord.should_stop():
                 predictions = sess.run([top_k_op])
@@ -119,8 +127,8 @@ def eval_once(saver, summary_writer, top_k_op, summary_op):
 def evaluate(dataset):
     with tf.Graph().as_default() as g:
         # Obtenemos imagenes:
-        images, labels = reconobook_modelo.eval_inputs(dataset, FLAGS.batch_size, FLAGS.num_epochs)
-        image_shape = tf.reshape(images, [-1, 28, 28, 3])
+        images, labels = reconobook_modelo.eval_inputs(dataset, FLAGS.eval_batch_size, 1)
+        image_shape = tf.reshape(images, [-1, FLAGS.image_height, FLAGS.image_width, 3])
         tf.image_summary('input', image_shape, 3)
 
         # Build a Graph that computes the logits predictions from the
@@ -128,23 +136,19 @@ def evaluate(dataset):
         logits = reconobook_modelo.inference(images)
 
         # Calculate predictions.
-        top_k_op = tf.nn.in_top_k(logits, labels, 1)
+        top_k_op = tf.nn.in_top_k(logits, labels, 5)
 
         # Restore the moving average version of the learned variables for eval.
-        variable_averages = tf.train.ExponentialMovingAverage(reconobook_modelo.MOVING_AVERAGE_DECAY)
+        variable_averages = tf.train.ExponentialMovingAverage(FLAGS.moving_average_decay)
         variables_to_restore = variable_averages.variables_to_restore()
         saver = tf.train.Saver(variables_to_restore)
 
         # Build the summary operation based on the TF collection of Summaries.
         summary_op = tf.merge_all_summaries()
 
-        summary_writer = tf.train.SummaryWriter(FLAGS.summary_dir, g)
+        summary_writer = tf.train.SummaryWriter(FLAGS.summary_dir_eval, g)
 
-        while True:
-            eval_once(saver, summary_writer, top_k_op, summary_op)
-            if FLAGS.run_once:
-                break
-            time.sleep(FLAGS.eval_interval_secs)
+        eval_once(saver, summary_writer, top_k_op, summary_op)
 
 
 def evaluate_unique(dataset):
@@ -153,11 +157,12 @@ def evaluate_unique(dataset):
     with tf.Graph().as_default():
 
         # definimos placeholders
-        _images = tf.placeholder(tf.float32, shape=[None, 28, 28, 3])
+        _images = tf.placeholder(tf.float32, shape=[None, FLAGS.image_height, FLAGS.image_width, 3])
 
         # Obtenemos imagenes --(se cargan desde archivo, no desde dataset)
-        # images, labels = reconobook_modelo.unique_input(dataset)
-        # images, labels = reconobook_modelo.eval_inputs(dataset, 1, 1)
+        if FLAGS.eval_unique_from_dataset:
+            images, labels = reconobook_modelo.unique_input(dataset)
+            # images, labels = reconobook_modelo.eval_inputs(dataset, 1, 1)
 
         # Build a Graph that computes the logits predictions from the
         # inference model.
@@ -167,7 +172,7 @@ def evaluate_unique(dataset):
         maximaActivacion = tf.argmax(logits, 1)
 
         # Restore the moving average version of the learned variables for eval.
-        variable_averages = tf.train.ExponentialMovingAverage(reconobook_modelo.MOVING_AVERAGE_DECAY)
+        variable_averages = tf.train.ExponentialMovingAverage(FLAGS.moving_average_decay)
         variables_to_restore = variable_averages.variables_to_restore()
         saver = tf.train.Saver(variables_to_restore)
 
@@ -190,12 +195,14 @@ def evaluate_unique(dataset):
                 for qr in tf.get_collection(tf.GraphKeys.QUEUE_RUNNERS):
                     threads.extend(qr.create_threads(sess, coord=coord, daemon=True, start=True))
 
-                for step in xrange(1):
-                    #var1 = images.eval()
+                for step in xrange(FLAGS.eval_unique_cantidad_img):
 
                     # cargamos imagen
-                    #imagenCargada = load_image("./test_img/2.jpeg")
-                    imagenCargada = load_image("./imagenes_jpg/2/2A 020.jpg")
+                    if FLAGS.eval_unique_from_dataset:
+                        imagenCargada = images.eval()
+                    else:
+                        imagenCargada = load_image("./test_img/%d.jpg" % (step + 1))
+                        #imagenCargada = load_image("./imagenes_jpg/test/17/17B 015.jpg")
 
                     # La pasamos por el modelo de predicción
                     prediccion = sess.run([logits], feed_dict={_images: imagenCargada})
@@ -209,7 +216,7 @@ def evaluate_unique(dataset):
                     print('------------------------------------------------------------------------------')
 
 
-                    for i in xrange(10):
+                    for i in xrange(FLAGS.cantidad_clases):
                         print('Activación => Clase: %d, Activación: %s, Libro: %s' % (i, activaciones[i], titulos[i]))
 
                     print('------------------------------------------------------------------------------')
@@ -228,7 +235,7 @@ def evaluate_unique(dataset):
 def main(argv=None):
     dataset = ReconoBookData(subset='validation')
 
-    if FLAGS.unique:
+    if FLAGS.eval_unique:
         evaluate_unique(dataset)
     else:
         evaluate(dataset)

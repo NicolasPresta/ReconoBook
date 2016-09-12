@@ -21,11 +21,11 @@ from abc import ABCMeta
 from abc import abstractmethod
 import os
 import tensorflow as tf
+import config
 
 # ==============================================================================
 
 FLAGS = tf.app.flags.FLAGS
-tf.app.flags.DEFINE_string('data_dir', './datasets', 'Directorio donde estan los datasets')
 
 # ==============================================================================
 
