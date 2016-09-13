@@ -47,6 +47,12 @@
 
 ###Paso a paso, desde imagenes a modelo entrenado:
 
+0. **Crear carpetas necesarias**
+  - Crear las siguientes carpetas:
+    - /summary_eval
+    - /summary_train
+    - /datasets
+    - /checkpoints
 1. **Cargar imagenes en la carpeta /imagenes_jpg**
   - Con una subcarpeta por cada caterogia.
 2. **Run dataset_scripts/split_dataset.py**,
