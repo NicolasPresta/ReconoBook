@@ -20,12 +20,12 @@ tf.app.flags.DEFINE_integer('image_height', 40, 'Alto imagen')
 tf.app.flags.DEFINE_integer('image_width', 40, 'Ancho imagen')
 
 # Evaluación
-tf.app.flags.DEFINE_boolean('eval_unique', True, "Ejecutar revisión imagen por imagen")
-tf.app.flags.DEFINE_boolean('eval_unique_from_dataset', True, "Evaluar imagen por imagen desde dataset")
-tf.app.flags.DEFINE_integer('eval_unique_cantidad_img', 30, "Cantidad de imagenes a evaluar si eval_unique = true")
-tf.app.flags.DEFINE_boolean('eval_distort', True, "Distorcionar imagenes al evaluar")
-tf.app.flags.DEFINE_boolean('eval_crop', True, "Distorcionar imagenes al evaluar")
-tf.app.flags.DEFINE_integer('eval_num_examples', 2000, "Número de imagenes a evaluar")
+tf.app.flags.DEFINE_boolean('eval_unique', False, "Ejecutar revisión imagen por imagen")
+tf.app.flags.DEFINE_boolean('eval_unique_from_dataset', False, "Evaluar imagen por imagen desde dataset")
+tf.app.flags.DEFINE_integer('eval_unique_cantidad_img', 20, "Cantidad de imagenes a evaluar si eval_unique = true")
+tf.app.flags.DEFINE_boolean('eval_distort', False, "Distorcionar imagenes al evaluar")
+tf.app.flags.DEFINE_boolean('eval_crop', False, "Distorcionar imagenes al evaluar")
+tf.app.flags.DEFINE_integer('eval_num_examples', 1000, "Número de imagenes a evaluar")
 tf.app.flags.DEFINE_integer("eval_batch_size", 100, "Cantidad de imagenes que se evaluan por batch")
 
 # Entrenamiento
@@ -45,4 +45,8 @@ tf.app.flags.DEFINE_integer('train_num_epochs', 500, 'Cantidad de epocas')
 tf.app.flags.DEFINE_integer('input_num_preprocess_threads', 4, 'Numero de hilos que hacen el preprocesado')
 tf.app.flags.DEFINE_integer('input_num_readers', 4, 'Numero de readers')
 
+# Modelo
+tf.app.flags.DEFINE_integer('model_cant_kernels1', 20, 'Cantidad de kernels de convolución en la capa 1')
+tf.app.flags.DEFINE_integer('model_cant_kernels2', 40, 'Cantidad de kernels de convolución en la capa 2')
+tf.app.flags.DEFINE_integer('model_cant_fc1', 200, 'Cantidad de neurolas full conected en capa 3')
 

@@ -133,8 +133,8 @@ def inference(images):
 
     # Primer capa convolucional
     with tf.name_scope("CONV-1"):
-        kernels_conv1 = _variable_with_weight_decay("kernels_conv1", [5, 5, 3, 150], stddev=1e-4, wd=0.0)
-        bias_conv1 = _variable_on_cpu("bias_conv1", [150], tf.constant_initializer(0.0))
+        kernels_conv1 = _variable_with_weight_decay("kernels_conv1", [5, 5, 3, FLAGS.model_cant_kernels1], stddev=1e-4, wd=0.0)
+        bias_conv1 = _variable_on_cpu("bias_conv1", [FLAGS.model_cant_kernels1], tf.constant_initializer(0.0))
         conv1 = tf.nn.relu(_conv2d(images, kernels_conv1) + bias_conv1, name="conv1")
         #_activation_summary(conv1)
 
@@ -148,8 +148,8 @@ def inference(images):
 
     # Segunda capa convolucional
     with tf.name_scope("CONV-2"):
-        kernels_conv2 = _variable_with_weight_decay("kernels_conv2", shape=[3, 3, 150, 300], stddev=1e-4, wd=0.0)
-        bias_conv2 = _variable_on_cpu("bias_conv2", [300], tf.constant_initializer(0.1))
+        kernels_conv2 = _variable_with_weight_decay("kernels_conv2", shape=[3, 3, FLAGS.model_cant_kernels1, FLAGS.model_cant_kernels2], stddev=1e-4, wd=0.0)
+        bias_conv2 = _variable_on_cpu("bias_conv2", [FLAGS.model_cant_kernels2], tf.constant_initializer(0.1))
         conv2 = tf.nn.relu(_conv2d(norm1, kernels_conv2) + bias_conv2, name="conv2")
         #_activation_summary(conv2)
 
@@ -163,15 +163,15 @@ def inference(images):
 
     # primer capa full conected
     with tf.name_scope("FC-1"):
-        pool2_flat = tf.reshape(pool2, [-1, 10 * 10 * 300])
-        W_fc1 = _variable_with_weight_decay("W_fc1", shape=[10 * 10 * 300, 800], stddev=0.04, wd=0.004)
-        b_fc1 = _variable_on_cpu("b_fc1", [800], tf.constant_initializer(0.1))
+        pool2_flat = tf.reshape(pool2, [-1, 10 * 10 * FLAGS.model_cant_kernels2])
+        W_fc1 = _variable_with_weight_decay("W_fc1", shape=[10 * 10 * FLAGS.model_cant_kernels2, FLAGS.model_cant_fc1], stddev=0.04, wd=0.004)
+        b_fc1 = _variable_on_cpu("b_fc1", [FLAGS.model_cant_fc1], tf.constant_initializer(0.1))
         local1 = tf.nn.relu(tf.matmul(pool2_flat, W_fc1) + b_fc1, name="local1")
         #_activation_summary(local1)
 
     # segunda capa full conected
     with tf.name_scope("FC-2"):
-        W_fc2 = _variable_with_weight_decay("W_fc2", shape=[800, FLAGS.cantidad_clases], stddev=0.04, wd=0.004)
+        W_fc2 = _variable_with_weight_decay("W_fc2", shape=[FLAGS.model_cant_fc1, FLAGS.cantidad_clases], stddev=0.04, wd=0.004)
         b_fc2 = _variable_on_cpu("b_fc2", [FLAGS.cantidad_clases], tf.constant_initializer(0.1))
         # softmax_linear = tf.nn.softmax(tf.matmul(local1, W_fc2) + b_fc2)
         #_activation_summary(softmax_linear)

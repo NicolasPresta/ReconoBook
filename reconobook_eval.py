@@ -87,6 +87,7 @@ def eval_once(saver, summary_writer, top_k_op, summary_op):
             #   /my-favorite-path/cifar10_train/model.ckpt-0,
             # extract global_step from it.
             global_step = ckpt.model_checkpoint_path.split('/')[-1].split('-')[-1]
+            print('Modelo restaurado: global step = %s' % global_step)
         else:
             print('No checkpoint file found')
             return
@@ -136,7 +137,7 @@ def evaluate(dataset):
         logits = reconobook_modelo.inference(images)
 
         # Calculate predictions.
-        top_k_op = tf.nn.in_top_k(logits, labels, 5)
+        top_k_op = tf.nn.in_top_k(logits, labels, 1)
 
         # Restore the moving average version of the learned variables for eval.
         variable_averages = tf.train.ExponentialMovingAverage(FLAGS.moving_average_decay)
