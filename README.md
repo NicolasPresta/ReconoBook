@@ -58,7 +58,7 @@
 2. **Run dataset_scripts/split_dataset.py**,
   - Parametro Modificable: porcentaje_img_test
   - Al finalizar se crean carpetas de train y test y el archivo con los labels.
-3. **Run dataset_build_datasets.py**
+3. **Run dataset_scripts/build_datasets.py**
   - Parametro modificable: porcentaje_img_test
   - Al finalizar se crean los datasets de train y validation en /datasets
 4. **Configurar Dataset**:
@@ -76,8 +76,7 @@
 
 **Abrir IDE**
 ```
-cd Downloads/pycharm-community-2016.1.2/bin/
-./pycharm.sh
+./Downloads/pycharm-community-2016.1.2/bin/pycharm.sh
 ```
 
 **Visualizar TensorBoard**
@@ -89,7 +88,26 @@ o
 tensorboard --logdir=/home/presta/ReconoBook/summary_eval
 ```
 
+**Instalación TensorFlow en UBUNTU 64**
+```
+sudo apt-get install python-pip python-dev
+export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.10.0-cp27-none-linux_x86_64.whl
+export LC_ALL=C
+sudo pip install --upgrade $TF_BINARY_URL
+git clone https://github.com/NicolasPresta/ReconoBook.git
+cd ReconoBook/
+mkdir summary_eval
+mkdir summary_train
+mkdir datasets
+mkdir checkpoints
+cd dataset_scripts/
+python build_datasets.py
+cd ..
+python reconobook_train.py
 
+...
+
+```
 -----------------------------------------------------------
 
 

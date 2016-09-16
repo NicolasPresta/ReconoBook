@@ -42,8 +42,8 @@ tf.app.flags.DEFINE_integer('train_num_epochs', 500, 'Cantidad de epocas')
 # OJO: (cantidad_imagenes_train) * (num_epochs) > (batch_size) * (max_steps)
 
 # Input
-tf.app.flags.DEFINE_integer('input_num_preprocess_threads', 4, 'Numero de hilos que hacen el preprocesado')
-tf.app.flags.DEFINE_integer('input_num_readers', 4, 'Numero de readers')
+tf.app.flags.DEFINE_integer('input_num_preprocess_threads', 1, 'Numero de hilos que hacen el preprocesado')
+tf.app.flags.DEFINE_integer('input_num_readers', 1, 'Numero de readers')
 
 # Modelo
 tf.app.flags.DEFINE_integer('model_cant_kernels1', 30, 'Cantidad de kernels de convolución en la capa 1')
