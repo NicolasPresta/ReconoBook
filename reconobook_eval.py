@@ -210,16 +210,30 @@ def evaluate_unique(dataset):
 
                     # Imprimios por consola
                     activaciones = prediccion[0][0]
-                    print('------------------------------------------------------------------------------')
-                    print('Predicción => Clase: %d, Activación: %s, Libro: %s' % (np.argmax(activaciones),
-                                                                                  max(activaciones),
-                                                                                  titulos[np.argmax(activaciones)]))
+                    activacionesDesc = np.sort(activaciones)[::-1]
+                    top1Activacion = activacionesDesc[0]
+                    top1Clase = np.where(activaciones == top1Activacion)[0]
+                    top2Activacion = activacionesDesc[1]
+                    top2Clase = np.where(activaciones == top2Activacion)[0]
+                    top3Activacion = activacionesDesc[2]
+                    top3Clase = np.where(activaciones == top3Activacion)[0]
+                    print('-- EJEMPLO %d ----------------------------------------------------------------' % (step + 1))
+                    print('Top 1 => Clase: %d, Activación: %s, Libro: %s' % (top1Clase,
+                                                                             top1Activacion,
+                                                                             titulos[top1Clase]))
+                    print('Top 2 => Clase: %d, Activación: %s, Libro: %s' % (top2Clase,
+                                                                             top2Activacion,
+                                                                             titulos[top2Clase]))
+                    print('Top 3 => Clase: %d, Activación: %s, Libro: %s' % (top3Clase,
+                                                                             top3Activacion,
+                                                                             titulos[top3Clase]))
                     print('------------------------------------------------------------------------------')
 
 
                     for i in xrange(FLAGS.cantidad_clases):
                         print('Activación => Clase: %d, Activación: %s, Libro: %s' % (i, activaciones[i], titulos[i]))
 
+                    print('------------------------------------------------------------------------------')
                     print('------------------------------------------------------------------------------')
 
                     # Mostramos la imagen

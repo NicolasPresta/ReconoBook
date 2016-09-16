@@ -2,5 +2,6 @@
 /summary_train/*
 /datasets/*
 /checkpoints/*
+/resguardo/*
 *.pyc
 */*.pyc
