@@ -335,7 +335,7 @@ def _process_image_files(name, filenames, texts, labels, num_shards):
     # Esperamos a que todos los hilos terminen:
     coord.join(threads)
 
-    print('%s: Finalizada la escritoria de %d imagenes en el data set.' % (datetime.now(), len(filenames)))
+    print('%s: Finalizada la escritura de %d imagenes en el data set.' % (datetime.now(), len(filenames)))
 
     sys.stdout.flush()
 

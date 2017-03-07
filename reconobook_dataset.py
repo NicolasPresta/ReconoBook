@@ -2,7 +2,14 @@
 
 # ==============================================================================
 
-"""Reconobook datset, hereda de base_dataset"""
+"""
+Reconobook datset, una clase que representa un dataset
+Métodos:
+    num_classes: Retorna la cantidad de clases en el dataset (FLAGS.cantidad_clases)
+    available_subsets: Retorna las particiones disponibles para el dataset (eval, train) .
+    reader: Retrona el reader que se va a usar para leer un registro del dataset.
+    data_files: Retorna la ruta al archivo donde está el dataset.
+"""
 
 # ==============================================================================
 
@@ -11,8 +18,7 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
-from base_dataset import Dataset
-import config
+import os
 
 # ==============================================================================
 
@@ -21,24 +27,32 @@ FLAGS = tf.app.flags.FLAGS
 # ==============================================================================
 
 
-class ReconoBookData(Dataset):
-    """ImageNet data set."""
-
+class ReconoBookData:
     def __init__(self, subset):
-        super(ReconoBookData, self).__init__('ReconoBook', subset)
+        assert subset in self.available_subsets(), self.available_subsets()
+        self.name = "Reconobook"
+        self.subset = subset
 
     def num_classes(self):
-        """Returns the number of classes in the data set."""
         return FLAGS.cantidad_clases
 
-    def num_examples_per_epoch(self):
-        """Returns the number of examples in the data set."""
-        if self.subset == 'train':
-            return FLAGS.cantidad_imagenes_train
-        if self.subset == 'validation':
-            return FLAGS.cantidad_imagenes_eval
+    def available_subsets(self):
+        return ['train', 'validation']
 
-    def download_message(self):
-        """Instruction to download and extract the tarball from Flowers website."""
+    def reader(self):
+        return tf.TFRecordReader()
 
-        print('Error al buscar el archivo dataset %s '% self.subset)
+    def data_files(self):
+        tf_record_pattern = os.path.join(FLAGS.data_dir, '%s-*' % self.subset)
+        data_files = tf.gfile.Glob(tf_record_pattern)
+        if not data_files:
+            print('No se ecnontraron archivos para el dataset %s/%s en %s' % (self.name,
+                                                                              self.subset,
+                                                                              FLAGS.data_dir))
+
+            self.download_message()
+            exit(-1)
+
+        return data_files
+
+

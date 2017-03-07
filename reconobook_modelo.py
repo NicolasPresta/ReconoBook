@@ -110,12 +110,13 @@ def _max_pool_2x2(x, name):
     return tf.nn.max_pool(x, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME', name=name)
 
 
-def train_inputs(dataset, batchSize, numEpochs):
-    return reconobook_input.train_inputs(dataset, batch_size=batchSize, num_epochs=numEpochs)
+# Funciones para obtener datos que alimenten el modelo
+def train_inputs(dataset, batchSize):
+    return reconobook_input.train_inputs(dataset, batch_size=batchSize)
 
 
-def eval_inputs(dataset, batchSize, numEpochs):
-    return reconobook_input.eval_inputs(dataset, batch_size=batchSize, num_epochs=numEpochs)
+def eval_inputs(dataset, batchSize):
+    return reconobook_input.eval_inputs(dataset, batch_size=batchSize)
 
 
 def unique_input(dataset):
@@ -124,7 +125,8 @@ def unique_input(dataset):
 
 # Armado del modelo:
 def inference(images):
-    """ Armamos el modelo
+    """ Armamos el modelo.
+    Contrucción de la red neuronal profunda
     Args:
         images: Images returned from distorted_inputs() or inputs().
     Returns:
@@ -181,14 +183,12 @@ def inference(images):
 
 
 def loss(logits, labels):
-    """Add L2Loss to all the trainable variables.
-        Add summary for "Loss" and "Loss/avg".
-        Args:
-        logits: Logits from inference().
-        labels: Labels from distorted_inputs or inputs(). 1-D tensor
-            of shape [batch_size]
+    """Cada un conjunto de predicciones y de etiquetas, retorna el costo de la predicción.
+    Args:
+        logits: Logits retornados por inference().
+        labels: Labels reales de las imagenes
     Returns:
-        Loss tensor of type float.
+        Loss tensor del tipo float.
     """
     # Calculate the average cross entropy loss across the batch.
     labels = tf.cast(labels, tf.int64)
@@ -202,17 +202,16 @@ def loss(logits, labels):
 
 
 def train(total_loss, global_step):
-    """Train CIFAR-10 model.
-        Create an optimizer and apply to all trainable variables. Add moving
-        average for all trainable variables.
+    """Entrenamiento del modelo
+    Crea un optimizador y lo aplica a todas las variables
     Args:
-        total_loss: Total loss from loss().
-        global_step: Integer Variable counting the number of training steps processed.
+        total_loss: costo total desde loss()
+        global_step: variable que cuenta la cantidad de pasos de entrenamiento
     Returns:
-        train_op: op for training.
+        train_op: operación para entrenar.
     """
 
-    # Decay the learning rate exponentially based on the number of steps.
+    # Reducimos el learning rate exponencialmente dependiendo el número de pasos de entrenamiento
     lr = tf.train.exponential_decay(FLAGS.initial_learning_rate,
                                     global_step,
                                     FLAGS.decay_steps,
@@ -222,27 +221,27 @@ def train(total_loss, global_step):
     tf.scalar_summary('learning_rate', lr)
     tf.scalar_summary('global_step', global_step)
 
-    # Generate moving averages of all losses and associated summaries.
+    # Agrega summaries
     loss_averages_op = _add_loss_summaries(total_loss)
 
-    # Compute gradients.
+    # Computa los gradientes
     with tf.control_dependencies([loss_averages_op]):
         opt = tf.train.GradientDescentOptimizer(lr)
         grads = opt.compute_gradients(total_loss)
 
-    # Apply gradients.
+    # aplica los gradientes.
     apply_gradient_op = opt.apply_gradients(grads, global_step=global_step)
 
-    # Add histograms for trainable variables.
+    # Agrega el histograma para las variables de entrenamiento
     for var in tf.trainable_variables():
         tf.histogram_summary(var.op.name, var)
 
-    # Add histograms for gradients.
+    # Agrega el histograma para los gradientes
     for grad, var in grads:
         if grad is not None:
             tf.histogram_summary(var.op.name + '/gradients', grad)
 
-    # Track the moving averages of all trainable variables.
+    # guardamos el promedio movil de las variables, es util para el entrenamiento.
     variable_averages = tf.train.ExponentialMovingAverage(FLAGS.moving_average_decay, global_step)
     variables_averages_op = variable_averages.apply(tf.trainable_variables())
 
