@@ -25,26 +25,26 @@ import config
 FLAGS = tf.app.flags.FLAGS
 
 titulos = [
-    "Einstein",
-    "Liderazgo Guardiola",
-    "En cambio",
-    "Analisis matematico (Amarillo)",
-    "Sistemas inteligentes",
-    "Empresas de consultoría",
-    "Mineria de datos a traves de ejemplos",
-    "Analisis matematico (Azul)",
-    "Teoria de control",
-    "Introducción a Mineria de datos",
-    "Legislación",
-    "El arte de conversar",
-    "Big data",
-    "Revista: Lado oscuro del cosmos",
-    "Revista: Epigenetica",
-    "Patrones de diseño",
     "Fisica universita",
-    "Constitución Argentina",
-    "El señor de las moscas",
+    "Patrones de diseño",
+    "Introducción a Mineria de datos",
+    "Mineria de datos a traves de ejemplos",
     "Sistemas expertos",
+    "Sistemas inteligentes",
+    "Big data",
+    "Analisis matematico (vol 3 / Azul)",
+    "Einstein",
+    "Analisis matematico (vol 2 / Amarillo)",
+    "Teoria de control",
+    "Empresas de consultoría",
+    "Legislación",
+    "En cambio",
+    "Liderazgo Guardiola",
+    "Constitución Argentina",
+    "El arte de conversar",
+    "El señor de las moscas",
+    "Revista: Epigenetica",
+    "Revista: Lado oscuro del cosmos"
 ]
 
 # ==============================================================================
@@ -128,7 +128,7 @@ def eval_once(saver, summary_writer, top_k_op, summary_op):
 def evaluate(dataset):
     with tf.Graph().as_default() as g:
         # Obtenemos imagenes:
-        images, labels = reconobook_modelo.eval_inputs(dataset, FLAGS.eval_batch_size, 1)
+        images, labels = reconobook_modelo.eval_inputs(dataset, FLAGS.eval_batch_size)
         image_shape = tf.reshape(images, [-1, FLAGS.image_height, FLAGS.image_width, 3])
         tf.image_summary('input', image_shape, 3)
 
@@ -137,7 +137,7 @@ def evaluate(dataset):
         logits = reconobook_modelo.inference(images)
 
         # Calculate predictions.
-        top_k_op = tf.nn.in_top_k(logits, labels, 1)
+        top_k_op = tf.nn.in_top_k(logits, labels, FLAGS.top_k_prediction)
 
         # Restore the moving average version of the learned variables for eval.
         variable_averages = tf.train.ExponentialMovingAverage(FLAGS.moving_average_decay)
@@ -202,8 +202,7 @@ def evaluate_unique(dataset):
                     if FLAGS.eval_unique_from_dataset:
                         imagenCargada = images.eval()
                     else:
-                        imagenCargada = load_image("./test_img/%d.jpg" % (step + 1))
-                        #imagenCargada = load_image("./imagenes_jpg/test/17/17B 015.jpg")
+                        imagenCargada = load_image(FLAGS.manual_test_folder + "%d.jpg" % (step + 1))
 
                     # La pasamos por el modelo de predicción
                     prediccion = sess.run([logits], feed_dict={_images: imagenCargada})

@@ -3,5 +3,8 @@
 /datasets/*
 /checkpoints/*
 /resguardo/*
+/imagenes_jpg/test/*
+/imagenes_jpg/train/*
+/imagenes_jpg/labels.txt
 *.pyc
 */*.pyc

@@ -32,7 +32,7 @@ def train(dataset):
         global_step = tf.Variable(0, trainable=False)
 
         # Obtenemos imagenes y labels.
-        images, labels = reconobook_modelo.train_inputs(dataset, FLAGS.train_batch_size, FLAGS.train_num_epochs)
+        images, labels = reconobook_modelo.train_inputs(dataset, FLAGS.train_batch_size)
 
         # Dadas las imagenes obtiene la probabilidad que tiene cada imagen de pertener a cada clase.
         logits = reconobook_modelo.inference(images)
