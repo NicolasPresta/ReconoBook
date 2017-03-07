@@ -27,7 +27,7 @@ tf.app.flags.DEFINE_boolean('eval_distort', False, "Distorcionar imagenes al eva
 tf.app.flags.DEFINE_boolean('eval_crop', False, "Distorcionar imagenes al evaluar")
 tf.app.flags.DEFINE_integer('eval_num_examples', 3000, "Número de imagenes a evaluar")
 tf.app.flags.DEFINE_integer("eval_batch_size", 100, "Cantidad de imagenes que se evaluan por batch")
-tf.app.flags.DEFINE_string('manual_test_folder', './imagenes_jpg/manual_test_img/',
+tf.app.flags.DEFINE_string('manual_test_folder', './manual_test_img/',
                            'Directorio donde estan las imagenes particular a evaluar manualmente')
 tf.app.flags.DEFINE_integer("top_k_prediction", 1,
                             "La predicción es conciderada correcta si se encuetra dentro de los k primeros resultados")
