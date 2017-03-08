@@ -1,7 +1,7 @@
 ## Introducción y Objetivos
 
 
-<img src="http://nosinmiscookies.com/wp-content/uploads/2014/01/objetivos-google-analytics.png" width="800">
+<img src="http://nosinmiscookies.com/wp-content/uploads/2014/01/objetivos-google-analytics.png" width="860">
 
 El principal objetivo de este proyecto es fomentar la investigación de *deep learning*, especificamente aplicado a la
 clasificación de imagenes.
