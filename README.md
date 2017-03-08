@@ -1,5 +1,6 @@
 #RECONOBOOK
 
+![Portada](./doc/portada.jpg "Portada")
 
 ##Un proyecto open source de visión artificial para reconocer la portada de libros.
 
@@ -22,7 +23,7 @@
 - [Script instalación de Tensorflow en UBUNTU 64](./doc/ubuntu.md)
 - IDE utilizado
 - Programa para separar frames en .jpg a partir de un video
-- Atajos rapidos desde consola
+- [Atajos rapidos desde consola](./doc/atajos.md)
 - Links de interes
 
 
