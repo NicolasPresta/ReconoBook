@@ -8,11 +8,11 @@ FLAGS = tf.app.flags.FLAGS
 tf.app.flags.DEFINE_string('summary_dir_eval', './summary_eval', "Logs de proceso de evaluación")
 tf.app.flags.DEFINE_string('summary_dir_train', './summary_train', "Logs de proceso de entrenamiento")
 tf.app.flags.DEFINE_string('checkpoint_dir', './checkpoints', "Resguardo del modelo a utilizar")
-tf.app.flags.DEFINE_string('data_dir', './datasets', 'Directorio donde estan los datasets a utilizar')
+tf.app.flags.DEFINE_string('data_dir', './datasets', 'Directorio donde esttán las imagenes a utilizar')
 
 # Dataset
-tf.app.flags.DEFINE_integer('cantidad_imagenes_train', 4631, 'Cantidad de imagenes distintas para entrenamiento')
-tf.app.flags.DEFINE_integer('cantidad_imagenes_eval', 3073, 'Cantidad de imagenes distintas para evaluar modelo')
+tf.app.flags.DEFINE_integer('cantidad_imagenes_train', 3980, 'Cantidad de imagenes distintas para entrenamiento')
+tf.app.flags.DEFINE_integer('cantidad_imagenes_eval', 2260, 'Cantidad de imagenes distintas para evaluar modelo')
 tf.app.flags.DEFINE_integer('cantidad_clases', 20, 'Cantidad de clases a reconocer')
 
 # Imagen
@@ -25,7 +25,7 @@ tf.app.flags.DEFINE_boolean('eval_unique_from_dataset', True, "Evaluar imagen po
 tf.app.flags.DEFINE_integer('eval_unique_cantidad_img', 5, "Cantidad de imagenes a evaluar si eval_unique = true")
 tf.app.flags.DEFINE_boolean('eval_distort', False, "Distorcionar imagenes al evaluar")
 tf.app.flags.DEFINE_boolean('eval_crop', False, "Distorcionar imagenes al evaluar")
-tf.app.flags.DEFINE_integer('eval_num_examples', 3000, "Número de imagenes a evaluar")
+tf.app.flags.DEFINE_integer('eval_num_examples', 2260, "Número de imagenes a evaluar")
 tf.app.flags.DEFINE_integer("eval_batch_size", 100, "Cantidad de imagenes que se evaluan por batch")
 tf.app.flags.DEFINE_string('manual_test_folder', './manual_test_img/',
                            'Directorio donde estan las imagenes particular a evaluar manualmente')

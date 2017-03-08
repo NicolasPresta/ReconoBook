@@ -84,8 +84,8 @@ import tensorflow as tf
 
 # -----------------------------------------------------------------------------------------------
 
-tf.app.flags.DEFINE_string('train_directory', '../imagenes_jpg/train/', 'Directorio con las imagenes de entrenamiento')
-tf.app.flags.DEFINE_string('validation_directory', '../imagenes_jpg/test/', 'Directorio con las imagenes de validación')
+tf.app.flags.DEFINE_string('train_directory', '../split_jpg/train/', 'Directorio con las imagenes de entrenamiento')
+tf.app.flags.DEFINE_string('validation_directory', '../split_jpg/test/', 'Directorio con las imagenes de validación')
 tf.app.flags.DEFINE_string('output_directory', '../datasets/', 'Directorio de salida')
 
 tf.app.flags.DEFINE_integer('train_shards', 1, 'Numero de particiones del dataset de entrenamiento')
@@ -99,7 +99,7 @@ tf.app.flags.DEFINE_integer('num_threads', 1, 'Numero de hilos de ejecución')
 #   cat
 #   flower
 # Se mapea la etiqueta al numero de linea donde está ubicado, comenzando desde el 0
-tf.app.flags.DEFINE_string('labels_file', '../imagenes_jpg/labels.txt', 'Labels file')
+tf.app.flags.DEFINE_string('labels_file', '../split_jpg/labels.txt', 'Labels file')
 
 FLAGS = tf.app.flags.FLAGS
 
@@ -414,10 +414,14 @@ def main(unused_argv):
 
     assert not FLAGS.validation_shards % FLAGS.num_threads, ('La cantidad de particiones (FLAGS.validation_shards) debe ser divisible entre los hilos (FLAGS.num_threads)')
 
+    # creamos el directorio output si no existe
+    if not os.path.exists(FLAGS.output_directory):
+        os.mkdir(FLAGS.output_directory)
+
     print('Guardando dataset en: %s' % FLAGS.output_directory)
 
     # Generamos el dataset de validación
-    _process_dataset('validation', FLAGS.validation_directory, FLAGS.validation_shards, FLAGS.labels_file)
+    _process_dataset('test', FLAGS.validation_directory, FLAGS.validation_shards, FLAGS.labels_file)
 
     # Generamos el dataset de entrenamiento
     _process_dataset('train', FLAGS.train_directory, FLAGS.train_shards, FLAGS.labels_file)

@@ -1,6 +1,37 @@
 #RECONOBOOK
 ###Un proyecto open source de visión artificial para reconocer la portada de libros.
 
+1 - Objetivos del proyecto
+2 - Herramientas utilizadas
+3 - Descripción del problema
+4 - Obtención de imagenes
+5 - Generación de datasets a partir de imagenes
+6 - Armado del modelo, descripción de la red neuronal
+7 - Entrenamiento del modelo
+8 - Evaluación del modelo
+9 - Conclusiones
+10 - Lista TO DOs
+    [] Correr en 2 CPU
+    [] Correr en GPU y CPU
+    [] Correr el modelo en 2 servidores distribuidos
+    [] Utilizar el modelo para construir un programa que evalue fotos
+    [] Integrar el programa que evalua fotos a una camara web y evaluar "online"
+    [] Agregar al tensorboard las visualización de las imagenes que se predicen incorrectamente
+    [] Correr el modelo en Android
+    [] Ampliar a 30 Libros
+
+
+Extras:
+    Indice del repositorio
+    Script instalación de tensorflow en UBUNTU 64
+    IDE utilizado
+    Programa para separar frames en .jpg a partir de un video
+    Atajos rapidos desde consola
+    Links de interes
+
+
+-----------------------------------------------------------
+
 **Conocimientos aplicados:** Machine Learning, Deep Learning, Convolutional neural networks.
 
 **Herramientras aplicadas:** TensorFlow by Google, Python.

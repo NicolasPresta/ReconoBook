@@ -57,6 +57,7 @@ tf.app.flags.DEFINE_string('train_folder', 'train', 'Directorio con las imagenes
 tf.app.flags.DEFINE_string('test_folder', 'test', 'Directorio con las imagenes')
 tf.app.flags.DEFINE_string('labels_file_name', 'labels.txt', 'Labels file')
 tf.app.flags.DEFINE_string('porcentaje_img_test', 40, 'Porcentaje de imagenes que van al set de test')
+tf.app.flags.DEFINE_string('data_split_dir', '../split_jpg/', 'Directorio donde estan las imagenes divididas a utilizar')
 
 FLAGS = tf.app.flags.FLAGS
 
@@ -78,10 +79,10 @@ def dividir_set(carpeta_raiz, subcarpeta, carpeta_train, carpata_test, porcentaj
     imagenesTest = imagenes[cantidadImagenesTrain:cantidadTotalImagenes]
 
     for imagen in imagenesTrain:
-        shutil.copy(carpeta_raiz + subcarpeta + "/" + imagen, carpeta_raiz + carpeta_train + "/" + subcarpeta + "/" + imagen)
+        shutil.copy(carpeta_raiz + subcarpeta + "/" + imagen, FLAGS.data_split_dir + carpeta_train + "/" + subcarpeta + "/" + imagen)
 
     for imagen in imagenesTest:
-        shutil.copy(carpeta_raiz + subcarpeta + "/" + imagen, carpeta_raiz + carpata_test + "/" + subcarpeta + "/" + imagen)
+        shutil.copy(carpeta_raiz + subcarpeta + "/" + imagen, FLAGS.data_split_dir + carpata_test + "/" + subcarpeta + "/" + imagen)
 
 
 def obtenerSubCarpetas(carpeta):
@@ -92,18 +93,22 @@ def obtenerSubCarpetas(carpeta):
 def main(unused_argv):
     print('Dividiendo set de imagenes de: %s' % FLAGS.data_dir)
 
-    # Borramos las carpetas para el caso de que existan
-    if os.path.exists(FLAGS.data_dir + FLAGS.train_folder):
-        print('Borramos carpeta: %s' % FLAGS.data_dir + FLAGS.train_folder)
-        shutil.rmtree(FLAGS.data_dir + FLAGS.train_folder)
+    # creamos el directorio de split si no existe
+    if not os.path.exists(FLAGS.data_split_dir):
+        os.mkdir(FLAGS.data_split_dir)
 
-    if os.path.exists(FLAGS.data_dir + FLAGS.test_folder):
-        print('Borramos carpeta: %s' % FLAGS.data_dir + FLAGS.test_folder)
-        shutil.rmtree(FLAGS.data_dir + FLAGS.test_folder)
+    # Borramos las carpetas para el caso de que existan
+    if os.path.exists(FLAGS.data_split_dir + FLAGS.train_folder):
+        print('Borramos carpeta: %s' % FLAGS.data_split_dir + FLAGS.train_folder)
+        shutil.rmtree(FLAGS.data_split_dir + FLAGS.train_folder)
+
+    if os.path.exists(FLAGS.data_split_dir + FLAGS.test_folder):
+        print('Borramos carpeta: %s' % FLAGS.data_split_dir + FLAGS.test_folder)
+        shutil.rmtree(FLAGS.data_split_dir + FLAGS.test_folder)
 
     # Borramos el archivo de labels en caso de que exista:
     if os.path.isfile(FLAGS.data_dir + FLAGS.labels_file_name):
-        os.remove(FLAGS.data_dir + FLAGS.labels_file_name)
+        os.remove(FLAGS.data_split_dir + FLAGS.labels_file_name)
 
     carpetas = obtenerSubCarpetas(FLAGS.data_dir)
     carpetas = map(int, carpetas)
@@ -113,19 +118,19 @@ def main(unused_argv):
     print('Encontradas las siguientes subcarpetas: %s' % carpetas)
 
     # creamos las carpetas
-    os.mkdir(FLAGS.data_dir + FLAGS.train_folder)
+    os.mkdir(FLAGS.data_split_dir + FLAGS.train_folder)
     print('Creamos carpeta: %s' % FLAGS.data_dir + FLAGS.train_folder)
-    os.mkdir(FLAGS.data_dir + FLAGS.test_folder)
+    os.mkdir(FLAGS.data_split_dir + FLAGS.test_folder)
     print('Creamos carpeta: %s' % FLAGS.data_dir + FLAGS.test_folder)
 
     # creamos el archivo de labels
-    lablesFile = open(FLAGS.data_dir + FLAGS.labels_file_name, "a")
+    lablesFile = open(FLAGS.data_split_dir + FLAGS.labels_file_name, "a")
 
     esElPrimero = True
     for subcarpeta in carpetas:
         # creamos la subcarpeta
-        os.mkdir(FLAGS.data_dir + FLAGS.train_folder + "/" + subcarpeta)
-        os.mkdir(FLAGS.data_dir + FLAGS.test_folder + "/" + subcarpeta)
+        os.mkdir(FLAGS.data_split_dir + FLAGS.train_folder + "/" + subcarpeta)
+        os.mkdir(FLAGS.data_split_dir + FLAGS.test_folder + "/" + subcarpeta)
 
         print('Dividiendo imagenes de carpeta: %s' % subcarpeta)
 

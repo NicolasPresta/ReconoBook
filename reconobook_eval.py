@@ -18,6 +18,8 @@ from reconobook_dataset import ReconoBookData
 import reconobook_modelo
 from PIL import Image
 import random
+import os.path
+import shutil
 import config
 
 # ==============================================================================
@@ -247,7 +249,14 @@ def evaluate_unique(dataset):
 
 
 def main(argv=None):
-    dataset = ReconoBookData(subset='validation')
+    dataset = ReconoBookData(subset='test')
+
+    # creamos el directorio de checkpoint_dir si no existe, y si existe lo borramos y creamos de nuevo
+    if not os.path.exists(FLAGS.summary_dir_eval):
+        os.mkdir(FLAGS.summary_dir_eval)
+    else:
+        shutil.rmtree(FLAGS.summary_dir_eval)
+        os.mkdir(FLAGS.summary_dir_eval)
 
     if FLAGS.eval_unique:
         evaluate_unique(dataset)

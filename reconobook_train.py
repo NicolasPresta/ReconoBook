@@ -17,6 +17,7 @@ from datetime import datetime
 import os.path
 import time
 import numpy as np
+import shutil
 import config
 
 # ==============================================================================
@@ -91,6 +92,20 @@ def main(_):
     dataset = ReconoBookData(subset='train')
 
     assert dataset.data_files()
+
+    # creamos el directorio de summary_dir_train si no existe, y si existe lo borramos y creamos de nuevo
+    if not os.path.exists(FLAGS.summary_dir_train):
+        os.mkdir(FLAGS.summary_dir_train)
+    else:
+        shutil.rmtree(FLAGS.summary_dir_train)
+        os.mkdir(FLAGS.summary_dir_train)
+
+    # creamos el directorio de checkpoint_dir si no existe, y si existe lo borramos y creamos de nuevo
+    if not os.path.exists(FLAGS.checkpoint_dir):
+        os.mkdir(FLAGS.checkpoint_dir)
+    else:
+        os.removedirs(FLAGS.checkpoint_dir)
+        os.mkdir(FLAGS.checkpoint_dir)
 
     train(dataset)
 
