@@ -10,7 +10,7 @@
 1.  [Introducción y Objetivos](./doc/objetivos.md)
 2.  [Herramientas utilizadas](./doc/herramientas.md)
 3.  [Descripción del problema](./doc/problema.md)
-4.  Obtención de imagenes
+4.  [Obtención de imagenes](./doc/obtencion.md)
 5.  Generación de datasets a partir de imagenes
 6.  Armado del modelo, descripción de la red neuronal
 7.  Entrenamiento del modelo
