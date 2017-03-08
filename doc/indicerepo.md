@@ -1,3 +1,6 @@
+[<- Volver Home](../README.md)  
+
+
 ##Indice del repositorio:
 
 ####Datos (imagenes) para entrenar y evaluar el modelo:
@@ -35,6 +38,6 @@
 
 ####Configuración general
 
-- *config.py*: Contiene todas las constantes parametrizables del sistema (FLAGS).
+- *config.py*: Contiene todas las constantes parametrizables del sistema (FLAGS).  
 
 [<- Volver Home](../README.md)
