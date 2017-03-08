@@ -1,7 +1,7 @@
 #RECONOBOOK
 ###Un proyecto open source de visión artificial para reconocer la portada de libros.
 
-1 - Objetivos del proyecto
+1 - [Texto del enlace aquí](./doc/objetivos.md)
 2 - Herramientas utilizadas
 3 - Descripción del problema
 4 - Obtención de imagenes
