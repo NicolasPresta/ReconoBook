@@ -20,6 +20,6 @@ Este es un breve resumen de los pasos para obtener el modelo entrenado y evaluar
   
   
   ***
-  [<- Volver Home](../README.md)
+[<- Volver Home](../README.md)
   
   
