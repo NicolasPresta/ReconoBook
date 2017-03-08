@@ -124,4 +124,5 @@ python analize_jpg.py
 <img src="./img/20C.jpg" width="130">   
 
 
+***
 [<- Volver Home](../README.md)
