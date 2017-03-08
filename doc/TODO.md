@@ -8,6 +8,6 @@
 - [ ] Agregar al tensorboard las visualización de las imagenes que se predicen incorrectamente
 - [ ] Correr el modelo en Android
 - [ ] Ampliar a 30 Libros
-
+- [ ] Agregar más capturas utilizando otras cámaras
 
 [<- Volver Home](../README.md)

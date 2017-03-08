@@ -2,7 +2,7 @@
 
 ##Un proyecto open source de visión artificial para reconocer la portada de libros.
 
-![Portada](./doc/portada2.jpg "Portada")
+![Portada](./doc/img/portada2.jpg "Portada")
 
 ***
 
@@ -40,7 +40,7 @@ Sobre el Autor:
 **Entusiasta** de Machine Learning  
 
 
-[LinkedIn](https://www.linkedin.com/in/nicolaspresta/)
+[LinkedIn](https://www.linkedin.com/in/nicolaspresta/) / 
 [Twitter](https://twitter.com/nicolaspresta)
 
 ***
