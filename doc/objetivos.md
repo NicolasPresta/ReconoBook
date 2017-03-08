@@ -35,5 +35,5 @@ Otro gran artículo, aunque este en inglés, es [este de Michael Nielsen](http:/
 Finalmente, para no dejar de lado *la parte dura* [este artículo de Tim Dettmers](http://timdettmers.com/2015/03/09/deep-learning-hardware-guide/) explica muy claramente los aspectos necesarios a tener en cuenta al
 momento de seleccionar el hardware necesario para entrenar los modelos.
 
-
+***
 [<- Volver Home](../README.md)
