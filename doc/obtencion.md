@@ -24,7 +24,7 @@
 
 Para *entrenar* el modelo contamos con varias imagenes de las portadas de cada libro.  
 
-Para **obtener las imagenes se grabó un pequeño video** (10 seg) posicionando la portada entrente de la camara.  
+Para **obtener las imagenes se grabó un pequeño video** (10 seg) posicionando la portada frente de la camara.  
 
 El libro se fue moviendo e inclinando, alejando y acercando, para **cubrir la mayor cantidad de posiciones posibles** 
 (El modelo debe ser capas de reconocer el libro en cualquiera de estas posiciones), esto tambien ayuda a prevenir el 
