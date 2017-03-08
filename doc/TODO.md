@@ -13,5 +13,5 @@
 - [ ] Agregar más capturas utilizando otras cámaras  
 
 
-
+***
 [<- Volver Home](../README.md)
