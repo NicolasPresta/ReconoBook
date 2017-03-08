@@ -1,3 +1,5 @@
+[<- Volver Home](../README.md)  
+
 ## TODO List
 
 - [ ] Correr en 2 CPU
@@ -8,6 +10,8 @@
 - [ ] Agregar al tensorboard las visualización de las imagenes que se predicen incorrectamente
 - [ ] Correr el modelo en Android
 - [ ] Ampliar a 30 Libros
-- [ ] Agregar más capturas utilizando otras cámaras
+- [ ] Agregar más capturas utilizando otras cámaras  
+
+
 
 [<- Volver Home](../README.md)
