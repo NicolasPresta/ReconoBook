@@ -21,6 +21,7 @@
 
 ####Extras:
 - [Indice del repositorio](./doc/indicerepo.md)
+- [Paso a paso para obtener el modelo entrenado y evaluarlo](./doc/pasos.md)
 - [Script instalación de Tensorflow en UBUNTU 64](./doc/ubuntu.md)
 - [IDE utilizado](https://www.jetbrains.com/pycharm/)
 - [Programa para separar frames en .jpg a partir de un video](https://www.dvdvideosoft.com/es/products/dvd/Free-Video-to-JPG-Converter.htm)
@@ -45,33 +46,11 @@ Sobre el Autor:
 
 ***
 
-
-###Paso a paso, desde imagenes a modelo entrenado:
-
-0. **Crear carpetas necesarias**
-  - Crear las siguientes carpetas:
-    - /summary_eval
-    - /summary_train
-    - /datasets
-    - /checkpoints
-1. **Cargar imagenes en la carpeta /imagenes_jpg**
-  - Con una subcarpeta por cada caterogia.
-2. **Run dataset_scripts/split_dataset.py**,
-  - Parametro Modificable: porcentaje_img_test
-  - Al finalizar se crean carpetas de train y test y el archivo con los labels.
-3. **Run dataset_scripts/build_datasets.py**
-  - Parametro modificable: porcentaje_img_test
-  - Al finalizar se crean los datasets de train y validation en /datasets
-4. **Configurar Dataset**:
-  - ir a config.py y completar cantidad_imagenes_train y cantidad_imagenes_eval de acuerdo a las imagenes en las carpetas
-5. **Run reconobook_train.py**
-  - Hay algunos parametros que se pueden modificar en config.py, revisar.
-6. **Run reconobook_eval.py**
-  - Parametros modificable: config.py->eval_unique, indica si se evaluan todas imagenes juntas o una por vez.
-
+<img src="http://blog.desdelinux.net/wp-content/uploads/2016/04/ubuntu.png" height="200">
+<img src="https://i.ytimg.com/vi/oZikw5k_2FM/maxresdefault.jpg" height="200">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/PyCharm_Logo.svg/1000px-PyCharm_Logo.svg.png" height="200">
 
 ***
-
 
 
 
