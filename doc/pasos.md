@@ -19,6 +19,7 @@ Este es un breve resumen de los pasos para obtener el modelo entrenado y evaluar
   - Parametros modificable: config.py->eval_unique, indica si se evaluan todas imagenes juntas o una por vez.
   
   
+  ***
   [<- Volver Home](../README.md)
   
   
