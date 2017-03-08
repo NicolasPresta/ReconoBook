@@ -1,36 +1,40 @@
 ##Indice del repositorio:
 
-**Archivos vinculados al armado y evaluación del modelo:**
+####Datos (imagenes) para entrenar y evaluar el modelo:
 
-- **base_dataset.py ->** Clase base de un dataset. No tiene mayor importancia.
-- **reconobook_dataset.py ->** Clase que representa el dataset de Reconobook. Hereda de dataset. No tiene mayor ciencia.
-- **reconobook_eval.py ->** Contiene métodos para evalular un modelo.
-  - evaluate: Evalua un modelo contra el dataset de testing completo
-  - evaluate_unique: Evalua el modelo una imagen a la vez, mostrandola por pantalla.
-- **reconobook_input.py ->** Contiene los metodos que sirven de input al modelo, leyendo de los datasets.
-- **reconobook_modelo.py ->** El corazón del proyecto, acá se define y arma el modelo.
-  - inference: dada una imagen retorna su preducción
-  - loss: calcula la perdida de una predicción.
-  - train: backpropagation! (GradientDescentOptimizer)
-- **reconobook_train.py ->** Orquesta el entrenamiento del modelo
+- imagenes_jpg/* : En esta carpeta se encuentran todas las imagenes jpg de las portadas de libros. 
+                   Cada subcarpeta representa una clase (un libro) distinto.
+                   el nombre del archivo de la imagen se forma de la siguiente forma: '<ID-Libro><ID-Captura> <Nro imagen>.jpg'
+                   
+- manual_test_img/* : En esta carpeta se pueden colocar imagenes de las portadas de libros tomadas por fuera de las capturas para evaluarlas una a una. Todas las imagenes que se encuentren en esta carpeta pueden ser usadas como input del modelo ya entrenado para que las clasifique
 
-**Archivos vinculados al dataset (procesar los .jpg y armar un dataset):**
+####Scripts vinculados al dataset (procesar los .jpg y armar un dataset):
 
-- **imagenes_jpg/* ->** Imagenes jpg en crudo organizadas por clases.
-- **dataset_scripts/split_dataset.py ->** divide el conjunto de imagenes en 2 conjuntos: uno de test y otro de evaluación.
-- **dataset_scripts/build_dataset.py ->** luego de divididas las imagenes en 2 carpetas, crea 2 datasets. (jpg -> dataset).
-- **datasets/* ->** Datasets armados y listos para ser pasados al modelo!
+- dataset_scripts/
+    - *analize_jpg.py*: Analiza las imagenes que se encuentran en /imagenes_jpg.
+                          Genera un informe sobre la cantidad de imagenes para cada libro y captura. 
+    - *split_dataset.py*: divide el conjunto de imagenes en 2 conjuntos: uno de test y otro de evaluación.
+                            Genera una nueva carpeta con los 2 subconjutos de imagenes. 
+    - *build_dataset.py*: A partir de las carpetas generadas por split_dataset.py, genera 2 datasets de registros TFRecords.
 
-**Archivos vinculados al modelo ya entrenado:**
+####Documentación:
 
-- **checkpoints/* ->** Modelo ya entrenado, listo para ser evaluado.
+- doc/* : En esta carpeta se encuentra toda la documentación del proyecto.
 
-**Archivos vinculados a la configuración general:**
 
-- **config.py ->** Contiene todas las constantes parametrizables del sistema (FLAGS).
+####Modelo, entrenamiento y evaluación:
+- *reconobook_dataset.py*: Clase que representa el dataset de Reconobook. Puede ser un dataset de test o de entrenamiento.
+- *reconobook_input.py*: Contiene los metodos que sirven de input al modelo, leyendo de los datasets.
+- *reconobook_modelo.py:* El corazón del proyecto, acá se define y arma el modelo.
+- *reconobook_train.py:* Orquesta el entrenamiento del modelo
+- *reconobook_eval.py:* Contiene métodos para evalular un modelo.
 
-**Archivos de modelos y datasets viejos:**
+####Archivos vinculados al modelo ya entrenado
 
-- **Resguardo/* ->** Contiene modelos y datasets que no son el corriente.
+- checkpoints/*: Modelo ya entrenado, listo para ser evaluado. Cada 1000 pasos de entrenamiento se guarda un snapshot del modelo.
+
+####Configuración general
+
+- *config.py*: Contiene todas las constantes parametrizables del sistema (FLAGS).
 
 [<- Volver Home](../README.md)
