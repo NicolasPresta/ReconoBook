@@ -18,21 +18,16 @@ Garcia](https://www.youtube.com/playlist?list=PLAnA8FVrBl8AWkZmbswwWiF8a_52dQ3JQ
 detallada del modelo matematico detras de las redes neuronales artificiales. (Así mismo recomiento [todos los videos
 del canal de Javier Garcia](https://www.youtube.com/user/jamesjamesbondbond), que siempre resultan muy interesantes)
 
-Si se quiere *jugar* un poco con redes neuronales, nada mejor que [esta página que nos ofrece TensorFlow ]
-(http://playground.tensorflow.org)
+Si se quiere *jugar* un poco con redes neuronales, nada mejor que [esta página que nos ofrece TensorFlow](http://playground.tensorflow.org)
 
-Para una introducción sobre redes neuronales convolucionales recomiendo [este artículo de CS231N Staff](http://cs231n
- .github.io/convolutional-networks/#layers) y [este otro artículo de colah](http://colah.github
- .io/posts/2014-07-Conv-Nets-Modular/)
+Para una introducción sobre redes neuronales convolucionales recomiendo [este artículo de CS231N Staff](http://cs231n.github.io/convolutional-networks/#layers) 
+y [este otro artículo de colah](http://colah.github.io/posts/2014-07-Conv-Nets-Modular/)
 
-Un gran y claro artículo sobre deep learning en español [es este ofrecido por Ruben Lopez](https://rubenlopezg
-.wordpress.com/2014/05/07/que-es-y-como-funciona-deep-learning/)
+Un gran y claro artículo sobre deep learning en español [es este ofrecido por Ruben Lopez](https://rubenlopezg.wordpress.com/2014/05/07/que-es-y-como-funciona-deep-learning/)
 
-Otro gran artículo, aunque este en inglés, es [este de Michael Nielsen](http://neuralnetworksanddeeplearning
-.com/chap6.html)
+Otro gran artículo, aunque este en inglés, es [este de Michael Nielsen](http://neuralnetworksanddeeplearning.com/chap6.html)
 
-Finalmente, para no dejar de lado *la parte dura* [este artículo de Tim Dettmers](http://timdettmers
-.com/2015/03/09/deep-learning-hardware-guide/) explica muy claramente los aspectos necesarios a tener en cuenta al
+Finalmente, para no dejar de lado *la parte dura* [este artículo de Tim Dettmers](http://timdettmers.com/2015/03/09/deep-learning-hardware-guide/) explica muy claramente los aspectos necesarios a tener en cuenta al
 momento de seleccionar el hardware necesario para entrenar los modelos.
 
 

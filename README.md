@@ -22,10 +22,10 @@
 ####Extras:
 - [Indice del repositorio](./doc/indicerepo.md)
 - [Script instalación de Tensorflow en UBUNTU 64](./doc/ubuntu.md)
-- IDE utilizado
-- Programa para separar frames en .jpg a partir de un video
+- [IDE utilizado](https://www.jetbrains.com/pycharm/)
+- [Programa para separar frames en .jpg a partir de un video](https://www.dvdvideosoft.com/es/products/dvd/Free-Video-to-JPG-Converter.htm)
 - [Atajos rapidos desde consola](./doc/atajos.md)
-- Links de interes
+- [Links de interes](./doc/links.md)
 
 
 ***
