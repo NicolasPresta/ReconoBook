@@ -12,7 +12,7 @@
 3.  [Descripción del problema](./doc/problema.md)
 4.  [Obtención de imagenes](./doc/obtencion.md)
 5.  [Generación de datasets](./doc/generacion.md)
-6.  Armado del modelo, descripción de la red neuronal
+6.  [Descripción del modelo](./doc/modelo.md)
 7.  Entrenamiento del modelo
 8.  Evaluación del modelo
 9.  Conclusiones
