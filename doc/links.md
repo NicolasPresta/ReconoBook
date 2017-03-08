@@ -1,5 +1,5 @@
 [<- Volver Home](../README.md)
-
+***
 
 
 ## Links de interes
@@ -14,5 +14,5 @@
 - [Introducción a DeepLearning por Michael Nielsen](http://neuralnetworksanddeeplearning.com/chap6.html)
 - [Guia de Hardware para DeepLearning por Tim Dettmers](http://timdettmers.com/2015/03/09/deep-learning-hardware-guide/)  
 
-
+***
 [<- Volver Home](../README.md)
