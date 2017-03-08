@@ -1,3 +1,5 @@
+[<- Volver Home](../README.md)  
+
 ##Paso a paso, desde imagenes a modelo entrenado:
 
 Este es un breve resumen de los pasos para obtener el modelo entrenado y evaluarlo.
@@ -15,3 +17,8 @@ Este es un breve resumen de los pasos para obtener el modelo entrenado y evaluar
   - Hay varios parámetros que se pueden modificar en config.py.
 6. **Run reconobook_eval.py**
   - Parametros modificable: config.py->eval_unique, indica si se evaluan todas imagenes juntas o una por vez.
+  
+  
+  [<- Volver Home](../README.md)
+  
+  
