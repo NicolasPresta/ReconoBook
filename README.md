@@ -34,11 +34,16 @@ Sobre el Autor:
 
 **Nicolás Rodriguez Presta**
 
+
 **Desarollador** fullstack
+
 **Estudiante** de Ingenieria en Sistemas
+
 **Entusiasta** de Machine Learning
 
+
 [LinkedIn](https://www.linkedin.com/in/nicolaspresta/)
+
 [Twitter](https://twitter.com/nicolaspresta)
 
 ***
