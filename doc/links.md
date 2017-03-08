@@ -1,5 +1,4 @@
 [<- Volver Home](../README.md)
-***
 
 
 ## Links de interes
