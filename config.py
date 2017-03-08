@@ -29,7 +29,7 @@ tf.app.flags.DEFINE_integer('eval_num_examples', 2260, "Número de imagenes a ev
 tf.app.flags.DEFINE_integer("eval_batch_size", 100, "Cantidad de imagenes que se evaluan por batch")
 tf.app.flags.DEFINE_string('manual_test_folder', './manual_test_img/',
                            'Directorio donde estan las imagenes particular a evaluar manualmente')
-tf.app.flags.DEFINE_integer("top_k_prediction", 1,
+tf.app.flags.DEFINE_integer("top_k_prediction", 2,
                             "La predicción es conciderada correcta si se encuetra dentro de los k primeros resultados")
 
 # Entrenamiento
