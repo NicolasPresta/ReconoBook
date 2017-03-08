@@ -41,7 +41,8 @@ Cada libro tiene en total 330 imagenes, **110 corresponden a la captura A, 110 a
 Las imagenes se separan por carpeta. El formato de las imagenes es *jpg* y el tamaño puede variar, pero en general es de
 640x480 (de todos modos el tamaño no influye, ya que para alimentar el modelo se van a redimensionar a una escala menor)
 
-Las imagenes se encuentran en la carpeta */imagenes_jpg*, El nombre de cada subcarpeta es el ID del libro.  
+Las imagenes se encuentran en la carpeta */imagenes_jpg*, El nombre de cada subcarpeta es el ID del libro. (Todas las
+imagenes se subieron al repositorio de github para faciliar su obtención y descarga)
 El nombre de la imagen tiene el siguiente formato: <ID-Libro><ID-Capura> <Nro imagen>.jpg  
 Por ejemplo la imagen '**1A 005.jpg**' corresponde al libro ID 1, captura A.  
 
