@@ -19,9 +19,8 @@
 <img src="./img/17C.jpg" width="80"> 
 <img src="./img/18C.jpg" width="80"> 
 <img src="./img/19C.jpg" width="80"> 
-<img src="./img/20C.jpg" width="80"> 
+<img src="./img/20C.jpg" width="80">  
 
-***
 
 Para *entrenar* el modelo contamos con varias imagenes de las portadas de cada libro.  
 
