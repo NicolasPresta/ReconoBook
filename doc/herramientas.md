@@ -1,10 +1,9 @@
 ## Herramientas utilizadas
 
 
-<img src="https://i.ytimg.com/vi/oZikw5k_2FM/maxresdefault.jpg" height="200">
 <img src="http://blog.desdelinux.net/wp-content/uploads/2016/04/ubuntu.png" height="200">
+<img src="https://i.ytimg.com/vi/oZikw5k_2FM/maxresdefault.jpg" height="200">
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/PyCharm_Logo.svg/1000px-PyCharm_Logo.svg.png" height="200">
-<img src="https://scontent-eze1-1.xx.fbcdn.net/v/t1.0-9/12243056_993238084032935_7081353937984124692_n.png?oh=9387f42cedc9724a54af4833ad88c22a&oe=59293A87" height="200">
 
 
 Existen en el mercado muchas opciones disponibles de librerias para *machine learning*.
