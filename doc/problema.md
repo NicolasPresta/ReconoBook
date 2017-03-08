@@ -13,4 +13,5 @@ Simplemente necesitamos obtener un *software* que tiene como *input* una imagen 
 En este caso hay 20 portadas distintas que el sistema debe *aprender* a distinguir.
 
 
+***
 [<- Volver Home](../README.md)
