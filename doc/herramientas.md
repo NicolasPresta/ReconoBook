@@ -39,4 +39,5 @@ herramienta](https://www.dvdvideosoft.com/es/products/dvd/Free-Video-to-JPG-Conv
 Sobre el sistema operativo, [Ubuntu 64bits es más que suficiente](https://www.ubuntu.com/download/desktop)
 
 
+***
 [<- Volver Home](../README.md)
