@@ -19,33 +19,22 @@ Cada libro tiene en total 330 imagenes, **110 corresponden a la captura A, 110 a
 Las imagenes se separan por carpeta. El formato de las imagenes es *jpg* y el tamaño puede variar, pero en general es de
 640x480 (de todos modos el tamaño no influye, ya que para alimentar el modelo se van a redimensionar a una escala menor)
 
-El nombre de cada carpeta es el ID del libro.  
-
+Las imagenes se encuentran en la carpeta */imagenes_jpg*, El nombre de cada subcarpeta es el ID del libro.  
 El nombre de la imagen tiene el siguiente formato: <ID-Libro><ID-Capura> <Nro imagen>.jpg  
 Por ejemplo la imagen '**1A 005.jpg**' corresponde al libro ID 1, captura A.  
 
-Estas imagenes son TODO lo que tenemos, por lo tanto las vamos a utilizar tanto para entrenar como para evaluar el 
-modelo.
-
-Por eso primero necesitamos **dividir las imagenes en dos sets**, un conjunto de entrenamiento y otro conjunto de 
-evaluación.  
-Para esto se utiliza el script [split_dataset.py](../dataset_scripts/split_dataset.py)
- 
-Una vez con las imagenes divididas en 2 conjuntos necesitamos armar los **Archivos de dataset**, ya que tensorflow
-no leerá directamente las imagenes, sino que irá recorriendo un archivo que tiene todas las imagenes serializadas.
-El archivo de dataset es un archivo de TFRecords. Para más información [ver la documentación de tensorflow]
-(https://www.tensorflow.org/api_guides/python/python_io#tfrecords_format_details)  
-Para esto se utiliza el script [build_dataset.py](../dataset_scripts/build_dataset.py)
-
-
-Diagrama del flujo para obtener el dataset separado y formateado:
-
-![Obtencion](./img/obtencion1.png "Obtencion")
-
-Ademas contamos con otro script que analisa el conjunto de imagenes para totalizar cuantas imagenes hay por libro y 
-captura
+Contamos como herramienta con un script que analisa el conjunto de imagenes para totalizar cuantas imagenes hay 
+por libro y captura.  
 Para esto se utiliza el script [analize_jpg.py](../dataset_scripts/analize_jpg.py)
 
+![Obtencion](./img/obtencion1.png "Obtencion")  
+
+
+```shell
+python analize_jpg.py
+```
+
 ![Obtencion](./img/obtencion2.png "Obtencion")
+
 
 [<- Volver Home](../README.md)
