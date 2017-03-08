@@ -1,9 +1,10 @@
 #RECONOBOOK
 
-![Portada](./doc/portada.jpg "Portada")
-
 ##Un proyecto open source de visión artificial para reconocer la portada de libros.
 
+![Portada](./doc/portada2.jpg "Portada")
+
+***
 
 ###INDICE
 1.  [Introducción y Objetivos](./doc/objetivos.md)
