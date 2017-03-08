@@ -1,3 +1,5 @@
+[<- Volver Home](../README.md)  
+
 ## Generación de datasets
 
 Las imagenes que tenemos en */imagenes_jpg*  son todas* las que tenemos, por lo tanto las vamos a utilizar tanto para 
@@ -19,4 +21,6 @@ Para esto se utiliza el script [build_dataset.py](../dataset_scripts/build_datas
 Diagrama del flujo para obtener el dataset separado y formateado:
 
 
-![Obtencion](./img/generacion1.png "Obtencion")
+![Obtencion](./img/generacion1.png "Obtencion")  
+
+[<- Volver Home](../README.md)
