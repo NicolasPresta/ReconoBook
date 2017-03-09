@@ -5,7 +5,7 @@
 Una vez que los datasets están generados se puede comenzar el entrenamiento del modelo.
 
 ```shell
-python reconobook_train.py
+> python reconobook_train.py
 ```
 
 ![Entrenamiento](./img/entrenamiento5.png "Entrenamiento")  
