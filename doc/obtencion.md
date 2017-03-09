@@ -33,7 +33,7 @@ El libro se fue moviendo e inclinando, alejando y acercando, para **cubrir la ma
 sobreajuste.  
 
 Se realizaron varias capturas en video y su posterior separacion de frames en imagenes. Esto es para prevenir que las 
-condiciones de luz puedan sobreajustar el modelo. **En total se realizaron 6 capuras para entrenar, validar y testear el modelo (A, B, C, D, E y F)**.  
+condiciones de luz y del fondo puedan sobreajustar el modelo y hacer que no generalice bien el aprendizaje. **En total se realizaron 6 capuras para entrenar, validar y testear el modelo (A, B, C, D, E y F)**.
 Para evitar que haya un sesgo a clasificar mejor las imagenes de una determinada captura, **se utiliza la misma cantidad
 de imagenes para cada captura (y cada libro)**.  
 
