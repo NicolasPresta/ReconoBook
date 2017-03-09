@@ -14,10 +14,10 @@ python reconobook_train.py
 El entrenamiento se realiza por mini batch, es decir que se corrigen los parametros del modelo cada X cantidad de libros procesados. El tamaño de cada batch se puede ajustar con `FLAGS.train_batch_size`.
 
 Para ajustar los parametros del modelo se utiliza el gradiente de descenso. El objetivo es disminuir el costo de cada ejemplo.  
-![Entrenamiento](./img/entrenamiento2.png "Entrenamiento")  
+![Entrenamiento](./img/entrenamiento2.jpg "Entrenamiento")  
 
 Podemos observar que para hacer 4000 pasos (ajustar los parametros 4000 veces, en total se procesaron 400000 imagenes) se demoró 12hs.  
-![Entrenamiento](./img/entrenamiento1.png "Entrenamiento")  
+![Entrenamiento](./img/entrenamiento1.jpg "Entrenamiento")  
 
 Esto se debe a que el modelo está corriendo en una maquina virtual, sin GPU y con muchas limitaciones de RAM, y se está haciendo uso de un solo CPU.  
 ![Entrenamiento](./img/entrenamiento4.png "Entrenamiento")  
@@ -26,7 +26,7 @@ Esto se debe a que el modelo está corriendo en una maquina virtual, sin GPU y c
 
 El *learning rate* va a ir disminuyendo en función de la cantidad de pasos (esto permite que el modelo aprenda "más rapido" al principio y luego vaya afinando el aprendizaje sin *olvidar* lo que ya aprendió)
 
-![Entrenamiento](./img/entrenamiento3.png "Entrenamiento")  
+![Entrenamiento](./img/entrenamiento3.jpg "Entrenamiento")  
 
 
 Cada 10 pasos se imprime por consola el costo y la velocidad de procesamiento para esos 10 batch.  
