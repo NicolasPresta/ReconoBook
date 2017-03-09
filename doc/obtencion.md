@@ -33,11 +33,11 @@ El libro se fue moviendo e inclinando, alejando y acercando, para **cubrir la ma
 sobreajuste.  
 
 Se realizaron varias capturas en video y su posterior separacion de frames en imagenes. Esto es para prevenir que las 
-condiciones de luz puedan sobreajustar el modelo. **En total se realizaron 3 capuras para entrenar y validar el modelo (A, B y C) y una captura (D) para testear el modelo con imagenes nuevas de una captura que el modelo nunca procesó**.  
+condiciones de luz puedan sobreajustar el modelo. **En total se realizaron 6 capuras para entrenar, validar y testear el modelo (A, B, C, D, E y F)**.  
 Para evitar que haya un sesgo a clasificar mejor las imagenes de una determinada captura, **se utiliza la misma cantidad
 de imagenes para cada captura (y cada libro)**.  
 
-Cada libro tiene en total 330 imagenes, **110 corresponden a la captura A, 110 a la B y 110 a la C**.  
+Cada libro tiene en total 660 imagenes, **110 corresponden a la captura A, 110 a la B y 110 a la C, etc**.  
 **Las 110 imagenes de cada captura se eligieron aleatoriamente**. 
 
 Las imagenes se separan por carpeta. El formato de las imagenes es *jpg* y el tamaño puede variar, pero en general es de
@@ -65,7 +65,7 @@ python analize_jpg.py
 ### Libros a clasificar:
 
 1. Fisica universita  
-A)<img src="./img/1A.jpg" width="150"> B)<img src="./img/1B.jpg" width="150"> C)<img src="./img/1C.jpg" width="150"> 
+A)<img src="./img/1A.jpg" width="150"> B)<img src="./img/1B.jpg" width="150"> C)<img src="./img/1C.jpg" width="150"> D)<img src="./img/1D.jpg" width="150">  E)<img src="./img/1E.jpg" width="150">  F)<img src="./img/1F.jpg" width="150">  
 
 2. Patrones de diseño  
 A)<img src="./img/2A.jpg" width="150"> B)<img src="./img/2B.jpg" width="150"> C)<img src="./img/2C.jpg" width="150"> 
