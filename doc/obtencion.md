@@ -65,10 +65,10 @@ python analize_jpg.py
 ### Libros a clasificar:
 
 1. Fisica universita  
-A)<img src="./img/1A.jpg" width="150"> B)<img src="./img/1B.jpg" width="150"> C)<img src="./img/1C.jpg" width="150"> D)<img src="./img/1D.jpg" width="150">  E)<img src="./img/1E.jpg" width="150">  F)<img src="./img/1F.jpg" width="150">  
+A)<img src="./img/1A.jpg" width="130"> B)<img src="./img/1B.jpg" width="130"> C)<img src="./img/1C.jpg" width="130"> D)<img src="./img/1D.jpg" width="130">  E)<img src="./img/1E.jpg" width="130">  F)<img src="./img/1F.jpg" width="130">  
 
 2. Patrones de diseño  
-A)<img src="./img/2A.jpg" width="150"> B)<img src="./img/2B.jpg" width="150"> C)<img src="./img/2C.jpg" width="150"> 
+A)<img src="./img/2A.jpg" width="130"> B)<img src="./img/2B.jpg" width="130"> C)<img src="./img/2C.jpg" width="130"> D)<img src="./img/2D.jpg" width="130">  E)<img src="./img/2E.jpg" width="130">  F)<img src="./img/2F.jpg" width="130">  
 
 3. Introducción a Mineria de datos  
 A)<img src="./img/3A.jpg" width="150"> B)<img src="./img/3B.jpg" width="150"> C)<img src="./img/3C.jpg" width="150"> 
