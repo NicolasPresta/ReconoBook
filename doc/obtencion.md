@@ -55,8 +55,8 @@ Para esto se utiliza el script [analize_jpg.py](../dataset_scripts/analize_jpg.p
 ![Obtencion](./img/obtencion1.png "Obtencion")  
 
 ```shell
-cd dataset_scripts/
-python analize_jpg.py
+> cd dataset_scripts/
+> python analize_jpg.py
 ```
 
 ![Obtencion](./img/obtencion2.png "Obtencion")
