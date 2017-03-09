@@ -29,7 +29,7 @@ python build_datasets.py
 ```
 
 Diagrama del flujo para obtener el dataset separado y formateado:
-![Obtencion](./img/generacion1.png "Obtencion")  
+![Generacion](./img/generacion1.png "Generacion")  
 
 ***
 [<- Volver Home](../README.md)
