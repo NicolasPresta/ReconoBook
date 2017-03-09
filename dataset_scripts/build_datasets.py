@@ -75,9 +75,10 @@ SALIDA:
 
 from datetime import datetime
 import os
-import random
-import sys
+import os.path, sys
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
 import threading
+import random
 import config
 import numpy as np
 import tensorflow as tf

@@ -29,7 +29,8 @@ from __future__ import print_function
 
 import tensorflow as tf
 import os
-import os.path
+import os.path, sys
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
 import glob
 import config
 from random import shuffle
@@ -114,4 +115,5 @@ def procesar():
 # tf.app.run() busca y ejecuta la función main del script
 if __name__ == '__main__':
     os.chdir(os.getcwd() + "/..")
+    print (os.getcwd())
     tf.app.run()
