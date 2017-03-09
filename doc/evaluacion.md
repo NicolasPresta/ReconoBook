@@ -25,13 +25,13 @@ La predicción del modelo corresponde a la neurona de mayor activación a la sal
 Se puede ser más flexible y considerar que la predicción es correcta si está entre las K neuronas de mayor activación. Para esto se puede configurar el flag `FLAGS.top_k_prediction`  
 
 `FLAGS.top_k_prediction = 1`  
-![Evaluacion](./img/evaluacion1.png "Evaluacion") 
+validacion)![Evaluacion](./img/evaluacion1A.png "Evaluacion") test)![Evaluacion](./img/evaluacion1B.png "Evaluacion") 
 
 `FLAGS.top_k_prediction = 2`  
-![Evaluacion](./img/evaluacion2.png "Evaluacion")  
+validacion)![Evaluacion](./img/evaluacion2A.png "Evaluacion") test)![Evaluacion](./img/evaluacion2B.png "Evaluacion") 
 
 `FLAGS.top_k_prediction = 3`    
-![Evaluacion](./img/evaluacion3.png "Evaluacion")  
+validacion)![Evaluacion](./img/evaluacion3A.png "Evaluacion") test)![Evaluacion](./img/evaluacion3B.png "Evaluacion")   
 
 Vemos que cuanto mayor es K, el criterio de *lo que es correcto* es más flexible.
 
