@@ -1,4 +1,10 @@
-#RECONOBOOK
+#RECONOBOOK<img src="./doc/img/1C.jpg" width="80">
+<img src="./doc/img/2C.jpg" width="80">
+<img src="./doc/img/3C.jpg" width="80">
+<img src="./doc/img/4C.jpg" width="80">
+<img src="./doc/img/5C.jpg" width="80"> 
+<img src="./doc/img/6C.jpg" width="80"> 
+<img src="./doc/img/7C.jpg" width="80"> 
 
 <img src="./doc/img/1C.jpg" width="80">
 <img src="./doc/img/2C.jpg" width="80">
