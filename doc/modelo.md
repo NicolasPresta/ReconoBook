@@ -28,7 +28,7 @@ El costo de cada predicción se calcula comparando la predicción con el valor r
 
 Podemos ver el grafo de ejecución que genera TensorFlow para darnos una mejor idea de lo que en realidad está ocurriendo
 
-![Modelo](./img/modelo1.png "Modelo")
+![Modelo](./img/modelo5.png "Modelo")
 
 Donde el Input es la caja de abajo llamada *batch_processing*, podemos hacer zoom en esta parte para visualizar los 2 hilos de ejecución que se encargan de leer el dataset, parsear el TFRecord, decodificar el jpg y preprocesar la imagen. Luego se unen en *batch_join* para ser de input a la primer capa de la red neuronal.
 
