@@ -10,9 +10,9 @@ Este es un breve resumen de los pasos para obtener el modelo entrenado y evaluar
   - Parametro Modificable: porcentaje_img_test
   - Al finalizar se crean carpetas de train y test y el archivo con los labels.
 3. **Run dataset_scripts/build_datasets.py**
-  - Al finalizar se crean los datasets de train y validation en /datasets
+  - Al finalizar se crean los datasets de train y validation en /datasets.
 4. **Run reconobook_train.py**
-  - Hay varios parámetros que se pueden modificar en config.py
+  - Hay varios parámetros que se pueden modificar en config.py.
 5. **Run reconobook_eval.py**
   - Parametros modificable: config.py->eval_unique, indica si se evaluan todas imagenes juntas o una por vez.
   
