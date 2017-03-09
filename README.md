@@ -51,16 +51,16 @@ Sobre el Autor:
 
 ***
 
-<img src="./doc/img/1B.jpg" width="85">
-<img src="./doc/img/2A.jpg" width="85">
-<img src="./doc/img/3E.jpg" width="85">
-<img src="./doc/img/4F.jpg" width="85">
-<img src="./doc/img/5B.jpg" width="85"> 
-<img src="./doc/img/6A.jpg" width="85"> 
-<img src="./doc/img/7C.jpg" width="85"> 
-<img src="./doc/img/8F.jpg" width="85"> 
-<img src="./doc/img/9E.jpg" width="85"> 
-<img src="./doc/img/10E.jpg" width="85"> 
+<img src="./doc/img/1B.jpg" width="84">
+<img src="./doc/img/2A.jpg" width="84">
+<img src="./doc/img/3E.jpg" width="84">
+<img src="./doc/img/4F.jpg" width="84">
+<img src="./doc/img/5B.jpg" width="84"> 
+<img src="./doc/img/6A.jpg" width="84"> 
+<img src="./doc/img/7C.jpg" width="84"> 
+<img src="./doc/img/8F.jpg" width="84"> 
+<img src="./doc/img/9E.jpg" width="84"> 
+<img src="./doc/img/10E.jpg" width="84"> 
 <img src="./doc/img/11A.jpg" width="84"> 
 <img src="./doc/img/12B.jpg" width="84">
 <img src="./doc/img/13C.jpg" width="84"> 
