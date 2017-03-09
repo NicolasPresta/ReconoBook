@@ -4,7 +4,7 @@
 
 """
 DESCRIPCION:
-    Dada una carpeta con imagenes, divide la carpeta en 2 carpetas con imagenes, una para test y otra para train.
+    Dada una carpeta con imagenes, divide la carpeta en 2 carpetas con imagenes, una para validation y otra para train.
 
 ENTRADA:
     La carpata debe tener la siguiente estructura:
@@ -26,11 +26,11 @@ SALIDA:
 
           ...
 
-          data_dir/test/label_0/image1.jpeg
-          data_dir/test/label_0/image2.jpg
+          data_dir/validation/label_0/image1.jpeg
+          data_dir/validation/label_0/image2.jpg
           ...
-          data_dir/test/label_1/image0.jpeg
-          data_dir/test/label_1/image3.jpg
+          data_dir/validation/label_1/image0.jpeg
+          data_dir/validation/label_1/image3.jpg
 
     Ademas genera el archivo con los label en:
 
@@ -47,6 +47,7 @@ from __future__ import print_function
 import tensorflow as tf
 import os
 import os.path
+import glob
 import shutil
 from random import shuffle
 
@@ -56,34 +57,50 @@ tf.app.flags.DEFINE_string('porcentaje_img_validation', 40, 'Porcentaje de image
 tf.app.flags.DEFINE_string('data_dir', '../imagenes_jpg/', 'Directorio con las imagenes')
 tf.app.flags.DEFINE_string('train_folder', 'train', 'Directorio con las imagenes de entrenamiento')
 tf.app.flags.DEFINE_string('validation_folder', 'validation', 'Directorio con las imagenes de validation')
+tf.app.flags.DEFINE_string('test_folder', 'test', 'Directorio con las imagenes de test')
 tf.app.flags.DEFINE_string('labels_file_name', 'labels.txt', 'Labels file')
 tf.app.flags.DEFINE_string('data_split_dir', '../split_jpg/', 'Directorio donde estan las imagenes divididas a utilizar')
+
+capturasEntrenamiento = ["A", "B"]
+capturasTest = ["C"]
 
 FLAGS = tf.app.flags.FLAGS
 
 # ==============================================================================
 
-def dividir_set(carpeta_raiz, subcarpeta, carpeta_train, carpata_validation, porcentaje_img_validation):
-    # Listamos las imagenes
-    imagenes = os.listdir(carpeta_raiz + subcarpeta)
 
-    # Mesclamos aleatoriamente las imagenes
-    shuffle(imagenes)
+def dividir_set(carpeta_raiz, subcarpeta, carpeta_train, carpata_validation, carpeta_test, porcentaje_img_validation):
 
-    # Calculamos la cantidad de imagenes de cada set
-    cantidadTotalImagenes = len(imagenes)
-    cantidadImagenesValidation = int(cantidadTotalImagenes * porcentaje_img_validation / 100)
-    cantidadImagenesTrain = cantidadTotalImagenes - cantidadImagenesValidation
+    for captura in capturasEntrenamiento:
+        # Listamos las imagenes
+        imagenes = glob.glob(carpeta_raiz + subcarpeta + "/" + subcarpeta + captura + '*.jpg')
 
-    imagenesTrain = imagenes[0:cantidadImagenesTrain]
-    imagenesValidation = imagenes[cantidadImagenesTrain:cantidadTotalImagenes]
+        # Mesclamos aleatoriamente las imagenes
+        shuffle(imagenes)
 
-    for imagen in imagenesTrain:
-        shutil.copy(carpeta_raiz + subcarpeta + "/" + imagen, FLAGS.data_split_dir + carpeta_train + "/" + subcarpeta + "/" + imagen)
+        # Calculamos la cantidad de imagenes de cada set
+        cantidadTotalImagenes = len(imagenes)
+        cantidadImagenesValidation = int(cantidadTotalImagenes * porcentaje_img_validation / 100)
+        cantidadImagenesTrain = cantidadTotalImagenes - cantidadImagenesValidation
 
-    for imagen in imagenesValidation:
-        shutil.copy(carpeta_raiz + subcarpeta + "/" + imagen, FLAGS.data_split_dir + carpata_validation + "/" + subcarpeta + "/" + imagen)
+        imagenesTrain = imagenes[0:cantidadImagenesTrain]
+        imagenesValidation = imagenes[cantidadImagenesTrain:cantidadTotalImagenes]
 
+        for imagen in imagenesTrain:
+            name = os.path.basename(imagen)
+            shutil.copy(carpeta_raiz + subcarpeta + "/" + name, FLAGS.data_split_dir + carpeta_train + "/" + subcarpeta + "/" + name)
+
+        for imagen in imagenesValidation:
+            name = os.path.basename(imagen)
+            shutil.copy(carpeta_raiz + subcarpeta + "/" + name, FLAGS.data_split_dir + carpata_validation + "/" + subcarpeta + "/" + name)
+
+    for captura in capturasTest:
+        # Listamos las imagenes
+        imagenes = glob.glob(carpeta_raiz + subcarpeta + "/" + subcarpeta + captura + '*.jpg')
+        for imagen in imagenes:
+            name = os.path.basename(imagen)
+            shutil.copy(carpeta_raiz + subcarpeta + "/" + name,
+                        FLAGS.data_split_dir + carpeta_test + "/" + subcarpeta + "/" + name)
 
 def obtenerSubCarpetas(carpeta):
     subcarpetas = [d for d in os.listdir(carpeta) if os.path.isdir(os.path.join(carpeta, d))]
@@ -106,6 +123,10 @@ def main(unused_argv):
         print('Borramos carpeta: %s' % FLAGS.data_split_dir + FLAGS.validation_folder)
         shutil.rmtree(FLAGS.data_split_dir + FLAGS.validation_folder)
 
+    if os.path.exists(FLAGS.data_split_dir + FLAGS.test_folder):
+        print('Borramos carpeta: %s' % FLAGS.data_split_dir + FLAGS.test_folder)
+        shutil.rmtree(FLAGS.data_split_dir + FLAGS.test_folder)
+
     # Borramos el archivo de labels en caso de que exista:
     if os.path.isfile(FLAGS.data_dir + FLAGS.labels_file_name):
         os.remove(FLAGS.data_split_dir + FLAGS.labels_file_name)
@@ -122,6 +143,8 @@ def main(unused_argv):
     print('Creamos carpeta: %s' % FLAGS.data_dir + FLAGS.train_folder)
     os.mkdir(FLAGS.data_split_dir + FLAGS.validation_folder)
     print('Creamos carpeta: %s' % FLAGS.data_dir + FLAGS.validation_folder)
+    os.mkdir(FLAGS.data_split_dir + FLAGS.test_folder)
+    print('Creamos carpeta: %s' % FLAGS.data_dir + FLAGS.test_folder)
 
     # creamos el archivo de labels
     lablesFile = open(FLAGS.data_split_dir + FLAGS.labels_file_name, "a")
@@ -131,11 +154,13 @@ def main(unused_argv):
         # creamos la subcarpeta
         os.mkdir(FLAGS.data_split_dir + FLAGS.train_folder + "/" + subcarpeta)
         os.mkdir(FLAGS.data_split_dir + FLAGS.validation_folder + "/" + subcarpeta)
+        os.mkdir(FLAGS.data_split_dir + FLAGS.test_folder + "/" + subcarpeta)
 
         print('Dividiendo imagenes de carpeta: %s' % subcarpeta)
 
         # copiar imagenes
-        dividir_set(FLAGS.data_dir, subcarpeta, FLAGS.train_folder, FLAGS.validation_folder, FLAGS.porcentaje_img_validation)
+        dividir_set(FLAGS.data_dir, subcarpeta, FLAGS.train_folder, FLAGS.validation_folder,
+                    FLAGS.test_folder, FLAGS.porcentaje_img_validation)
 
         print('Divididas imagenes de carpeta %s' % subcarpeta)
 

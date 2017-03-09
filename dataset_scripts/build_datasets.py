@@ -86,10 +86,13 @@ import tensorflow as tf
 
 tf.app.flags.DEFINE_string('train_directory', '../split_jpg/train/', 'Directorio con las imagenes de entrenamiento')
 tf.app.flags.DEFINE_string('validation_directory', '../split_jpg/validation/', 'Directorio con las imagenes de validación')
+tf.app.flags.DEFINE_string('test_directory', '../split_jpg/test/', 'Directorio con las imagenes de test')
+
 tf.app.flags.DEFINE_string('output_directory', '../datasets/', 'Directorio de salida')
 
 tf.app.flags.DEFINE_integer('train_shards', 1, 'Numero de particiones del dataset de entrenamiento')
 tf.app.flags.DEFINE_integer('validation_shards', 1, 'Numero de particiones del dataset de validación')
+tf.app.flags.DEFINE_integer('test_shards', 1, 'Numero de particiones del dataset de entrenamiento')
 
 tf.app.flags.DEFINE_integer('num_threads', 1, 'Numero de hilos de ejecución')
 
@@ -420,11 +423,14 @@ def main(unused_argv):
 
     print('Guardando dataset en: %s' % FLAGS.output_directory)
 
+    # Generamos el dataset de entrenamiento
+    _process_dataset('train', FLAGS.train_directory, FLAGS.train_shards, FLAGS.labels_file)
+
     # Generamos el dataset de validación
     _process_dataset('validation', FLAGS.validation_directory, FLAGS.validation_shards, FLAGS.labels_file)
 
-    # Generamos el dataset de entrenamiento
-    _process_dataset('train', FLAGS.train_directory, FLAGS.train_shards, FLAGS.labels_file)
+    # Generamos el dataset de test
+    _process_dataset('test', FLAGS.test_directory, FLAGS.test_shards, FLAGS.labels_file)
 
 
 # Punto de entrada del script
