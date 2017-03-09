@@ -55,7 +55,7 @@ Sobre el Autor:
 **Nicolás Rodriguez Presta**
 
 
-**Desarollador** fullstack  
+**Desarollador** Fullstack  
 **Estudiante** de Ingenieria en Sistemas   
 **Entusiasta** de Machine Learning  
 
