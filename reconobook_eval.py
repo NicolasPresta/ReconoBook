@@ -249,7 +249,7 @@ def evaluate_unique(dataset):
 
 
 def main(argv=None):
-    dataset = ReconoBookData(subset='test')
+    dataset = ReconoBookData(subset='validation')
 
     # creamos el directorio de checkpoint_dir si no existe, y si existe lo borramos y creamos de nuevo
     if not os.path.exists(FLAGS.summary_dir_eval):

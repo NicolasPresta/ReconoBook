@@ -37,7 +37,7 @@ class ReconoBookData:
         return FLAGS.cantidad_clases
 
     def available_subsets(self):
-        return ['train', 'test']
+        return ['train', 'validation', 'test']
 
     def reader(self):
         return tf.TFRecordReader()

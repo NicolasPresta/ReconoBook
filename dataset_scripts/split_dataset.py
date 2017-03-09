@@ -52,18 +52,18 @@ from random import shuffle
 
 # ==============================================================================
 
+tf.app.flags.DEFINE_string('porcentaje_img_validation', 40, 'Porcentaje de imagenes que van al set de validation')
 tf.app.flags.DEFINE_string('data_dir', '../imagenes_jpg/', 'Directorio con las imagenes')
-tf.app.flags.DEFINE_string('train_folder', 'train', 'Directorio con las imagenes')
-tf.app.flags.DEFINE_string('test_folder', 'test', 'Directorio con las imagenes')
+tf.app.flags.DEFINE_string('train_folder', 'train', 'Directorio con las imagenes de entrenamiento')
+tf.app.flags.DEFINE_string('validation_folder', 'validation', 'Directorio con las imagenes de validation')
 tf.app.flags.DEFINE_string('labels_file_name', 'labels.txt', 'Labels file')
-tf.app.flags.DEFINE_string('porcentaje_img_test', 40, 'Porcentaje de imagenes que van al set de test')
 tf.app.flags.DEFINE_string('data_split_dir', '../split_jpg/', 'Directorio donde estan las imagenes divididas a utilizar')
 
 FLAGS = tf.app.flags.FLAGS
 
 # ==============================================================================
 
-def dividir_set(carpeta_raiz, subcarpeta, carpeta_train, carpata_test, porcentaje_img_test):
+def dividir_set(carpeta_raiz, subcarpeta, carpeta_train, carpata_validation, porcentaje_img_validation):
     # Listamos las imagenes
     imagenes = os.listdir(carpeta_raiz + subcarpeta)
 
@@ -72,17 +72,17 @@ def dividir_set(carpeta_raiz, subcarpeta, carpeta_train, carpata_test, porcentaj
 
     # Calculamos la cantidad de imagenes de cada set
     cantidadTotalImagenes = len(imagenes)
-    cantidadImagenesTest = int(cantidadTotalImagenes * porcentaje_img_test / 100)
-    cantidadImagenesTrain = cantidadTotalImagenes - cantidadImagenesTest
+    cantidadImagenesValidation = int(cantidadTotalImagenes * porcentaje_img_validation / 100)
+    cantidadImagenesTrain = cantidadTotalImagenes - cantidadImagenesValidation
 
     imagenesTrain = imagenes[0:cantidadImagenesTrain]
-    imagenesTest = imagenes[cantidadImagenesTrain:cantidadTotalImagenes]
+    imagenesValidation = imagenes[cantidadImagenesTrain:cantidadTotalImagenes]
 
     for imagen in imagenesTrain:
         shutil.copy(carpeta_raiz + subcarpeta + "/" + imagen, FLAGS.data_split_dir + carpeta_train + "/" + subcarpeta + "/" + imagen)
 
-    for imagen in imagenesTest:
-        shutil.copy(carpeta_raiz + subcarpeta + "/" + imagen, FLAGS.data_split_dir + carpata_test + "/" + subcarpeta + "/" + imagen)
+    for imagen in imagenesValidation:
+        shutil.copy(carpeta_raiz + subcarpeta + "/" + imagen, FLAGS.data_split_dir + carpata_validation + "/" + subcarpeta + "/" + imagen)
 
 
 def obtenerSubCarpetas(carpeta):
@@ -102,9 +102,9 @@ def main(unused_argv):
         print('Borramos carpeta: %s' % FLAGS.data_split_dir + FLAGS.train_folder)
         shutil.rmtree(FLAGS.data_split_dir + FLAGS.train_folder)
 
-    if os.path.exists(FLAGS.data_split_dir + FLAGS.test_folder):
-        print('Borramos carpeta: %s' % FLAGS.data_split_dir + FLAGS.test_folder)
-        shutil.rmtree(FLAGS.data_split_dir + FLAGS.test_folder)
+    if os.path.exists(FLAGS.data_split_dir + FLAGS.validation_folder):
+        print('Borramos carpeta: %s' % FLAGS.data_split_dir + FLAGS.validation_folder)
+        shutil.rmtree(FLAGS.data_split_dir + FLAGS.validation_folder)
 
     # Borramos el archivo de labels en caso de que exista:
     if os.path.isfile(FLAGS.data_dir + FLAGS.labels_file_name):
@@ -120,8 +120,8 @@ def main(unused_argv):
     # creamos las carpetas
     os.mkdir(FLAGS.data_split_dir + FLAGS.train_folder)
     print('Creamos carpeta: %s' % FLAGS.data_dir + FLAGS.train_folder)
-    os.mkdir(FLAGS.data_split_dir + FLAGS.test_folder)
-    print('Creamos carpeta: %s' % FLAGS.data_dir + FLAGS.test_folder)
+    os.mkdir(FLAGS.data_split_dir + FLAGS.validation_folder)
+    print('Creamos carpeta: %s' % FLAGS.data_dir + FLAGS.validation_folder)
 
     # creamos el archivo de labels
     lablesFile = open(FLAGS.data_split_dir + FLAGS.labels_file_name, "a")
@@ -130,12 +130,12 @@ def main(unused_argv):
     for subcarpeta in carpetas:
         # creamos la subcarpeta
         os.mkdir(FLAGS.data_split_dir + FLAGS.train_folder + "/" + subcarpeta)
-        os.mkdir(FLAGS.data_split_dir + FLAGS.test_folder + "/" + subcarpeta)
+        os.mkdir(FLAGS.data_split_dir + FLAGS.validation_folder + "/" + subcarpeta)
 
         print('Dividiendo imagenes de carpeta: %s' % subcarpeta)
 
         # copiar imagenes
-        dividir_set(FLAGS.data_dir, subcarpeta, FLAGS.train_folder, FLAGS.test_folder, FLAGS.porcentaje_img_test)
+        dividir_set(FLAGS.data_dir, subcarpeta, FLAGS.train_folder, FLAGS.validation_folder, FLAGS.porcentaje_img_validation)
 
         print('Divididas imagenes de carpeta %s' % subcarpeta)
 
