@@ -37,7 +37,9 @@ tf.app.flags.DEFINE_integer("moving_average_decay", 0.9999, "The decay to use fo
 tf.app.flags.DEFINE_integer("initial_learning_rate", 0.1, "Initial learning rate.")
 tf.app.flags.DEFINE_integer("decay_steps", 500, "Epochs after which learning rate decays.")
 tf.app.flags.DEFINE_integer("decay_rate", 0.9, "Learning rate decay factor.")
-tf.app.flags.DEFINE_boolean('log_device_placement', False, "Whether to log device placement.")
+tf.app.flags.DEFINE_boolean('log_device_placement', False, "Si logea la ubicación de cada variable al inciar la ejecución")
+tf.app.flags.DEFINE_boolean('allow_soft_placement', True, "Si permite una asignación de variables flexible")
+
 tf.app.flags.DEFINE_boolean('train_distort', True, "Distorcionar imagenes al evaluar")
 tf.app.flags.DEFINE_boolean('train_crop', True, "Distorcionar imagenes al evaluar")
 tf.app.flags.DEFINE_integer('train_max_steps', 20000, "Number of batches to run.")

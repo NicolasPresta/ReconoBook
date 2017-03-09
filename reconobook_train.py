@@ -53,8 +53,13 @@ def train(dataset):
         # Build an initialization operation to run below.
         init = tf.initialize_all_variables()
 
+        # Define config
+        config = tf.ConfigProto()
+        config.log_device_placement = FLAGS.log_device_placement
+        config.allow_soft_placement = FLAGS.allow_soft_placement
+
         # Start running operations on the Graph.
-        sess = tf.Session(config=tf.ConfigProto(log_device_placement=FLAGS.log_device_placement))
+        sess = tf.Session(config=config)
         sess.run(init)
 
         # Start the queue runners.
@@ -104,7 +109,7 @@ def main(_):
     if not os.path.exists(FLAGS.checkpoint_dir):
         os.mkdir(FLAGS.checkpoint_dir)
     else:
-        os.removedirs(FLAGS.checkpoint_dir)
+        shutil.rmtree(FLAGS.checkpoint_dir)
         os.mkdir(FLAGS.checkpoint_dir)
 
     train(dataset)
