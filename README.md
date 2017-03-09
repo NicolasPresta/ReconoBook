@@ -27,7 +27,27 @@
 - [Atajos rapidos desde consola](./doc/atajos.md)
 - [Links de interes](./doc/links.md)
 
-
+***
+<img src="./doc/img/1B.jpg" width="84">
+<img src="./doc/img/2A.jpg" width="84">
+<img src="./doc/img/3E.jpg" width="84">
+<img src="./doc/img/4F.jpg" width="84">
+<img src="./doc/img/5B.jpg" width="84"> 
+<img src="./doc/img/6A.jpg" width="84"> 
+<img src="./doc/img/7C.jpg" width="84"> 
+<img src="./doc/img/8F.jpg" width="84"> 
+<img src="./doc/img/9E.jpg" width="84"> 
+<img src="./doc/img/10E.jpg" width="84"> 
+<img src="./doc/img/11A.jpg" width="84"> 
+<img src="./doc/img/12B.jpg" width="84">
+<img src="./doc/img/13C.jpg" width="84"> 
+<img src="./doc/img/14C.jpg" width="84"> 
+<img src="./doc/img/15D.jpg" width="84"> 
+<img src="./doc/img/16F.jpg" width="84"> 
+<img src="./doc/img/17E.jpg" width="84"> 
+<img src="./doc/img/18B.jpg" width="84"> 
+<img src="./doc/img/19B.jpg" width="84"> 
+<img src="./doc/img/20C.jpg" width="84">
 ***
 
 Sobre el Autor:
@@ -48,28 +68,5 @@ Sobre el Autor:
 <img src="http://blog.desdelinux.net/wp-content/uploads/2016/04/ubuntu.png" height="200">
 <img src="https://i.ytimg.com/vi/oZikw5k_2FM/maxresdefault.jpg" height="200">
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/PyCharm_Logo.svg/1000px-PyCharm_Logo.svg.png" height="200">
-
-***
-
-<img src="./doc/img/1B.jpg" width="84">
-<img src="./doc/img/2A.jpg" width="84">
-<img src="./doc/img/3E.jpg" width="84">
-<img src="./doc/img/4F.jpg" width="84">
-<img src="./doc/img/5B.jpg" width="84"> 
-<img src="./doc/img/6A.jpg" width="84"> 
-<img src="./doc/img/7C.jpg" width="84"> 
-<img src="./doc/img/8F.jpg" width="84"> 
-<img src="./doc/img/9E.jpg" width="84"> 
-<img src="./doc/img/10E.jpg" width="84"> 
-<img src="./doc/img/11A.jpg" width="84"> 
-<img src="./doc/img/12B.jpg" width="84">
-<img src="./doc/img/13C.jpg" width="84"> 
-<img src="./doc/img/14C.jpg" width="84"> 
-<img src="./doc/img/15D.jpg" width="84"> 
-<img src="./doc/img/16F.jpg" width="84"> 
-<img src="./doc/img/17E.jpg" width="84"> 
-<img src="./doc/img/18B.jpg" width="84"> 
-<img src="./doc/img/19B.jpg" width="84"> 
-<img src="./doc/img/20C.jpg" width="84">  
 
 ***
