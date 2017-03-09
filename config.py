@@ -24,9 +24,6 @@ tf.app.flags.DEFINE_string('labels_file_name', 'labels.txt', 'Labels file')
 tf.app.flags.DEFINE_string('porcentaje_img_validation', 40, 'Porcentaje de imagenes que van al set de validation')
 tf.app.flags.DEFINE_integer('cantidad_clases', 20, 'Cantidad de clases a reconocer')
 
-tf.app.flags.DEFINE_integer('cantidad_imagenes_train', 3980, 'Cantidad de imagenes distintas para entrenamiento')
-tf.app.flags.DEFINE_integer('cantidad_imagenes_eval', 2260, 'Cantidad de imagenes distintas para evaluar modelo')
-
 tf.app.flags.DEFINE_boolean('modo_procesar', 0, 'Al ejecutar analize_jpg realizar emparejamiento')
 tf.app.flags.DEFINE_integer('img_por_captura', 110, 'Cantidad de imagenes a conservar por captura')
 
