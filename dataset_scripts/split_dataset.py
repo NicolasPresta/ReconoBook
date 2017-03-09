@@ -110,6 +110,7 @@ def obtenerSubCarpetas(carpeta):
 def main(unused_argv):
     print('Dividiendo set de imagenes de: %s' % FLAGS.data_dir)
 
+    shutil.rmtree(FLAGS.data_split_dir)
     # creamos el directorio de split si no existe
     if not os.path.exists(FLAGS.data_split_dir):
         os.mkdir(FLAGS.data_split_dir)
