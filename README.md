@@ -13,10 +13,9 @@
 4.  [Obtención de imagenes](./doc/obtencion.md)
 5.  [Generación de datasets](./doc/generacion.md)
 6.  [Descripción del modelo](./doc/modelo.md)
-7.  Entrenamiento del modelo
-8.  Evaluación del modelo
-9.  Conclusiones
-10. [Lista TODOs](./doc/TODO.md)
+7.  [Entrenamiento del modelo](./doc/entrenamiento.md)
+8.  [Evaluación del modelo](./doc/evaluacion.md)
+9. [Lista TODOs](./doc/TODO.md)
 
 
 ####Extras:
