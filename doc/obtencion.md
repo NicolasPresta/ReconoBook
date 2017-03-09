@@ -24,7 +24,7 @@
 <img src="./img/20C.jpg" width="80">  
 
 
-Para *entrenar* el modelo contamos con varias imagenes de las portadas de cada libro.  
+Para *entrenar y validar* el modelo contamos con varias imagenes de las portadas de cada libro.  
 
 Para **obtener las imagenes se grabó un pequeño video** (10 seg) posicionando la portada frente de la camara.  
 
@@ -55,6 +55,7 @@ Para esto se utiliza el script [analize_jpg.py](../dataset_scripts/analize_jpg.p
 ![Obtencion](./img/obtencion1.png "Obtencion")  
 
 ```shell
+cd dataset_scripts/
 python analize_jpg.py
 ```
 
@@ -64,10 +65,10 @@ python analize_jpg.py
 ### Libros a clasificar:
 
 1. Fisica universita  
-<img src="./img/1C.jpg" width="150"> 
+A)<img src="./img/1A.jpg" width="150"> B)<img src="./img/1B.jpg" width="150"> C)<img src="./img/1C.jpg" width="150"> 
 
 2. Patrones de diseño  
-<img src="./img/2C.jpg" width="150"> 
+A)<img src="./img/2C.jpg" width="150"> B)<img src="./img/2C.jpg" width="150"> C)<img src="./img/2C.jpg" width="150"> 
 
 3. Introducción a Mineria de datos  
 <img src="./img/3C.jpg" width="150"> 
