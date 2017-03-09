@@ -68,61 +68,61 @@ python analize_jpg.py
 A)<img src="./img/1A.jpg" width="150"> B)<img src="./img/1B.jpg" width="150"> C)<img src="./img/1C.jpg" width="150"> 
 
 2. Patrones de diseño  
-A)<img src="./img/2C.jpg" width="150"> B)<img src="./img/2C.jpg" width="150"> C)<img src="./img/2C.jpg" width="150"> 
+A)<img src="./img/2A.jpg" width="150"> B)<img src="./img/2B.jpg" width="150"> C)<img src="./img/2C.jpg" width="150"> 
 
 3. Introducción a Mineria de datos  
-<img src="./img/3C.jpg" width="150"> 
+A)<img src="./img/3A.jpg" width="150"> B)<img src="./img/3B.jpg" width="150"> C)<img src="./img/3C.jpg" width="150"> 
 
 4. Mineria de datos a traves de ejemplos  
-<img src="./img/4C.jpg" width="150"> 
+A)<img src="./img/4A.jpg" width="150"> B)<img src="./img/4B.jpg" width="150"> C)<img src="./img/4C.jpg" width="150">
 
 5. Sistemas expertos  
-<img src="./img/5C.jpg" width="150"> 
+A)<img src="./img/5A.jpg" width="150"> B)<img src="./img/5B.jpg" width="150"> C)<img src="./img/5C.jpg" width="150">
 
 6. Sistemas inteligentes  
-<img src="./img/6C.jpg" width="150"> 
+A)<img src="./img/6A.jpg" width="150"> B)<img src="./img/6B.jpg" width="150"> C)<img src="./img/6C.jpg" width="150">
 
 7. Big data  
-<img src="./img/7C.jpg" width="150"> 
+A)<img src="./img/7A.jpg" width="150"> B)<img src="./img/7B.jpg" width="150"> C)<img src="./img/7C.jpg" width="150">
 
 8.  Analisis matematico (vol 3 / Azul)  
-<img src="./img/8C.jpg" width="150"> 
+A)<img src="./img/8A.jpg" width="150"> B)<img src="./img/8B.jpg" width="150"> C)<img src="./img/8C.jpg" width="150">
 
 9.  Einstein  
-<img src="./img/9C.jpg" width="150"> 
+A)<img src="./img/9A.jpg" width="150"> B)<img src="./img/9B.jpg" width="150"> C)<img src="./img/9C.jpg" width="150">
 
 10. Analisis matematico (vol 2 / Amarillo)  
-<img src="./img/10C.jpg" width="150"> 
+A)<img src="./img/10A.jpg" width="150"> B)<img src="./img/10B.jpg" width="150"> C)<img src="./img/10C.jpg" width="150">
 
 11. Teoria de control  
-<img src="./img/11C.jpg" width="150"> 
+A)<img src="./img/11A.jpg" width="150"> B)<img src="./img/11B.jpg" width="150"> C)<img src="./img/11C.jpg" width="150">
 
 12. Empresas de consultoría  
-<img src="./img/12C.jpg" width="150"> 
+A)<img src="./img/12A.jpg" width="150"> B)<img src="./img/12B.jpg" width="150"> C)<img src="./img/12C.jpg" width="150">
 
 13. Legislación  
-<img src="./img/13C.jpg" width="150"> 
+A)<img src="./img/13A.jpg" width="150"> B)<img src="./img/13B.jpg" width="150"> C)<img src="./img/13C.jpg" width="150"> 
 
 14. En cambio  
-<img src="./img/14C.jpg" width="150"> 
+A)<img src="./img/14A.jpg" width="150"> B)<img src="./img/14B.jpg" width="150"> C)<img src="./img/14C.jpg" width="150">
 
 15. Liderazgo Guardiola  
-<img src="./img/15C.jpg" width="150"> 
+A)<img src="./img/15A.jpg" width="150"> B)<img src="./img/15B.jpg" width="150"> C)<img src="./img/15C.jpg" width="150">
 
 16. Constitución Argentina  
-<img src="./img/16C.jpg" width="150"> 
+A)<img src="./img/16A.jpg" width="150"> B)<img src="./img/16B.jpg" width="150"> C)<img src="./img/16C.jpg" width="150">
 
 17. El arte de conversar  
-<img src="./img/17C.jpg" width="150"> 
+A)<img src="./img/17A.jpg" width="150"> B)<img src="./img/17B.jpg" width="150"> C)<img src="./img/17C.jpg" width="150">
 
 18. El señor de las moscas  
-<img src="./img/18C.jpg" width="150"> 
+A)<img src="./img/18A.jpg" width="150"> B)<img src="./img/18B.jpg" width="150"> C)<img src="./img/18C.jpg" width="150"> 
 
 19. Revista: Epigenetica  
-<img src="./img/19C.jpg" width="150"> 
+A)<img src="./img/19A.jpg" width="150"> B)<img src="./img/19B.jpg" width="150"> C)<img src="./img/19C.jpg" width="150">
 
 20. Revista: Lado oscuro del cosmos  
-<img src="./img/20C.jpg" width="130">   
+A)<img src="./img/20A.jpg" width="150"> B)<img src="./img/20B.jpg" width="150"> C)<img src="./img/20C.jpg" width="150">
 
 
 ***
