@@ -1,4 +1,4 @@
-#<img src="./doc/img/1C.jpg" width="80"><img src="./doc/img/2C.jpg" width="80"><img src="./doc/img/4C.jpg" width="80">RECONOBOOK<img src="./doc/img/4C.jpg" width="80"><img src="./doc/img/5C.jpg" width="80"> <img src="./doc/img/6C.jpg" width="80"> 
+#RECONOBOOK
 
 ##Un proyecto open source de visión artificial para reconocer la portada de libros.
 
@@ -51,5 +51,25 @@ Sobre el Autor:
 
 ***
 
+<img src="./doc/img/1B.jpg" width="80">
+<img src="./doc/img/2A.jpg" width="80">
+<img src="./doc/img/3E.jpg" width="80">
+<img src="./doc/img/4F.jpg" width="80">
+<img src="./doc/img/5B.jpg" width="80"> 
+<img src="./doc/img/6A.jpg" width="80"> 
+<img src="./doc/img/7C.jpg" width="80"> 
+<img src="./doc/img/8F.jpg" width="80"> 
+<img src="./doc/img/9E.jpg" width="80"> 
+<img src="./doc/img/10E.jpg" width="80"> 
+<img src="./doc/img/11A.jpg" width="80"> 
+<img src="./doc/img/12B.jpg" width="80">
+<img src="./doc/img/13C.jpg" width="80"> 
+<img src="./doc/img/14C.jpg" width="80"> 
+<img src="./doc/img/15D.jpg" width="80"> 
+<img src="./doc/img/16F.jpg" width="80"> 
+<img src="./doc/img/17E.jpg" width="80"> 
+<img src="./doc/img/18B.jpg" width="80"> 
+<img src="./doc/img/19B.jpg" width="80"> 
+<img src="./doc/img/20C.jpg" width="80">  
 
-
+***
