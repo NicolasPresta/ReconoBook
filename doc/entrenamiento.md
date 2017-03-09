@@ -17,7 +17,7 @@ Para ajustar los parametros del modelo se utiliza el gradiente de descenso. El o
 ![Entrenamiento](./img/entrenamiento2.jpg "Entrenamiento")  
 
 Podemos observar que para hacer 4000 pasos (ajustar los parametros 4000 veces, en total se procesaron 400000 imagenes) se demoró 12hs.  
-![Entrenamiento](./img/entrenamiento1.JPG "Entrenamiento")  
+![Entrenamiento](./img/entrenamiento1.jpg "Entrenamiento")  
 
 Esto se debe a que el modelo está corriendo en una maquina virtual, sin GPU y con muchas limitaciones de RAM, y se está haciendo uso de un solo CPU.  
 ![Entrenamiento](./img/entrenamiento4.png "Entrenamiento")  
