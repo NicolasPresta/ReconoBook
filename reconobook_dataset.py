@@ -43,14 +43,13 @@ class ReconoBookData:
         return tf.TFRecordReader()
 
     def data_files(self):
-        tf_record_pattern = os.path.join(FLAGS.data_dir, '%s-*' % self.subset)
+        tf_record_pattern = os.path.join(FLAGS.datasets_dir, '%s-*' % self.subset)
         data_files = tf.gfile.Glob(tf_record_pattern)
         if not data_files:
             print('No se ecnontraron archivos para el dataset %s/%s en %s' % (self.name,
                                                                               self.subset,
-                                                                              FLAGS.data_dir))
+                                                                              FLAGS.datasets_dir))
 
-            self.download_message()
             exit(-1)
 
         return data_files

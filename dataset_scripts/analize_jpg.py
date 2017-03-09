@@ -11,11 +11,11 @@ DESCRIPCION:
 ENTRADA:
     La carpata debe tener la siguiente estructura:
 
-          data_dir/label_0/A image0.jpeg
-          data_dir/label_0/B image1.jpg
+          img_dir/label_0/A image0.jpeg
+          img_dir/label_0/B image1.jpg
           ...
-          data_dir/label_1/A image0.jpeg
-          data_dir/label_1/B image1.jpeg
+          img_dir/label_1/A image0.jpeg
+          img_dir/label_1/B image1.jpeg
 
 SALIDA:
     Una tabla sumarizando la cantidad de imagen por cada clase, por cada captura.
@@ -29,22 +29,18 @@ from __future__ import print_function
 
 import tensorflow as tf
 import os
-import os.path
+import os.path, sys
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
 import glob
+import config
 from random import shuffle
 
 # ==============================================================================
 
-tf.app.flags.DEFINE_string('data_dir', '../imagenes_jpg/', 'Directorio con las imagenes')
-tf.app.flags.DEFINE_integer('img_por_captura', 110, 'Cantidad de imagenes a concervar por captura')
-tf.app.flags.DEFINE_boolean('modo_procesar', 0, 'Indica si en lugar de hacer el analisis se realiza la limpieza')
-
-capturas = ["A", "B", "C"]
-
 FLAGS = tf.app.flags.FLAGS
+capturas = FLAGS.capturas_id.split(",")
 
 # ==============================================================================
-
 
 def obtenerSubCarpetas(carpeta):
     subcarpetas = [d for d in os.listdir(carpeta) if os.path.isdir(os.path.join(carpeta, d))]
@@ -59,9 +55,9 @@ def main(unused_argv):
 
 
 def analisar():
-    print('Analisando imagenes de: %s' % FLAGS.data_dir)
+    print('Analisando imagenes de: %s' % FLAGS.img_dir)
 
-    carpetas = obtenerSubCarpetas(FLAGS.data_dir)
+    carpetas = obtenerSubCarpetas(FLAGS.img_dir)
 
     encabezado = "clase\t"
     for captura in capturas:
@@ -72,7 +68,7 @@ def analisar():
 
     for subcarpeta in carpetas:
         renglon = subcarpeta + "\t\t"
-        carpeta = FLAGS.data_dir + subcarpeta + "/"
+        carpeta = FLAGS.img_dir + "/" + subcarpeta + "/"
 
         total = 0
         for captura in capturas:
@@ -89,13 +85,13 @@ def analisar():
 
 
 def procesar():
-    print('Procesando imagenes de: %s' % FLAGS.data_dir)
+    print('Procesando imagenes de: %s' % FLAGS.img_dir)
 
-    carpetas = obtenerSubCarpetas(FLAGS.data_dir)
+    carpetas = obtenerSubCarpetas(FLAGS.img_dir)
 
     for subcarpeta in carpetas:
 
-        carpeta = FLAGS.data_dir + subcarpeta + "/"
+        carpeta = FLAGS.img_dir + "/" + subcarpeta + "/"
 
         for captura in capturas:
             capturaX = glob.glob(carpeta + subcarpeta + captura + "*.jpg")
@@ -118,4 +114,6 @@ def procesar():
 # Punto de entrada del script
 # tf.app.run() busca y ejecuta la función main del script
 if __name__ == '__main__':
+    os.chdir(os.getcwd() + "/..")
+    print (os.getcwd())
     tf.app.run()

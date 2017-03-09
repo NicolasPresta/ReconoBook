@@ -2,26 +2,26 @@
 
 ## Obtención de imagenes
 
-<img src="./img/1C.jpg" width="80">
-<img src="./img/2C.jpg" width="80">
-<img src="./img/3C.jpg" width="80">
-<img src="./img/4C.jpg" width="80">
-<img src="./img/5C.jpg" width="80"> 
-<img src="./img/6C.jpg" width="80"> 
-<img src="./img/7C.jpg" width="80"> 
-<img src="./img/8C.jpg" width="80"> 
-<img src="./img/9C.jpg" width="80"> 
-<img src="./img/10C.jpg" width="80"> 
-<img src="./img/11C.jpg" width="80"> 
-<img src="./img/12C.jpg" width="80">
-<img src="./img/13C.jpg" width="80"> 
-<img src="./img/14C.jpg" width="80"> 
-<img src="./img/15C.jpg" width="80"> 
-<img src="./img/16C.jpg" width="80"> 
-<img src="./img/17C.jpg" width="80"> 
-<img src="./img/18C.jpg" width="80"> 
-<img src="./img/19C.jpg" width="80"> 
-<img src="./img/20C.jpg" width="80">  
+<img src="./img/1C.jpg" width="84">
+<img src="./img/2C.jpg" width="84">
+<img src="./img/3C.jpg" width="84">
+<img src="./img/4C.jpg" width="84">
+<img src="./img/5C.jpg" width="84"> 
+<img src="./img/6C.jpg" width="84"> 
+<img src="./img/7C.jpg" width="84"> 
+<img src="./img/8C.jpg" width="84"> 
+<img src="./img/9C.jpg" width="84"> 
+<img src="./img/10C.jpg" width="84"> 
+<img src="./img/11C.jpg" width="84"> 
+<img src="./img/12C.jpg" width="84">
+<img src="./img/13C.jpg" width="84"> 
+<img src="./img/14C.jpg" width="84"> 
+<img src="./img/15C.jpg" width="84"> 
+<img src="./img/16C.jpg" width="84"> 
+<img src="./img/17C.jpg" width="84"> 
+<img src="./img/18C.jpg" width="84"> 
+<img src="./img/19C.jpg" width="84"> 
+<img src="./img/20C.jpg" width="84">  
 
 
 Para *entrenar y validar* el modelo contamos con varias imagenes de las portadas de cada libro.  
@@ -55,8 +55,8 @@ Para esto se utiliza el script [analize_jpg.py](../dataset_scripts/analize_jpg.p
 ![Obtencion](./img/obtencion1.png "Obtencion")  
 
 ```shell
-cd dataset_scripts/
-python analize_jpg.py
+> cd dataset_scripts/
+> python analize_jpg.py
 ```
 
 ![Obtencion](./img/obtencion2.png "Obtencion")

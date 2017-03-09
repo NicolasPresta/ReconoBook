@@ -91,6 +91,7 @@ def train(dataset):
             if step % 500 == 0 or (step + 1) == FLAGS.train_max_steps:
                 checkpoint_path = os.path.join(FLAGS.checkpoint_dir, 'model.ckpt')
                 saver.save(sess, checkpoint_path, global_step=step)
+                print ("---> Guardado resguardo: " + checkpoint_path)
 
 
 def main(_):

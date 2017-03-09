@@ -25,29 +25,7 @@ import config
 # ==============================================================================
 
 FLAGS = tf.app.flags.FLAGS
-
-titulos = [
-    "Fisica universita",
-    "Patrones de diseño",
-    "Introducción a Mineria de datos",
-    "Mineria de datos a traves de ejemplos",
-    "Sistemas expertos",
-    "Sistemas inteligentes",
-    "Big data",
-    "Analisis matematico (vol 3 / Azul)",
-    "Einstein",
-    "Analisis matematico (vol 2 / Amarillo)",
-    "Teoria de control",
-    "Empresas de consultoría",
-    "Legislación",
-    "En cambio",
-    "Liderazgo Guardiola",
-    "Constitución Argentina",
-    "El arte de conversar",
-    "El señor de las moscas",
-    "Revista: Epigenetica",
-    "Revista: Lado oscuro del cosmos"
-]
+titulos = FLAGS.titulos.split(",")
 
 # ==============================================================================
 

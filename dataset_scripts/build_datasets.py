@@ -11,11 +11,11 @@ ENTRADA:
     Las imagenes deben ser de formato JPG.
     Se espera que esten en el file system con la siguente estructura de carpetas:
 
-      data_dir/label_0/image0.jpeg
-      data_dir/label_0/image1.jpg
+      datasets_dir/label_0/image0.jpeg
+      datasets_dir/label_0/image1.jpg
       ...
-      data_dir/label_1/weird-image.jpeg
-      data_dir/label_1/my-image.jpeg
+      datasets_dir/label_1/weird-image.jpeg
+      datasets_dir/label_1/my-image.jpeg
       ...
 
     Donde el subdirectorio es la etiqueta unica asociada a cada imagen.
@@ -75,34 +75,16 @@ SALIDA:
 
 from datetime import datetime
 import os
-import random
-import sys
+import os.path, sys
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
 import threading
-
+import random
+import config
 import numpy as np
 import tensorflow as tf
 
 # -----------------------------------------------------------------------------------------------
 
-tf.app.flags.DEFINE_string('train_directory', '../split_jpg/train/', 'Directorio con las imagenes de entrenamiento')
-tf.app.flags.DEFINE_string('validation_directory', '../split_jpg/validation/', 'Directorio con las imagenes de validación')
-tf.app.flags.DEFINE_string('test_directory', '../split_jpg/test/', 'Directorio con las imagenes de test')
-
-tf.app.flags.DEFINE_string('output_directory', '../datasets/', 'Directorio de salida')
-
-tf.app.flags.DEFINE_integer('train_shards', 1, 'Numero de particiones del dataset de entrenamiento')
-tf.app.flags.DEFINE_integer('validation_shards', 1, 'Numero de particiones del dataset de validación')
-tf.app.flags.DEFINE_integer('test_shards', 1, 'Numero de particiones del dataset de entrenamiento')
-
-tf.app.flags.DEFINE_integer('num_threads', 1, 'Numero de hilos de ejecución')
-
-# El archivo de labels (etiquetas) contiene una lista de las etiquetas validas
-# El archivo contiene una lista de strings, donde cada linea corresponde a una etiqueta:
-#   dog
-#   cat
-#   flower
-# Se mapea la etiqueta al numero de linea donde está ubicado, comenzando desde el 0
-tf.app.flags.DEFINE_string('labels_file', '../split_jpg/labels.txt', 'Labels file')
 
 FLAGS = tf.app.flags.FLAGS
 
@@ -254,7 +236,7 @@ def _process_image_files_batch(coder, thread_index, ranges, name, filenames, tex
         # Generamos el nombre del arhivo, que contenga la particion, ej: 'train-00002-of-00010'
         shard = thread_index * num_shards_per_batch + s
         output_filename = '%s-%.5d-of-%.5d' % (name, shard, num_shards)
-        output_file = os.path.join(FLAGS.output_directory, output_filename)
+        output_file = os.path.join(FLAGS.datasets_dir + "/", output_filename)
         writer = tf.python_io.TFRecordWriter(output_file)
 
         shard_counter = 0
@@ -307,14 +289,14 @@ def _process_image_files(name, filenames, texts, labels, num_shards):
     assert len(filenames) == len(labels)
 
     # Separamos el listado de imagenes en varios rangos (varios batch), uno para cada hilo de ejecución
-    spacing = np.linspace(0, len(filenames), FLAGS.num_threads + 1).astype(np.int)
+    spacing = np.linspace(0, len(filenames), FLAGS.dataset_num_threads + 1).astype(np.int)
     ranges = []
 
     for i in xrange(len(spacing) - 1):
         ranges.append([spacing[i], spacing[i+1]])
 
     # lanzamos un hilo de ejecución para cada batch
-    print('Lanzando %d hilos para las siguientes separaciones del set de imagenes: %s' % (FLAGS.num_threads, ranges))
+    print('Lanzando %d hilos para las siguientes separaciones del set de imagenes: %s' % (FLAGS.dataset_num_threads, ranges))
     sys.stdout.flush()
 
     # Creamos un macanismo para monitorear los hilos de ejecución
@@ -343,10 +325,10 @@ def _process_image_files(name, filenames, texts, labels, num_shards):
     sys.stdout.flush()
 
 
-def _find_image_files(data_dir, labels_file):
+def _find_image_files(datasets_dir, labels_file):
     """ Genera una lista de todas las imagenes y etiquetas en el dataset
     Args:
-        data_dir: string, ruta base a la carpeta donde se encuentran las imagenes
+        datasets_dir: string, ruta base a la carpeta donde se encuentran las imagenes
         labels_file: string, ruta al archivo de etiquetas.
     Returns:
         filenames: list of strings; cada string es la ruta a una imagen. (m*1) donde m es el numero de imagenes
@@ -354,7 +336,7 @@ def _find_image_files(data_dir, labels_file):
         labels: list of integer; cada entero identifica una etiqueta. (m*1)
     """
 
-    print('Determinando la lista de imagenes y etiquetas desde: %s.' % data_dir)
+    print('Determinando la lista de imagenes y etiquetas desde: %s.' % datasets_dir)
 
     filenames = []
     texts = []
@@ -368,8 +350,8 @@ def _find_image_files(data_dir, labels_file):
 
     # construir la lista de imagenes y etiquetas.
     for text in unique_labels:
-        # armamos la ruta donde estan las imagenes de esa etiqueta: data_dir/dog/*
-        jpeg_file_path = '%s/%s/*' % (data_dir, text)
+        # armamos la ruta donde estan las imagenes de esa etiqueta: datasets_dir/dog/*
+        jpeg_file_path = '%s/%s/*' % (datasets_dir, text)
         # listamos los archivos de esa etiqueta
         matching_files = tf.gfile.Glob(jpeg_file_path)
 
@@ -391,7 +373,7 @@ def _find_image_files(data_dir, labels_file):
     texts = [texts[i] for i in shuffled_index]
     labels = [labels[i] for i in shuffled_index]
 
-    print('Encontrados %d imagenes JPEG, para %d etiquetas, en: %s.' % (len(filenames), len(unique_labels), data_dir))
+    print('Encontrados %d imagenes JPEG, para %d etiquetas, en: %s.' % (len(filenames), len(unique_labels), datasets_dir))
 
     return filenames, texts, labels
 
@@ -413,27 +395,31 @@ def _process_dataset(name, directory, num_shards, labels_file):
 
 
 def main(unused_argv):
-    assert not FLAGS.train_shards % FLAGS.num_threads, ('La cantidad de particiones (FLAGS.train_shards) debe ser divisible entre los hilos (FLAGS.num_threads)')
+    assert not FLAGS.train_shards % FLAGS.dataset_num_threads,('La cantidad de particiones (FLAGS.train_shards) debe ser divisible entre los hilos (FLAGS.num_threads)')
 
-    assert not FLAGS.validation_shards % FLAGS.num_threads, ('La cantidad de particiones (FLAGS.validation_shards) debe ser divisible entre los hilos (FLAGS.num_threads)')
+    assert not FLAGS.validation_shards % FLAGS.dataset_num_threads, ('La cantidad de particiones (FLAGS.validation_shards) debe ser divisible entre los hilos (FLAGS.num_threads)')
 
     # creamos el directorio output si no existe
-    if not os.path.exists(FLAGS.output_directory):
-        os.mkdir(FLAGS.output_directory)
+    if not os.path.exists(FLAGS.datasets_dir + "/"):
+        os.mkdir(FLAGS.datasets_dir + "/")
 
-    print('Guardando dataset en: %s' % FLAGS.output_directory)
+    print('Guardando dataset en: %s' % FLAGS.datasets_dir + "/")
 
     # Generamos el dataset de entrenamiento
-    _process_dataset('train', FLAGS.train_directory, FLAGS.train_shards, FLAGS.labels_file)
+    _process_dataset('train', FLAGS.data_split_dir + "/" + FLAGS.train_folder + "/",
+                     FLAGS.train_shards, FLAGS.data_split_dir + "/" + FLAGS.labels_file_name)
 
     # Generamos el dataset de validación
-    _process_dataset('validation', FLAGS.validation_directory, FLAGS.validation_shards, FLAGS.labels_file)
+    _process_dataset('validation', FLAGS.data_split_dir + "/" + FLAGS.validation_folder + "/",
+                     FLAGS.validation_shards, FLAGS.data_split_dir + "/" + FLAGS.labels_file_name)
 
     # Generamos el dataset de test
-    _process_dataset('test', FLAGS.test_directory, FLAGS.test_shards, FLAGS.labels_file)
+    _process_dataset('test', FLAGS.data_split_dir + "/" + FLAGS.test_folder + "/",
+                     FLAGS.test_shards, FLAGS.data_split_dir + "/" + FLAGS.labels_file_name)
 
 
 # Punto de entrada del script
 # tf.app.run() busca y ejecuta la función main del script
 if __name__ == '__main__':
+    os.chdir(os.getcwd() + "/..")
     tf.app.run()
