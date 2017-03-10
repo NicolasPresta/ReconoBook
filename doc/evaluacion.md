@@ -14,7 +14,7 @@ Para elegir entre un set u otro se configura el flag `FLAGS.eval_dataset`
 
 Para correr la evaluación es tan simple como:
 ```shell
-python reconobook_eval.py
+> python reconobook_eval.py
 ```
 
 Para evaluar, el sistema restaura el último modelo guardado en la carpeta */checkpoints*.  
