@@ -52,6 +52,8 @@ def main(unused_argv):
         procesar()
     else:
         analisar()
+    
+    input = sys.stdin.readline()
 
 
 def analisar():

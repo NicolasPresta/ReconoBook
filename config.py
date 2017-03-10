@@ -72,12 +72,13 @@ tf.app.flags.DEFINE_integer("train_batch_size", 100, "Cantidad de imagenes que s
 # -------------------------------- EVALUACION --------------------------------
 tf.app.flags.DEFINE_boolean('eval_unique', False, "Ejecutar revisión imagen por imagen")
 tf.app.flags.DEFINE_boolean('eval_unique_from_dataset', True, "Evaluar imagen por imagen desde dataset")
-tf.app.flags.DEFINE_integer('eval_unique_cantidad_img', 3, "Cantidad de imagenes a evaluar si eval_unique = true")
+tf.app.flags.DEFINE_integer('eval_unique_cantidad_img', 10, "Cantidad de imagenes a evaluar si eval_unique = true")
 tf.app.flags.DEFINE_boolean('eval_distort', False, "Distorcionar imagenes al evaluar")
 tf.app.flags.DEFINE_boolean('eval_crop', False, "Distorcionar imagenes al evaluar")
-tf.app.flags.DEFINE_integer('eval_num_examples', 2260, "Número de imagenes a evaluar")
+tf.app.flags.DEFINE_integer('eval_num_examples', 2000, "Número de imagenes a evaluar")
 tf.app.flags.DEFINE_integer("eval_batch_size", 100, "Cantidad de imagenes que se evaluan por batch")
 tf.app.flags.DEFINE_integer("top_k_prediction", 1, "La predicción correcta si esta entre los k primeros resultados")
+tf.app.flags.DEFINE_string('eval_dataset', 'validation', 'Data set usado para validacion (validation o test')
 
 titulosStr = ("Fisica universita,"
               "Patrones de diseño,"

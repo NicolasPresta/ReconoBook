@@ -20,6 +20,7 @@ import random
 import os.path
 import shutil
 import config
+import sys
 
 # ==============================================================================
 
@@ -71,6 +72,16 @@ def eval_once(saver, summary_writer, top_k_op, summary_op):
             print('No checkpoint file found')
             return
 
+        print("  " )
+        print(" ------- " )
+        print("--> Evaluando dataset: " + FLAGS.eval_dataset)
+        print("--> Top K: " + str(FLAGS.top_k_prediction))
+        print("--> eval_distort: " + str(FLAGS.eval_distort))
+        print("--> eval_crop: " + str(FLAGS.eval_distort))
+        print("--> eval_num_examples: " + str(FLAGS.eval_num_examples))
+        print(" ------- " )
+        print("  " )
+                
         # Start the queue runners.
         coord = tf.train.Coordinator()
         threads = []
@@ -167,6 +178,14 @@ def evaluate_unique(dataset):
                 print('No checkpoint file found')
                 return
 
+            print("  " )
+            print(" ------- " )
+            print("--> eval_unique: " + str(FLAGS.eval_unique))
+            print("--> eval_unique_from_dataset: " + str(FLAGS.eval_unique_from_dataset))
+            print("--> Evaluando dataset: " + FLAGS.eval_dataset)
+            print("--> eval_unique_cantidad_img: " + str(FLAGS.eval_unique_cantidad_img))
+            print(" ------- " )
+            print("  " )
 
             # Start the queue runners.
             coord = tf.train.Coordinator()
@@ -226,8 +245,8 @@ def evaluate_unique(dataset):
 
 
 def main(argv=None):
-    dataset = ReconoBookData(subset='validation')
-
+    dataset = ReconoBookData(subset=FLAGS.eval_dataset)
+    
     # creamos el directorio de checkpoint_dir si no existe, y si existe lo borramos y creamos de nuevo
     if not os.path.exists(FLAGS.summary_dir_eval):
         os.mkdir(FLAGS.summary_dir_eval)
@@ -239,6 +258,8 @@ def main(argv=None):
         evaluate_unique(dataset)
     else:
         evaluate(dataset)
+
+    input = sys.stdin.readline()
 
 if __name__ == '__main__':
     tf.app.run()
