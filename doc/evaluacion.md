@@ -3,6 +3,11 @@
 
 ## Evaluación del modelo
 
+**Importante: antes de evaluar el modelo es necesario intalar matplotlib**
+```shell
+> pip3 install matplotlib
+```
+
 Para saber si nuestro modelo ya entrenado está aprendió correctamente es necesario evaluarlo.
 
 Para la evaluación tenemos 2 sets de datos distintos, con imagenes que el modelo nunca *vio* antes.
