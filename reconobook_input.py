@@ -126,7 +126,7 @@ def decode_jpeg(image_buffer):
     Returns:
         3-D float Tensor con valores entre [0, 1).
     """
-    with tf.name_scope([image_buffer], 'decode_jpeg'):
+    with tf.name_scope(values=[image_buffer], name='decode_jpeg'):
         # Decode the string as an RGB JPEG.
         # Note that the resulting image contains an unknown height and width
         # that is set dynamically by decode_jpeg. In other words, the height
