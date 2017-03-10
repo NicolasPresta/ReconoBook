@@ -38,7 +38,7 @@ validacion)![Evaluacion](./img/evaluacion2A.jpg "Evaluacion") test)![Evaluacion]
 `FLAGS.top_k_prediction = 3`    
 validacion)![Evaluacion](./img/evaluacion3A.jpg "Evaluacion") test)![Evaluacion](./img/evaluacion3B.jpg "Evaluacion")   
 
-Vemos que cuanto mayor es K, el criterio de *lo que es correcto* es más flexible.
+Vemos que cuanto mayor es K, el criterio de *lo que es correcto* es más flexible. De todos modos el modelo lo está haciendo *no muy bien*. Habrá que hacer algunos ajustes para mejorarlo y que aprenda *mejor*.
 
 Ademas podemos configurar la cantidad de imagenes que se van a evaluar desde el flag `FLAGS.eval_num_examples`. Idealmente lo mejor es evalular el 100% del dataset.  
 
