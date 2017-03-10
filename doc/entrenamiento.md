@@ -39,11 +39,11 @@ La cantidad máxima de pasos a ejecutar se define en `FLAGS.train_max_steps`
 
 Ejecutando en la misma máquina donde estaba corriendo el servidor virtual Ubuntu, pero en Windows, se obtiene una mejora en la performance:  
 
-![Entrenamiento](./img/entrenamiento5.jpg "Entrenamiento")    
+![Entrenamiento](./img/entrenamiento5.JPG "Entrenamiento")    
 
 Y podes observar que los 4 cores están al 100%
 
-![Entrenamiento](./img/entrenamiento6.jpg "Entrenamiento")    
+![Entrenamiento](./img/entrenamiento6.JPG "Entrenamiento")    
 
 ***
 [<- Volver Home](../README.md)
