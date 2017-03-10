@@ -49,6 +49,8 @@ Si queremos podemos visualizar las imagenes una por una con la activación de la
 ![Evaluacion](./img/evaluacion6.jpg "Evaluacion")  
 ![Evaluacion](./img/evaluacion7.jpg "Evaluacion")  
 ![Evaluacion](./img/evaluacion8.jpg "Evaluacion")  
+![Evaluacion](./img/evaluacion9.jpg "Evaluacion")  
+![Evaluacion](./img/evaluacion10.jpg "Evaluacion")  
 
   ***
 [<- Volver Home](../README.md)
