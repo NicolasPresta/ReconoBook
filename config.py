@@ -61,12 +61,12 @@ tf.app.flags.DEFINE_integer("moving_average_decay", 0.9999, "The decay to use fo
 tf.app.flags.DEFINE_integer("initial_learning_rate", 0.1, "Initial learning rate.")
 tf.app.flags.DEFINE_integer("decay_steps", 500, "Epochs after which learning rate decays.")
 tf.app.flags.DEFINE_integer("decay_rate", 0.9, "Learning rate decay factor.")
-tf.app.flags.DEFINE_boolean('log_device_placement', True, "Si logea la ubicación de variables al inciar la ejecución")
+tf.app.flags.DEFINE_boolean('log_device_placement', False, "Si logea la ubicación de variables al inciar la ejecución")
 tf.app.flags.DEFINE_boolean('allow_soft_placement', True, "Si permite una asignación de variables flexible")
 tf.app.flags.DEFINE_boolean('train_distort', True, "Distorcionar imagenes al evaluar")
 tf.app.flags.DEFINE_boolean('train_crop', True, "Distorcionar imagenes al evaluar")
-tf.app.flags.DEFINE_integer('train_max_steps', 20000, "Number of batches to run.")
-tf.app.flags.DEFINE_integer("train_batch_size", 100, "Cantidad de imagenes que se procesan por batch")
+tf.app.flags.DEFINE_integer('train_max_steps', 30000, "Number of batches to run.")
+tf.app.flags.DEFINE_integer("train_batch_size", 20, "Cantidad de imagenes que se procesan por batch")
 
 
 # -------------------------------- EVALUACION --------------------------------
@@ -78,7 +78,7 @@ tf.app.flags.DEFINE_boolean('eval_crop', False, "Distorcionar imagenes al evalua
 tf.app.flags.DEFINE_integer('eval_num_examples', 2000, "Número de imagenes a evaluar")
 tf.app.flags.DEFINE_integer("eval_batch_size", 100, "Cantidad de imagenes que se evaluan por batch")
 tf.app.flags.DEFINE_integer("top_k_prediction", 1, "La predicción correcta si esta entre los k primeros resultados")
-tf.app.flags.DEFINE_string('eval_dataset', 'validation', 'Data set usado para validacion (validation o test')
+tf.app.flags.DEFINE_string('eval_dataset', 'validation', 'Data set usado para validacion (train, validation o test')
 
 titulosStr = ("Fisica universita,"
               "Patrones de diseño,"

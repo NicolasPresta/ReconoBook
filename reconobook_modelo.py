@@ -22,22 +22,6 @@ FLAGS = tf.app.flags.FLAGS
 # ==============================================================================
 
 
-def _activation_summary(x):
-    """Helper to create summaries for activations.
-    Creates a summary that provides a histogram of activations.
-    Creates a summary that measure the sparsity of activations.
-    Args:
-        x: Tensor
-    Returns:
-        nothing
-    """
-    # Remove 'tower_[0-9]/' from the name in case this is a multi-GPU training
-    # session. This helps the clarity of presentation on tensorboard.
-    tensor_name = re.sub('%s_[0-9]*/' % "tower", '', x.op.name)
-    tf.summary.histogram(tensor_name + '/activations', x)
-    tf.summary.scalar(tensor_name + '/sparsity', tf.nn.zero_fraction(x))
-
-
 def _add_loss_summaries(total_loss):
     """Add summaries for losses in CIFAR-10 model.
     Generates moving average for all losses and associated summaries for
@@ -64,20 +48,6 @@ def _add_loss_summaries(total_loss):
 
 
 # Funciones utiles para inicializar parametros
-def _variable(name, shape, initializer):
-    """Helper to create a Variable
-    Args:
-        name: name of the variable
-        shape: list of ints
-        initializer: initializer for Variable
-    Returns:
-        Variable Tensor
-    """
-    var = tf.get_variable(name, shape, initializer=initializer)
-
-    return var
-
-
 def _variable_with_weight_decay(name, shape, stddev, wd):
     """Helper to create an initialized Variable with weight decay.
         Note that the Variable is initialized with a truncated normal distribution.
@@ -91,11 +61,10 @@ def _variable_with_weight_decay(name, shape, stddev, wd):
     Returns:
         Variable Tensor
     """
-    var = _variable(name, shape, tf.truncated_normal_initializer(stddev=stddev))
+    var = tf.get_variable(name, shape, initializer=tf.truncated_normal_initializer(stddev=stddev))
+    weight_decay = tf.multiply(tf.nn.l2_loss(var), wd, name='weight_loss')
 
-    if wd is not None:
-        weight_decay = tf.multiply(tf.nn.l2_loss(var), wd, name='weight_loss')
-        tf.add_to_collection('losses', weight_decay)
+    tf.add_to_collection('losses', weight_decay)
 
     return var
 
@@ -134,10 +103,9 @@ def inference(images):
 
     # Primer capa convolucional
     with tf.name_scope("CONV-1"):
-        kernels_conv1 = _variable_with_weight_decay("kernels_conv1", [5, 5, 3, FLAGS.model_cant_kernels1], stddev=1e-4, wd=0.0)
-        bias_conv1 = _variable("bias_conv1", [FLAGS.model_cant_kernels1], tf.constant_initializer(0.0))
+        kernels_conv1 = _variable_with_weight_decay("kernels_conv1", [5, 5, 3, FLAGS.model_cant_kernels1], stddev=1e-4, wd=0.004)
+        bias_conv1 = tf.get_variable("bias_conv1", [FLAGS.model_cant_kernels1], initializer=tf.constant_initializer(0.0))
         conv1 = tf.nn.relu(_conv2d(images, kernels_conv1) + bias_conv1, name="conv1")
-        #_activation_summary(conv1)
 
     # max pool 1
     with tf.name_scope("MAXPOOL-1"):
@@ -149,10 +117,9 @@ def inference(images):
 
     # Segunda capa convolucional
     with tf.name_scope("CONV-2"):
-        kernels_conv2 = _variable_with_weight_decay("kernels_conv2", shape=[3, 3, FLAGS.model_cant_kernels1, FLAGS.model_cant_kernels2], stddev=1e-4, wd=0.0)
-        bias_conv2 = _variable("bias_conv2", [FLAGS.model_cant_kernels2], tf.constant_initializer(0.1))
+        kernels_conv2 = _variable_with_weight_decay("kernels_conv2", shape=[3, 3, FLAGS.model_cant_kernels1, FLAGS.model_cant_kernels2], stddev=1e-4, wd=0.004)
+        bias_conv2 = tf.get_variable("bias_conv2", [FLAGS.model_cant_kernels2], initializer=tf.constant_initializer(0.1))
         conv2 = tf.nn.relu(_conv2d(norm1, kernels_conv2) + bias_conv2, name="conv2")
-        #_activation_summary(conv2)
 
     # normalización 2
     with tf.name_scope("NORM-2"):
@@ -166,16 +133,13 @@ def inference(images):
     with tf.name_scope("FC-1"):
         pool2_flat = tf.reshape(pool2, [-1, 10 * 10 * FLAGS.model_cant_kernels2])
         W_fc1 = _variable_with_weight_decay("W_fc1", shape=[10 * 10 * FLAGS.model_cant_kernels2, FLAGS.model_cant_fc1], stddev=0.04, wd=0.004)
-        b_fc1 = _variable("b_fc1", [FLAGS.model_cant_fc1], tf.constant_initializer(0.1))
+        b_fc1 = tf.get_variable("b_fc1", [FLAGS.model_cant_fc1], initializer=tf.constant_initializer(0.1))
         local1 = tf.nn.relu(tf.matmul(pool2_flat, W_fc1) + b_fc1, name="local1")
-        #_activation_summary(local1)
 
     # segunda capa full conected
     with tf.name_scope("FC-2"):
         W_fc2 = _variable_with_weight_decay("W_fc2", shape=[FLAGS.model_cant_fc1, FLAGS.cantidad_clases], stddev=0.04, wd=0.004)
-        b_fc2 = _variable("b_fc2", [FLAGS.cantidad_clases], tf.constant_initializer(0.1))
-        # softmax_linear = tf.nn.softmax(tf.matmul(local1, W_fc2) + b_fc2)
-        #_activation_summary(softmax_linear)
+        b_fc2 = tf.get_variable("b_fc2", [FLAGS.cantidad_clases], initializer=tf.constant_initializer(0.1))
         logits = tf.matmul(local1, W_fc2) + b_fc2
 
     return logits
@@ -193,10 +157,10 @@ def loss(logits, labels):
     labels = tf.cast(labels, tf.int64)
     cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=logits, labels=labels, name='cross_entropy_per_example')
     cross_entropy_mean = tf.reduce_mean(cross_entropy, name='cross_entropy')
+
     tf.add_to_collection('losses', cross_entropy_mean)
 
-    # The total loss is defined as the cross entropy loss plus all of the weight
-    # decay terms (L2 loss).
+    # The total loss is defined as the cross entropy loss plus all of the weight decay terms (L2 loss).
     return tf.add_n(tf.get_collection('losses'), name='total_loss')
 
 
@@ -217,35 +181,32 @@ def train(total_loss, global_step):
                                     FLAGS.decay_rate,
                                     staircase=True)
 
-    tf.summary.scalar('learning_rate', lr)
-    tf.summary.scalar('global_step', global_step)
+    # Definimos el optimizador a utilizar
+    opt = tf.train.AdamOptimizer(lr)
 
     # Agrega summaries
+    tf.summary.scalar('learning_rate', lr)
     loss_averages_op = _add_loss_summaries(total_loss)
 
-    # Computa los gradientes
     with tf.control_dependencies([loss_averages_op]):
-        opt = tf.train.GradientDescentOptimizer(lr)
+        # Computa los gradientes
         grads = opt.compute_gradients(total_loss)
-
-    # aplica los gradientes.
-    apply_gradient_op = opt.apply_gradients(grads, global_step=global_step)
+        # aplica los gradientes.
+        apply_gradient_op = opt.apply_gradients(grads, global_step=global_step)
 
     # Agrega el histograma para las variables de entrenamiento
-    for var in tf.trainable_variables():
-        tf.summary.histogram(var.op.name, var)
+    #for var in tf.trainable_variables():
+    #    tf.summary.histogram(var.op.name, var)
 
     # Agrega el histograma para los gradientes
-    for grad, var in grads:
-        if grad is not None:
-            tf.summary.histogram(var.op.name + '/gradients', grad)
+    #for grad, var in grads:
+    #    if grad is not None:
+    #        tf.summary.histogram(var.op.name + '/gradients', grad)
 
-    # guardamos el promedio movil de las variables, es util para el entrenamiento.
+    # guardamos el promedio movil de las variables, es util para mejorar la eficiencia del optimizador.
     variable_averages = tf.train.ExponentialMovingAverage(FLAGS.moving_average_decay, global_step)
     variables_averages_op = variable_averages.apply(tf.trainable_variables())
 
-    # Control_dependencies lo que hace es obligaar a ejecutar las acciones que se pasan por parametro antes
-    # de las que estan dentro del with.
     with tf.control_dependencies([apply_gradient_op, variables_averages_op]):
         train_op = tf.no_op(name='train')
 

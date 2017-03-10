@@ -30,6 +30,8 @@ FLAGS = tf.app.flags.FLAGS
 def train(dataset):
 
     with tf.Graph().as_default():
+
+        # Definimos la variable que tiene el paso actual.
         global_step = tf.Variable(0, trainable=False)
 
         # Obtenemos imagenes y labels.
@@ -41,57 +43,57 @@ def train(dataset):
         # Calulamos el costo.
         loss = reconobook_modelo.loss(logits, labels)
 
-        # Build a Graph that trains the model with one batch of examples and updates the model parameters.
+        # Definimos el paso de entrenamiento
         train_op = reconobook_modelo.train(loss, global_step)
 
-        # Create a saver.
+        # Create a saver que va a guardar nuestro modelo
         saver = tf.train.Saver(tf.global_variables())
-
-        # Build the summary operation based on the TF collection of Summaries.
-        summary_op = tf.summary.merge_all()
 
         # Build an initialization operation to run below.
         init = tf.global_variables_initializer()
 
-        # Define config
+        # Definimos la configuración general de la sesion
         config = tf.ConfigProto()
+
         config.log_device_placement = FLAGS.log_device_placement
         config.allow_soft_placement = FLAGS.allow_soft_placement
 
-        # Start running operations on the Graph.
+        # Creamos la sesión
         sess = tf.Session(config=config)
         sess.run(init)
 
-        # Start the queue runners.
+        # Iniciamos las colas de lectura
         tf.train.start_queue_runners(sess=sess)
 
-        # Create a summary writer
+        # Creamos la operación que va a guardar el resumen para luego visualizarlo desde tensorboard
+        summary_op = tf.summary.merge_all()
         summary_writer = tf.summary.FileWriter(FLAGS.summary_dir_train, sess.graph)
 
         for step in range(FLAGS.train_max_steps):
             start_time = time.time()
-            _, loss_value = sess.run([train_op, loss])
+            sess.run([train_op])
             duration = time.time() - start_time
 
-            assert not np.isnan(loss_value), 'Model diverged with loss = NaN'
-
-            if step % 10 == 0:
+            # Imprimir el avance
+            if step % 5 == 0:
                 num_examples_per_step = FLAGS.train_batch_size
                 examples_per_sec = num_examples_per_step / duration
                 sec_per_batch = float(duration)
-
+                loss_value = sess.run(loss)
                 format_str = '%s: step %d, loss = %.2f (%.1f examples/sec; %.3f sec/batch)'
-                print (format_str % (datetime.now(), step, loss_value, examples_per_sec, sec_per_batch))
+                print(format_str % (datetime.now(), step, loss_value, examples_per_sec, sec_per_batch))
 
+            # Guardar el summary para verlo en tensorboard
             if step % 100 == 0:
                 summary_str = sess.run(summary_op)
                 summary_writer.add_summary(summary_str, step)
+                print("---> Guardado Summary ")
 
-            # Save the model checkpoint periodically.
+            # Guardar el modelo en el estado actual
             if step % 500 == 0 or (step + 1) == FLAGS.train_max_steps:
                 checkpoint_path = os.path.join(FLAGS.checkpoint_dir, 'model.ckpt')
                 saver.save(sess, checkpoint_path, global_step=step)
-                print ("---> Guardado resguardo: " + checkpoint_path)
+                print("---> Guardado Checkpoint")
 
 
 def main(_):
