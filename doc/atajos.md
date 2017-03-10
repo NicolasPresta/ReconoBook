@@ -20,6 +20,9 @@
 > tensorboard --logdir=/home/presta/ReconoBook/summary_eval
 ```
 
+```shell
+>  C:\Users\Presta\AppData\Local\Programs\Python\Python35\Scripts\tensorboard --logdir=C:\Users\Presta\Desktop\ReconoBook\summary_train
+```
 
   ***
 [<- Volver Home](../README.md)
