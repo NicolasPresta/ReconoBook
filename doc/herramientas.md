@@ -36,7 +36,7 @@ Respecto al IDE, puede sentirse libre de elegir cualquiera, mi recomendación es
 Para obtener imagenes se grabó un video y se separó cada frame en una imagen, para esa tarea se utilizó [está
 herramienta](https://www.dvdvideosoft.com/es/products/dvd/Free-Video-to-JPG-Converter.htm)
 
-Sobre el sistema operativo, [Ubuntu 64bits es más que suficiente](https://www.ubuntu.com/download/desktop)
+Sobre el sistema operativo, [Ubuntu 64bits es más que suficiente](https://www.ubuntu.com/download/desktop), también se corrió el proyecto en Windows 7 sin problemas.
 
 
 ***
