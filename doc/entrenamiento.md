@@ -35,6 +35,15 @@ cada 500 pasos se guarda el modelo, con los valores de todos los parametros a es
 
 La cantidad máxima de pasos a ejecutar se define en `FLAGS.train_max_steps`
 
+#### Ejecución en windows 7, no virtual.
+
+Ejecutando en la misma máquina donde estaba corriendo el servidor virtual Ubuntu, pero en Windows, se obtiene una mejora en la performance:  
+
+![Entrenamiento](./img/entrenamiento5.jpg "Entrenamiento")    
+
+Y podes observar que los 4 cores están al 100%
+
+![Entrenamiento](./img/entrenamiento6.jpg "Entrenamiento")    
 
 ***
 [<- Volver Home](../README.md)
