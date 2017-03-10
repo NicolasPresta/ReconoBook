@@ -59,13 +59,13 @@ tf.app.flags.DEFINE_integer('model_cant_fc1', 250, 'Cantidad de neurolas full co
 # -------------------------------- ENTRENAMIENTO --------------------------------
 tf.app.flags.DEFINE_integer("moving_average_decay", 0.9999, "The decay to use for the moving average.")
 tf.app.flags.DEFINE_integer("initial_learning_rate", 0.1, "Initial learning rate.")
-tf.app.flags.DEFINE_integer("decay_steps", 500, "Epochs after which learning rate decays.")
+tf.app.flags.DEFINE_integer("decay_steps", 1500, "Epochs after which learning rate decays.")
 tf.app.flags.DEFINE_integer("decay_rate", 0.9, "Learning rate decay factor.")
 tf.app.flags.DEFINE_boolean('log_device_placement', False, "Si logea la ubicación de variables al inciar la ejecución")
 tf.app.flags.DEFINE_boolean('allow_soft_placement', True, "Si permite una asignación de variables flexible")
 tf.app.flags.DEFINE_boolean('train_distort', True, "Distorcionar imagenes al evaluar")
 tf.app.flags.DEFINE_boolean('train_crop', True, "Distorcionar imagenes al evaluar")
-tf.app.flags.DEFINE_integer('train_max_steps', 30000, "Number of batches to run.")
+tf.app.flags.DEFINE_integer('train_max_steps', 70000, "Number of batches to run.")
 tf.app.flags.DEFINE_integer("train_batch_size", 20, "Cantidad de imagenes que se procesan por batch")
 
 

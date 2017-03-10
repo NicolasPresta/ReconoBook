@@ -75,7 +75,7 @@ def train(dataset):
             duration = time.time() - start_time
 
             # Imprimir el avance
-            if step % 5 == 0:
+            if step % 50 == 0:
                 num_examples_per_step = FLAGS.train_batch_size
                 examples_per_sec = num_examples_per_step / duration
                 sec_per_batch = float(duration)
@@ -84,13 +84,13 @@ def train(dataset):
                 print(format_str % (datetime.now(), step, loss_value, examples_per_sec, sec_per_batch))
 
             # Guardar el summary para verlo en tensorboard
-            if step % 100 == 0:
+            if step % 200 == 0:
                 summary_str = sess.run(summary_op)
                 summary_writer.add_summary(summary_str, step)
                 print("---> Guardado Summary ")
 
             # Guardar el modelo en el estado actual
-            if step % 500 == 0 or (step + 1) == FLAGS.train_max_steps:
+            if step % 1000 == 0 or (step + 1) == FLAGS.train_max_steps:
                 checkpoint_path = os.path.join(FLAGS.checkpoint_dir, 'model.ckpt')
                 saver.save(sess, checkpoint_path, global_step=step)
                 print("---> Guardado Checkpoint")
