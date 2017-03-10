@@ -72,33 +72,33 @@ tf.app.flags.DEFINE_integer("train_batch_size", 100, "Cantidad de imagenes que s
 # -------------------------------- EVALUACION --------------------------------
 tf.app.flags.DEFINE_boolean('eval_unique', False, "Ejecutar revisión imagen por imagen")
 tf.app.flags.DEFINE_boolean('eval_unique_from_dataset', True, "Evaluar imagen por imagen desde dataset")
-tf.app.flags.DEFINE_integer('eval_unique_cantidad_img', 5, "Cantidad de imagenes a evaluar si eval_unique = true")
+tf.app.flags.DEFINE_integer('eval_unique_cantidad_img', 3, "Cantidad de imagenes a evaluar si eval_unique = true")
 tf.app.flags.DEFINE_boolean('eval_distort', False, "Distorcionar imagenes al evaluar")
 tf.app.flags.DEFINE_boolean('eval_crop', False, "Distorcionar imagenes al evaluar")
 tf.app.flags.DEFINE_integer('eval_num_examples', 2260, "Número de imagenes a evaluar")
 tf.app.flags.DEFINE_integer("eval_batch_size", 100, "Cantidad de imagenes que se evaluan por batch")
-tf.app.flags.DEFINE_integer("top_k_prediction", 2, "La predicción correcta si esta entre los k primeros resultados")
+tf.app.flags.DEFINE_integer("top_k_prediction", 1, "La predicción correcta si esta entre los k primeros resultados")
 
-titulosStr = """Fisica universita,
-Patrones de diseño,
-Introducción a Mineria de datos,
-Mineria de datos a traves de ejemplos,
-Sistemas expertos,
-Sistemas inteligentes,
-Big data,
-Analisis matematico (vol 3 / Azul),
-Einstein,
-Analisis matematico (vol 2 / Amarillo),
-Teoria de control,
-Empresas de consultoría,
-Legislación,
-En cambio,
-Liderazgo Guardiola,
-Constitución Argentina,
-El arte de conversar,
-El señor de las moscas,
-Revista: Epigenetica,
-Revista: Lado oscuro del cosmos"""
+titulosStr = ("Fisica universita,"
+              "Patrones de diseño,"
+              "Introducción a Mineria de datos,"
+              "Mineria de datos a traves de ejemplos,"
+              "Sistemas expertos,"
+              "Sistemas inteligentes,"
+              "Big data,"
+              "Analisis matematico (vol 3 / Azul),"
+              "Einstein,"
+              "Analisis matematico (vol 2 / Amarillo),"
+              "Teoria de control,"
+              "Empresas de consultoría,"
+              "Legislación,"
+              "En cambio,"
+              "Liderazgo Guardiola,"
+              "Constitución Argentina,"
+              "El arte de conversar,"
+              "El señor de las moscas,"
+              "Revista: Epigenetica,"
+              "Revista: Lado oscuro del cosmos")
 
 tf.app.flags.DEFINE_string('titulos', titulosStr, 'Titulos de los libros')
 

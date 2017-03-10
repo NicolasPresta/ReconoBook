@@ -365,9 +365,9 @@ def _find_image_files(datasets_dir, labels_file):
         label_index += 1
 
     # Mescla los registros de forma aleatoria, pero conservando la concordancia emtre ellos
-    shuffled_index = range(len(filenames))
+    shuffled_index = list(range(len(filenames)))
     random.seed(12345)
-    random.sample(shuffled_index, len(shuffled_index))
+    shuffled_index = random.sample(shuffled_index, len(shuffled_index))
 
     filenames = [filenames[i] for i in shuffled_index]
     texts = [texts[i] for i in shuffled_index]

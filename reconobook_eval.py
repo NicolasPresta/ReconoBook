@@ -16,7 +16,6 @@ import tensorflow as tf
 import numpy as np
 from reconobook_dataset import ReconoBookData
 import reconobook_modelo
-from PIL import Image
 import random
 import os.path
 import shutil
@@ -197,15 +196,15 @@ def evaluate_unique(dataset):
                     top3Activacion = activacionesDesc[2]
                     top3Clase = np.where(activaciones == top3Activacion)[0]
                     print('-- EJEMPLO %d ----------------------------------------------------------------' % (step + 1))
-                    print('Top 1 => Clase: %d, Activación: %s, Libro: %s' % (top1Clase,
+                    print('Top 1 => Clase: %d, Activación: %s, Libro: %s' % (top1Clase[0],
                                                                              top1Activacion,
-                                                                             titulos[top1Clase]))
-                    print('Top 2 => Clase: %d, Activación: %s, Libro: %s' % (top2Clase,
+                                                                             titulos[top1Clase[0]]))
+                    print('Top 2 => Clase: %d, Activación: %s, Libro: %s' % (top2Clase[0],
                                                                              top2Activacion,
-                                                                             titulos[top2Clase]))
-                    print('Top 3 => Clase: %d, Activación: %s, Libro: %s' % (top3Clase,
+                                                                             titulos[top2Clase[0]]))
+                    print('Top 3 => Clase: %d, Activación: %s, Libro: %s' % (top3Clase[0],
                                                                              top3Activacion,
-                                                                             titulos[top3Clase]))
+                                                                             titulos[top3Clase[0]]))
                     print('------------------------------------------------------------------------------')
 
 
