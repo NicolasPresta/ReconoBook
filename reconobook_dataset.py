@@ -46,7 +46,7 @@ class ReconoBookData:
         tf_record_pattern = os.path.join(FLAGS.datasets_dir, '%s-*' % self.subset)
         data_files = tf.gfile.Glob(tf_record_pattern)
         if not data_files:
-            print('No se ecnontraron archivos para el dataset %s/%s en %s' % (self.name,
+            print('No se encontraron archivos para el dataset %s/%s en %s' % (self.name,
                                                                               self.subset,
                                                                               FLAGS.datasets_dir))
 

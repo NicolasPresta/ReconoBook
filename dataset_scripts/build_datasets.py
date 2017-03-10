@@ -144,9 +144,9 @@ def _convert_to_example(filename, image_buffer, label, text, height, width):
         Example proto
     """
 
-    colorspace = 'RGB'
+    colorspace = b'RGB'
     channels = 3
-    image_format = 'JPEG'
+    image_format = b'JPEG'
 
     example = tf.train.Example(features=tf.train.Features(feature={
       'image/height': _int64_feature(height),
@@ -154,9 +154,9 @@ def _convert_to_example(filename, image_buffer, label, text, height, width):
       'image/colorspace': _bytes_feature(colorspace),
       'image/channels': _int64_feature(channels),
       'image/class/label': _int64_feature(label),
-      'image/class/text': _bytes_feature(text),
+      'image/class/text': _bytes_feature(text.encode()),
       'image/format': _bytes_feature(image_format),
-      'image/filename': _bytes_feature(os.path.basename(filename)),
+      'image/filename': _bytes_feature(os.path.basename(filename.encode())),
       'image/encoded': _bytes_feature(image_buffer)}))
 
     return example
@@ -232,7 +232,7 @@ def _process_image_files_batch(coder, thread_index, ranges, name, filenames, tex
 
     counter = 0
     # por cada particion a generar:
-    for s in xrange(num_shards_per_batch):
+    for s in range(num_shards_per_batch):
         # Generamos el nombre del arhivo, que contenga la particion, ej: 'train-00002-of-00010'
         shard = thread_index * num_shards_per_batch + s
         output_filename = '%s-%.5d-of-%.5d' % (name, shard, num_shards)
@@ -292,7 +292,7 @@ def _process_image_files(name, filenames, texts, labels, num_shards):
     spacing = np.linspace(0, len(filenames), FLAGS.dataset_num_threads + 1).astype(np.int)
     ranges = []
 
-    for i in xrange(len(spacing) - 1):
+    for i in range(len(spacing) - 1):
         ranges.append([spacing[i], spacing[i+1]])
 
     # lanzamos un hilo de ejecución para cada batch
@@ -307,7 +307,7 @@ def _process_image_files(name, filenames, texts, labels, num_shards):
 
     # A hilo de ejecución le pasamos un batch
     threads = []
-    for thread_index in xrange(len(ranges)):
+    for thread_index in range(len(ranges)):
         # definimos los parametros que le pasamos al metodo del hilo
         args = (coder, thread_index, ranges, name, filenames, texts, labels, num_shards)
         # creamos el hilo, va a ejecutar el método "_process_image_files_batch"
@@ -367,7 +367,7 @@ def _find_image_files(datasets_dir, labels_file):
     # Mescla los registros de forma aleatoria, pero conservando la concordancia emtre ellos
     shuffled_index = range(len(filenames))
     random.seed(12345)
-    random.shuffle(shuffled_index)
+    random.sample(shuffled_index, len(shuffled_index))
 
     filenames = [filenames[i] for i in shuffled_index]
     texts = [texts[i] for i in shuffled_index]

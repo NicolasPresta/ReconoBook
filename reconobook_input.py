@@ -126,7 +126,7 @@ def decode_jpeg(image_buffer):
     Returns:
         3-D float Tensor con valores entre [0, 1).
     """
-    with tf.op_scope([image_buffer], 'decode_jpeg'):
+    with tf.name_scope([image_buffer], 'decode_jpeg'):
         # Decode the string as an RGB JPEG.
         # Note that the resulting image contains an unknown height and width
         # that is set dynamically by decode_jpeg. In other words, the height
@@ -154,7 +154,7 @@ def distort_color(image, thread_id=0):
         imagen distorcionada
     """
 
-    with tf.op_scope([image], 'distort_color'):
+    with tf.name_scope(values=[image], name='distort_color'):
         color_ordering = thread_id % 2
 
         if color_ordering == 0:
@@ -183,7 +183,7 @@ def distort_image(image, height, width):
         3-D float Tensor
     """
 
-    with tf.op_scope([image, height, width], 'distort_image'):
+    with tf.name_scope(values=[image, height, width], name='distort_image'):
 
         # distort the image
         if FLAGS.train_distort:
@@ -222,7 +222,7 @@ def eval_image(image, height, width):
     Returns:
         3-D float Tensor
     """
-    with tf.op_scope([image, height, width], 'eval_image'):
+    with tf.name_scope(values=[image, height, width], name='eval_image'):
         # Crop the central region of the image with an area containing 87.5% of
         # the original image.
         # image = tf.image.central_crop(image, central_fraction=0.875)

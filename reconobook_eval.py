@@ -110,7 +110,7 @@ def evaluate(dataset):
         # Obtenemos imagenes:
         images, labels = reconobook_modelo.eval_inputs(dataset, FLAGS.eval_batch_size)
         image_shape = tf.reshape(images, [-1, FLAGS.image_height, FLAGS.image_width, 3])
-        tf.image_summary('input', image_shape, 3)
+        tf.summary.image('input', image_shape, 3)
 
         # Build a Graph that computes the logits predictions from the
         # inference model.
@@ -125,9 +125,9 @@ def evaluate(dataset):
         saver = tf.train.Saver(variables_to_restore)
 
         # Build the summary operation based on the TF collection of Summaries.
-        summary_op = tf.merge_all_summaries()
+        summary_op = tf.summary.merge_all()
 
-        summary_writer = tf.train.SummaryWriter(FLAGS.summary_dir_eval, g)
+        summary_writer = tf.summary.FileWriter(FLAGS.summary_dir_eval, g)
 
         eval_once(saver, summary_writer, top_k_op, summary_op)
 
@@ -176,7 +176,7 @@ def evaluate_unique(dataset):
                 for qr in tf.get_collection(tf.GraphKeys.QUEUE_RUNNERS):
                     threads.extend(qr.create_threads(sess, coord=coord, daemon=True, start=True))
 
-                for step in xrange(FLAGS.eval_unique_cantidad_img):
+                for step in range(FLAGS.eval_unique_cantidad_img):
 
                     # cargamos imagen
                     if FLAGS.eval_unique_from_dataset:
@@ -209,7 +209,7 @@ def evaluate_unique(dataset):
                     print('------------------------------------------------------------------------------')
 
 
-                    for i in xrange(FLAGS.cantidad_clases):
+                    for i in range(FLAGS.cantidad_clases):
                         print('Activación => Clase: %d, Activación: %s, Libro: %s' % (i, activaciones[i], titulos[i]))
 
                     print('------------------------------------------------------------------------------')

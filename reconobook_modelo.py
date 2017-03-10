@@ -34,8 +34,8 @@ def _activation_summary(x):
     # Remove 'tower_[0-9]/' from the name in case this is a multi-GPU training
     # session. This helps the clarity of presentation on tensorboard.
     tensor_name = re.sub('%s_[0-9]*/' % "tower", '', x.op.name)
-    tf.histogram_summary(tensor_name + '/activations', x)
-    tf.scalar_summary(tensor_name + '/sparsity', tf.nn.zero_fraction(x))
+    tf.summary.histogram(tensor_name + '/activations', x)
+    tf.summary.scalar(tensor_name + '/sparsity', tf.nn.zero_fraction(x))
 
 
 def _add_loss_summaries(total_loss):
@@ -57,8 +57,8 @@ def _add_loss_summaries(total_loss):
     for l in losses + [total_loss]:
         # Name each loss as '(raw)' and name the moving average version of the loss
         # as the original loss name.
-        tf.scalar_summary(l.op.name + ' (raw)', l)
-        tf.scalar_summary(l.op.name, loss_averages.average(l))
+        tf.summary.scalar(l.op.name + ' (raw)', l)
+        tf.summary.scalar(l.op.name, loss_averages.average(l))
 
     return loss_averages_op
 
@@ -94,7 +94,7 @@ def _variable_with_weight_decay(name, shape, stddev, wd):
     var = _variable(name, shape, tf.truncated_normal_initializer(stddev=stddev))
 
     if wd is not None:
-        weight_decay = tf.mul(tf.nn.l2_loss(var), wd, name='weight_loss')
+        weight_decay = tf.multiply(tf.nn.l2_loss(var), wd, name='weight_loss')
         tf.add_to_collection('losses', weight_decay)
 
     return var
@@ -191,7 +191,7 @@ def loss(logits, labels):
     """
     # Calculate the average cross entropy loss across the batch.
     labels = tf.cast(labels, tf.int64)
-    cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(logits, labels, name='cross_entropy_per_example')
+    cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=logits, labels=labels, name='cross_entropy_per_example')
     cross_entropy_mean = tf.reduce_mean(cross_entropy, name='cross_entropy')
     tf.add_to_collection('losses', cross_entropy_mean)
 
@@ -217,8 +217,8 @@ def train(total_loss, global_step):
                                     FLAGS.decay_rate,
                                     staircase=True)
 
-    tf.scalar_summary('learning_rate', lr)
-    tf.scalar_summary('global_step', global_step)
+    tf.summary.scalar('learning_rate', lr)
+    tf.summary.scalar('global_step', global_step)
 
     # Agrega summaries
     loss_averages_op = _add_loss_summaries(total_loss)
@@ -233,12 +233,12 @@ def train(total_loss, global_step):
 
     # Agrega el histograma para las variables de entrenamiento
     for var in tf.trainable_variables():
-        tf.histogram_summary(var.op.name, var)
+        tf.summary.histogram(var.op.name, var)
 
     # Agrega el histograma para los gradientes
     for grad, var in grads:
         if grad is not None:
-            tf.histogram_summary(var.op.name + '/gradients', grad)
+            tf.summary.histogram(var.op.name + '/gradients', grad)
 
     # guardamos el promedio movil de las variables, es util para el entrenamiento.
     variable_averages = tf.train.ExponentialMovingAverage(FLAGS.moving_average_decay, global_step)

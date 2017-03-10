@@ -129,9 +129,9 @@ def main(unused_argv):
         os.remove(FLAGS.data_split_dir + "/" + FLAGS.labels_file_name)
 
     carpetas = obtenerSubCarpetas(FLAGS.img_dir)
-    carpetas = map(int, carpetas)
+    carpetas = list(map(int, carpetas))
     carpetas.sort()
-    carpetas = map(str, carpetas)
+    carpetas = list(map(str, carpetas))
 
     print('Encontradas las siguientes subcarpetas: %s' % carpetas)
 
