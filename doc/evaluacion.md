@@ -8,6 +8,12 @@
 > pip3 install matplotlib
 ```
 
+**Visualización del modelo a evaluar:**  
+
+![Evaluacion](./img/evaluacion02.png "Evaluacion")  
+
+
+
 Para saber si nuestro modelo ya entrenado está aprendió correctamente es necesario evaluarlo.
 
 Para la evaluación tenemos 2 sets de datos distintos, con imagenes que el modelo nunca *vio* antes.
@@ -15,7 +21,6 @@ Para la evaluación tenemos 2 sets de datos distintos, con imagenes que el model
 - test: Son imagenes tomadas en otra captura que no es la que se usó para entrenar el modelo. 
 
 Para elegir entre un set u otro se configura el flag `FLAGS.eval_dataset`
-
 
 Para correr la evaluación es tan simple como:
 ```shell
@@ -51,6 +56,18 @@ Si queremos podemos visualizar las imagenes una por una con la activación de la
 ![Evaluacion](./img/evaluacion8.jpg "Evaluacion")  
 ![Evaluacion](./img/evaluacion9.jpg "Evaluacion")  
 ![Evaluacion](./img/evaluacion10.jpg "Evaluacion")  
+***
 
-  ***
+UPDATE 11/03/2017: Se realizan algunos ajustes para poder visualizar la evolución de la precisión de nuestro modelo durante el entrenamiento. Luego de guardarse cada checkpoint, se va a levantar el modelo y a evaluar con X imagenes de los 3 sets de datos. Los resultados se arrojarán por consola y ademas se pueden visualizar desde el tensorboard para el */summary_eval*. 
+
+Adicionalmente realizamos algunos cambios en el modelo en relación a la cantidad de batch, el tamaño de los batch, y la regularización de nuestros parametros de las capas convolucionales que pasaron de 0 a 0.004 (*weight_decay - wd*, para entender más [ver este link](http://stats.stackexchange.com/questions/29130/difference-between-neural-net-weight-decay-and-learning-rate))
+
+Podemos visualizar como lo va haciendo nuestro modelo online durante el entrenamiento:   
+![Evaluacion](./img/evaluacion01.png "Evaluacion")  
+
+Como vemos el *limite* de precición que parece poder alcanzar es de 86% de predicciones correctas (top_k = 1), lo que es *aceptable*, aunque se puede mejorar. 
+
+
+
+***
 [<- Volver Home](../README.md)
