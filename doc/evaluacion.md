@@ -8,7 +8,7 @@
 > pip3 install matplotlib
 ```
 
-**Visualización del modelo a evaluar: *  
+**Visualización del modelo a evaluar: **  
 
 ![Evaluacion](./img/evaluacion02.png "Evaluacion")  
 
