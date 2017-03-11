@@ -11,6 +11,7 @@
 - [ ] Correr el modelo en Android
 - [ ] Ampliar a 30 Libros
 - [ ] Agregar más capturas utilizando otras cámaras  
+- [ ] Poder obtener una lista de input y predicción al evalular, para analisar mejor que está aprendiendo mal.
 
 
 ***
