@@ -5,7 +5,7 @@
 Este es un breve resumen de los pasos para obtener el modelo entrenado y evaluarlo.
 
 1. **Cargar imagenes en la carpeta /imagenes_jpg**
-  - Con una subcarpeta por cada caterogia.
+  - Con una subcarpeta por cada caterogia. Si se realiza un checkout del repositorio de github ya se descargarán todas las imagenes.
 2. **Run dataset_scripts/split_dataset.py**,
   - Parametro Modificable: porcentaje_img_test
   - Al finalizar se crean carpetas de train y test y el archivo con los labels.
