@@ -50,7 +50,7 @@ def load_image(filename):
     return data
 
 
-def eval_once(saver, summary_writer, top_k_op, summary_op):
+def eval_once(saver, summary_writer, top_k_op, summary_op, datasetname, eval_num_examples, eval_batch_size):
     """Run Eval once.
     Args:
         saver: Saver.
@@ -72,15 +72,15 @@ def eval_once(saver, summary_writer, top_k_op, summary_op):
             print('No checkpoint file found')
             return
 
-        print("  " )
-        print(" ------- " )
-        print("--> Evaluando dataset: " + FLAGS.eval_dataset)
+        print("  ")
+        print(" ------- ")
+        print("--> Evaluando dataset: " + datasetname)
         print("--> Top K: " + str(FLAGS.top_k_prediction))
         print("--> eval_distort: " + str(FLAGS.eval_distort))
         print("--> eval_crop: " + str(FLAGS.eval_distort))
-        print("--> eval_num_examples: " + str(FLAGS.eval_num_examples))
-        print(" ------- " )
-        print("  " )
+        print("--> eval_num_examples: " + str(eval_num_examples))
+        print(" ------- ")
+        print("  ")
                 
         # Start the queue runners.
         coord = tf.train.Coordinator()
@@ -89,9 +89,9 @@ def eval_once(saver, summary_writer, top_k_op, summary_op):
             for qr in tf.get_collection(tf.GraphKeys.QUEUE_RUNNERS):
                 threads.extend(qr.create_threads(sess, coord=coord, daemon=True, start=True))
 
-            num_iter = int(math.ceil(FLAGS.eval_num_examples / FLAGS.eval_batch_size))
+            num_iter = int(math.ceil(eval_num_examples / eval_batch_size))
             true_count = 0  # Counts the number of correct predictions.
-            total_sample_count = num_iter * FLAGS.eval_batch_size
+            total_sample_count = num_iter * eval_batch_size
             step = 0
             while step < num_iter and not coord.should_stop():
                 predictions = sess.run([top_k_op])
@@ -106,7 +106,10 @@ def eval_once(saver, summary_writer, top_k_op, summary_op):
 
             summary = tf.Summary()
             summary.ParseFromString(sess.run(summary_op))
-            summary.value.add(tag='Precision @ 1', simple_value=precision)
+            tf.summary.scalar('true_count', true_count)
+            tf.summary.scalar('precision', precision)
+            tf.summary.scalar('total_sample_count', total_sample_count)
+            summary.value.add(tag=datasetname + 'Precision @ 1', simple_value=precision)
             summary_writer.add_summary(summary, global_step)
         except Exception as e:  # pylint: disable=broad-except
             coord.request_stop(e)
@@ -115,12 +118,15 @@ def eval_once(saver, summary_writer, top_k_op, summary_op):
         coord.join(threads, stop_grace_period_secs=10)
 
 
-def evaluate(dataset):
+def evaluate(datasetname, eval_num_examples, eval_batch_size):
+
+    dataset = ReconoBookData(subset=FLAGS.eval_dataset)
+
     with tf.Graph().as_default() as g:
         # Obtenemos imagenes:
-        images, labels = reconobook_modelo.eval_inputs(dataset, FLAGS.eval_batch_size)
-        image_shape = tf.reshape(images, [-1, FLAGS.image_height, FLAGS.image_width, 3])
-        tf.summary.image('input', image_shape, 3)
+        images, labels = reconobook_modelo.eval_inputs(dataset, eval_batch_size)
+        # image_shape = tf.reshape(images, [-1, FLAGS.image_height, FLAGS.image_width, 3])
+        # tf.summary.image('input', image_shape, 3)
 
         # Build a Graph that computes the logits predictions from the
         # inference model.
@@ -139,11 +145,11 @@ def evaluate(dataset):
 
         summary_writer = tf.summary.FileWriter(FLAGS.summary_dir_eval, g)
 
-        eval_once(saver, summary_writer, top_k_op, summary_op)
+        eval_once(saver, summary_writer, top_k_op, summary_op, datasetname, eval_num_examples, eval_batch_size)
 
 
-def evaluate_unique(dataset):
-    global titulos
+def evaluate_unique(datasetname):
+    dataset = ReconoBookData(subset=datasetname)
 
     with tf.Graph().as_default():
 
@@ -178,14 +184,14 @@ def evaluate_unique(dataset):
                 print('No checkpoint file found')
                 return
 
-            print("  " )
-            print(" ------- " )
+            print("  ")
+            print(" ------- ")
             print("--> eval_unique: " + str(FLAGS.eval_unique))
             print("--> eval_unique_from_dataset: " + str(FLAGS.eval_unique_from_dataset))
             print("--> Evaluando dataset: " + FLAGS.eval_dataset)
             print("--> eval_unique_cantidad_img: " + str(FLAGS.eval_unique_cantidad_img))
-            print(" ------- " )
-            print("  " )
+            print(" ------- ")
+            print("  ")
 
             # Start the queue runners.
             coord = tf.train.Coordinator()
@@ -226,7 +232,6 @@ def evaluate_unique(dataset):
                                                                              titulos[top3Clase[0]]))
                     print('------------------------------------------------------------------------------')
 
-
                     for i in range(FLAGS.cantidad_clases):
                         print('Activación => Clase: %d, Activación: %s, Libro: %s' % (i, activaciones[i], titulos[i]))
 
@@ -245,19 +250,18 @@ def evaluate_unique(dataset):
 
 
 def main(argv=None):
-    dataset = ReconoBookData(subset=FLAGS.eval_dataset)
     
     # creamos el directorio de checkpoint_dir si no existe, y si existe lo borramos y creamos de nuevo
     if not os.path.exists(FLAGS.summary_dir_eval):
         os.mkdir(FLAGS.summary_dir_eval)
-    else:
-        shutil.rmtree(FLAGS.summary_dir_eval)
-        os.mkdir(FLAGS.summary_dir_eval)
+    # else:
+    #    shutil.rmtree(FLAGS.summary_dir_eval)
+    #    os.mkdir(FLAGS.summary_dir_eval)
 
     if FLAGS.eval_unique:
-        evaluate_unique(dataset)
+        evaluate_unique(FLAGS.eval_dataset)
     else:
-        evaluate(dataset)
+        evaluate(FLAGS.eval_dataset, FLAGS.eval_num_examples, FLAGS.eval_batch_size)
 
     input = sys.stdin.readline()
 

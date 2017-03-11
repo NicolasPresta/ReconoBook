@@ -182,7 +182,7 @@ def train(total_loss, global_step):
                                     staircase=True)
 
     # Definimos el optimizador a utilizar
-    opt = tf.train.AdamOptimizer(lr)
+    opt = tf.train.GradientDescentOptimizer(lr)
 
     # Agrega summaries
     tf.summary.scalar('learning_rate', lr)
