@@ -67,7 +67,7 @@ Sobre el Autor:
 
 <p align="center"> 
     <a src="https://www.tensorflow.org/">
-        <img src ="https://i.ytimg.com/vi/oZikw5k_2FM/maxresdefault.jpg" height="250"/>
+        <img href ="https://i.ytimg.com/vi/oZikw5k_2FM/maxresdefault.jpg" height="250"/>
     </a>
 </p>
 
