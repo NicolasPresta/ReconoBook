@@ -9,7 +9,7 @@
 ```
 
 
-![Evaluacion](./img/evaluacion02.jpg "Evaluacion")  
+![Evaluacion](./img/evaluacion02.png "Evaluacion")  
 
 
 
@@ -62,7 +62,7 @@ UPDATE 11/03/2017: Se realizan algunos ajustes para poder visualizar la evoluci�
 Adicionalmente realizamos algunos cambios en el modelo en relación a la cantidad de batch, el tamaño de los batch, y la regularización de nuestros parametros de las capas convolucionales que pasaron de 0 a 0.004 (*weight_decay - wd*, para entender más [ver este link](http://stats.stackexchange.com/questions/29130/difference-between-neural-net-weight-decay-and-learning-rate))
 
 Podemos visualizar como lo va haciendo nuestro modelo online durante el entrenamiento:   
-![Evaluacion](./img/evaluacion01.jpg "Evaluacion")  
+![Evaluacion](./img/evaluacion01.png "Evaluacion")  
 
 Como vemos el *limite* de precición que parece poder alcanzar es de 86% de predicciones correctas (top_k = 1), lo que es *aceptable*, aunque se puede mejorar. 
 
