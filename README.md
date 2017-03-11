@@ -65,6 +65,8 @@ Sobre el Autor:
 
 ***
 
-<div style="text-align:center"><img src ="https://i.ytimg.com/vi/oZikw5k_2FM/maxresdefault.jpg" height="250"/></div>
+<p align="center"> 
+  <img src ="https://i.ytimg.com/vi/oZikw5k_2FM/maxresdefault.jpg" height="250"/>
+</p>
 
 ***
