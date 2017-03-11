@@ -65,8 +65,8 @@ Sobre el Autor:
 
 ***
 
-<img src="http://blog.desdelinux.net/wp-content/uploads/2016/04/ubuntu.png" height="200">
-<img src="https://i.ytimg.com/vi/oZikw5k_2FM/maxresdefault.jpg" height="200">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/PyCharm_Logo.svg/1000px-PyCharm_Logo.svg.png" height="200">
+
+<img src="https://i.ytimg.com/vi/oZikw5k_2FM/maxresdefault.jpg" height="350">
+
 
 ***
