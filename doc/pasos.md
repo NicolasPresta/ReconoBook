@@ -16,6 +16,17 @@ Este es un breve resumen de los pasos para obtener el modelo entrenado y evaluar
 5. **Run reconobook_eval.py**
   - Parametros modificable: config.py->eval_unique, indica si se evaluan todas imagenes juntas o una por vez.
   
+
+```shell
+> git clone https://github.com/NicolasPresta/ReconoBook.git
+> cd ReconoBook/
+> cd dataset_scripts/
+> python split_dataset.py
+> python build_datasets.py
+> cd ..
+> python reconobook_train.py
+```
+  
   
   ***
 [<- Volver Home](../README.md)
