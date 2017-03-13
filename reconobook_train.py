@@ -38,34 +38,8 @@ def train(dataset):
         # Obtenemos imagenes y labels.
         images, labels = reconobook_modelo.train_inputs(dataset, FLAGS.train_batch_size)
 
-
-
         # Dadas las imagenes obtiene la probabilidad que tiene cada imagen de pertener a cada clase.
         logits = reconobook_modelo.inference(images)
-
-        # Paraa evaluar el modelo:
-        # images_eval_train, labels_eval_train = reconobook_modelo.eval_inputs(ReconoBookData(subset='train'),
-        #                                                                      FLAGS.eval_num_examples_mini)
-        # images_eval_val, labels_eval_val = reconobook_modelo.eval_inputs(ReconoBookData(subset='validation'),
-        #                                                                  FLAGS.eval_num_examples_mini)
-        # images_eval_test, labels_eval_test = reconobook_modelo.eval_inputs(ReconoBookData(subset='test'),
-        #                                                                    FLAGS.eval_num_examples_mini)
-        #
-        # logits_eval_train = reconobook_modelo.inference(images_eval_train)
-        # logits_eval_val = reconobook_modelo.inference(images_eval_val)
-        # logits_eval_test = reconobook_modelo.inference(images_eval_test)
-        #
-        # top_k_op_eval_train = tf.nn.in_top_k(logits_eval_train, labels_eval_train, FLAGS.top_k_prediction)
-        # top_k_op_eval_val = tf.nn.in_top_k(logits_eval_val, labels_eval_val, FLAGS.top_k_prediction)
-        # top_k_op_eval_test = tf.nn.in_top_k(logits_eval_test, labels_eval_test, FLAGS.top_k_prediction)
-        #
-        # true_prediction_eval_train = tf.reduce_sum(top_k_op_eval_train)
-        # true_prediction_eval_val = tf.reduce_sum(top_k_op_eval_val)
-        # true_prediction_eval_test = tf.reduce_sum(top_k_op_eval_test)
-        #
-        # tf.summary.scalar('true_prediction_eval_train', true_prediction_eval_train)
-        # tf.summary.scalar('true_prediction_eval_val', true_prediction_eval_val)
-        # tf.summary.scalar('true_prediction_eval_test', true_prediction_eval_test)
 
         # Calulamos el costo.
         loss = reconobook_modelo.loss(logits, labels)
@@ -74,7 +48,7 @@ def train(dataset):
         train_op = reconobook_modelo.train(loss, global_step)
 
         # Create a saver que va a guardar nuestro modelo
-        saver = tf.train.Saver(tf.global_variables())
+        saver = tf.train.Saver(tf.global_variables(), max_to_keep=FLAGS.saver_max_to_keep)
 
         # Build an initialization operation to run below.
         init = tf.global_variables_initializer()
@@ -102,7 +76,7 @@ def train(dataset):
             duration = time.time() - start_time
 
             # Imprimir el avance
-            if step % 50 == 0:
+            if step % FLAGS.steps_to_imprimir_avance == 0:
                 num_examples_per_step = FLAGS.train_batch_size
                 examples_per_sec = num_examples_per_step / duration
                 sec_per_batch = float(duration)
@@ -111,22 +85,22 @@ def train(dataset):
                 print(format_str % (datetime.now(), step, loss_value, examples_per_sec, sec_per_batch))
 
             # Guardar el summary para verlo en tensorboard
-            if step % 100 == 0:
+            if step % FLAGS.steps_to_guardar_summary == 0:
                 summary_str = sess.run(summary_op)
                 summary_writer.add_summary(summary_str, step)
                 print("---> Guardado Summary ")
 
             # Guardar el modelo en el estado actual y lo evaluamos para los 3 sets de datos
-            if step % 500 == 0 or (step + 1) == FLAGS.train_max_steps:
+            if step % FLAGS.steps_to_guardar_checkpoint == 0 or (step + 1) == FLAGS.train_max_steps:
                 checkpoint_path = os.path.join(FLAGS.checkpoint_dir, 'model.ckpt')
                 saver.save(sess, checkpoint_path, global_step=step)
                 print("---> Guardado Checkpoint")
                 print("--- ---- ---- ---- ---")
-                reconobook_eval.evaluate('train', FLAGS.eval_num_examples_mini, FLAGS.eval_num_examples_mini)
+                reconobook_eval.evaluate('train', FLAGS.eval_num_examples_mini)
                 print("--- ---- ---- ---- ---")
-                reconobook_eval.evaluate('validation', FLAGS.eval_num_examples_mini, FLAGS.eval_num_examples_mini)
+                reconobook_eval.evaluate('validation', FLAGS.eval_num_examples_mini)
                 print("--- ---- ---- ---- ---")
-                reconobook_eval.evaluate('test', FLAGS.eval_num_examples_mini, FLAGS.eval_num_examples_mini)
+                reconobook_eval.evaluate('test', FLAGS.eval_num_examples_mini)
                 print("--- ---- ---- ---- ---")
 
 

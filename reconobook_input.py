@@ -87,7 +87,7 @@ def batch_inputs(dataset, batch_size, train):
         if train:
             filename_queue = tf.train.string_input_producer(data_files, shuffle=True, capacity=8)
         else:
-            filename_queue = tf.train.string_input_producer(data_files, shuffle=True, capacity=8)
+            filename_queue = tf.train.string_input_producer(data_files, shuffle=False, capacity=8)
 
         # Creamos el reader
         reader = dataset.reader()
