@@ -14,6 +14,9 @@ Luego de 70000 pasos se obtiene un modelo entrenado con esta precición para top
 - VALIDATION:  precision = 0.844
 - TEST:  precision = 0.628  
 
+Vemos que el modelo no lo está haciendo bien para las imagenes de la captura F. El modelo sufre de alta varianza, no está generaizando bien. 
+
+
 *** 
 
 
