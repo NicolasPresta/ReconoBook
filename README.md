@@ -21,8 +21,8 @@
 ####Extras:
 - [Indice del repositorio](./doc/indicerepo.md)
 - [Paso a paso para obtener el modelo entrenado y evaluarlo](./doc/pasos.md)
-- [Script instalación de Tensorflow en UBUNTU 64](./doc/ubuntu.md)
-- [IDE utilizado](https://www.jetbrains.com/pycharm/)
+- [Script instalación de Tensorflow](./doc/ubuntu.md)
+- <a href="https://www.jetbrains.com/pycharm/" target="_blank">IDE utilizado</a>
 - [Programa para separar frames en .jpg a partir de un video](https://www.dvdvideosoft.com/es/products/dvd/Free-Video-to-JPG-Converter.htm)
 - [Atajos rapidos desde consola](./doc/atajos.md)
 - [Links de interes](./doc/links.md)
@@ -65,8 +65,10 @@ Sobre el Autor:
 
 ***
 
-<img src="http://blog.desdelinux.net/wp-content/uploads/2016/04/ubuntu.png" height="200">
-<img src="https://i.ytimg.com/vi/oZikw5k_2FM/maxresdefault.jpg" height="200">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/PyCharm_Logo.svg/1000px-PyCharm_Logo.svg.png" height="200">
+<p align="center"> 
+    <a href="https://www.tensorflow.org/" target="_blank">
+        <img src ="https://i.ytimg.com/vi/oZikw5k_2FM/maxresdefault.jpg" height="250"/>
+    </a>
+</p>
 
 ***
