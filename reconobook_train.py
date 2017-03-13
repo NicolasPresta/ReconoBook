@@ -104,8 +104,6 @@ def train(dataset):
                 print("--- ---- ---- ---- ---")
 
 
-
-
 def main(_):
     dataset = ReconoBookData(subset='train')
 

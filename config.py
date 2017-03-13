@@ -67,10 +67,10 @@ tf.app.flags.DEFINE_boolean('train_distort', True, "Distorcionar imagenes al eva
 tf.app.flags.DEFINE_boolean('train_crop', False, "Distorcionar imagenes al evaluar")
 tf.app.flags.DEFINE_integer('train_max_steps', 70000, "Number of batches to run.")
 tf.app.flags.DEFINE_integer("steps_to_imprimir_avance", 50, "Cantidad de pasos cada los cuales se imprimer por consola")
-tf.app.flags.DEFINE_integer("steps_to_guardar_summary", 50, "Cantidad de pasos cada los cuales se guarda summary")
-tf.app.flags.DEFINE_integer("steps_to_guardar_checkpoint", 100, "Cantidad de pasos cada los cuales se guarda checkpoint")
+tf.app.flags.DEFINE_integer("steps_to_guardar_summary", 100, "Cantidad de pasos cada los cuales se guarda summary")
+tf.app.flags.DEFINE_integer("steps_to_guardar_checkpoint", 1000, "Cantidad de pasos cada los cuales se guarda checkpoint")
 tf.app.flags.DEFINE_integer("saver_max_to_keep", 100, "Cantidad de checkouts a concervar")
-tf.app.flags.DEFINE_integer("train_batch_size", 20, "Cantidad de imagenes que se procesan por batch")
+tf.app.flags.DEFINE_integer("train_batch_size", 50, "Cantidad de imagenes que se procesan por batch")
 
 
 # -------------------------------- EVALUACION --------------------------------
