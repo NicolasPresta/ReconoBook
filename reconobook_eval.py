@@ -68,11 +68,6 @@ def evaluate(datasetname, eval_num_examples):
         # Calculamos si están en el top k
         top_k_op = tf.nn.in_top_k(logits, labels, FLAGS.top_k_prediction)
 
-        # Restore the moving average version of the learned variables for eval.
-        variable_averages = tf.train.ExponentialMovingAverage(FLAGS.moving_average_decay)
-        variables_to_restore = variable_averages.variables_to_restore()
-        saver = tf.train.Saver(variables_to_restore)
-
         # Build the summary operation based on the TF collection of Summaries.
         summary_op = tf.summary.merge_all()
         summary_writer = tf.summary.FileWriter(FLAGS.summary_dir_eval, g)
@@ -81,7 +76,7 @@ def evaluate(datasetname, eval_num_examples):
             # Restore del modelo guardado (checkpoint)
             ckpt = tf.train.get_checkpoint_state(FLAGS.checkpoint_dir)
             if ckpt and ckpt.model_checkpoint_path:
-                saver.restore(sess, ckpt.model_checkpoint_path)
+                tf.train.Saver().restore(sess, ckpt.model_checkpoint_path)
                 global_step = ckpt.model_checkpoint_path.split('/')[-1].split('-')[-1]
                 print('Modelo restaurado: global step = %s' % global_step)
             else:
