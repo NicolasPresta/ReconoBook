@@ -19,6 +19,18 @@ Vemos que el modelo no lo está haciendo bien para las imagenes de la captura F.
 
 *** 
 
+**15/03/2017**
+
+Se cambia la estructura del modelo agregando más kernels y se reentrena:
+
+model_cant_kernels1 = 60
+model_cant_kernels2 = 120
+model_cant_fc1 = 250
+
+
+Vemos que el modelo lo hace muy bien con los sets de test y validacion, pero mal con el de test. Osea que no puede generalizar el aprendizaje para evaluar imagenes de otras capturas correctamente. Es decir que el modelo está sobreajustado. 
+
+
 
 *** 
 [<- Volver Home](../README.md)  
