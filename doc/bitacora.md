@@ -27,9 +27,9 @@ model_cant_kernels1 = 60
 model_cant_kernels2 = 120
 model_cant_fc1 = 250
 
-![Bitacora](./doc/img/bitacora1a.jpg "Bitacora")
-![Bitacora](./doc/img/bitacora1b.jpg "Bitacora")
-![Bitacora](./doc/img/bitacora1c.jpg "Bitacora")
+![Bitacora](./img/bitacora1a.jpg "Bitacora")
+![Bitacora](./img/bitacora1b.jpg "Bitacora")
+![Bitacora](./img/bitacora1c.jpg "Bitacora")
 
 Vemos que el modelo lo hace muy bien con los sets de test y validacion, pero mal con el de test. Osea que no puede generalizar el aprendizaje para evaluar imagenes de otras capturas correctamente. Es decir que el modelo está sobreajustado. 
 
