@@ -27,7 +27,7 @@ model_cant_kernels1 = 60
 model_cant_kernels2 = 120
 model_cant_fc1 = 250
 
-![Bitacora](./img/bitacora1a.JPG "Bitacora")
+![Bitacora](./img/bicatora1a.JPG "Bitacora")
 ![Bitacora](./img/bitacora1b.JPG "Bitacora")
 ![Bitacora](./img/bitacora1c.JPG "Bitacora")
 
