@@ -28,6 +28,7 @@
 - [Links de interes](./doc/links.md)
 
 ***
+
 <img src="./doc/img/1B.jpg" width="84">
 <img src="./doc/img/2A.jpg" width="84">
 <img src="./doc/img/3E.jpg" width="84">
@@ -48,6 +49,7 @@
 <img src="./doc/img/18B.jpg" width="84"> 
 <img src="./doc/img/19B.jpg" width="84"> 
 <img src="./doc/img/20C.jpg" width="84">
+
 ***
 
 Sobre el Autor:
