@@ -87,7 +87,7 @@ def batch_inputs(dataset, batch_size, train):
         if train:
             filename_queue = tf.train.string_input_producer(data_files, shuffle=True, capacity=8)
         else:
-            filename_queue = tf.train.string_input_producer(data_files, shuffle=False, capacity=8)
+            filename_queue = tf.train.string_input_producer(data_files, shuffle=True, capacity=8)
 
         # Creamos el reader
         reader = dataset.reader()
@@ -192,7 +192,7 @@ def distort_image(image, height, width):
             image = tf.image.random_saturation(image, 0.5, 1)
 
         if FLAGS.train_crop:
-            image = tf.image.central_crop(image, (random.randint(7, 10) / 10))
+            image = tf.image.central_crop(image, (random.randint(8, 10) / 10))
 
         # Resize the image to the original height and width.
         image = tf.expand_dims(image, 0)

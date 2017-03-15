@@ -103,7 +103,10 @@ def inference(images):
 
     # Primer capa convolucional
     with tf.name_scope("CONV-1"):
-        kernels_conv1 = _variable_with_weight_decay("kernels_conv1", [5, 5, 3, FLAGS.model_cant_kernels1], stddev=1e-4, wd=0.004)
+        kernels_conv1 = _variable_with_weight_decay("kernels_conv1",
+                                                    shape=[5, 5, 3, FLAGS.model_cant_kernels1],
+                                                    stddev=1e-4,
+                                                    wd=0.0)
         bias_conv1 = tf.get_variable("bias_conv1", [FLAGS.model_cant_kernels1], initializer=tf.constant_initializer(0.0))
         conv1 = tf.nn.relu(_conv2d(images, kernels_conv1) + bias_conv1, name="conv1")
 
@@ -117,28 +120,37 @@ def inference(images):
 
     # Segunda capa convolucional
     with tf.name_scope("CONV-2"):
-        kernels_conv2 = _variable_with_weight_decay("kernels_conv2", shape=[3, 3, FLAGS.model_cant_kernels1, FLAGS.model_cant_kernels2], stddev=1e-4, wd=0.004)
+        kernels_conv2 = _variable_with_weight_decay("kernels_conv2",
+                                                    shape=[3, 3, FLAGS.model_cant_kernels1, FLAGS.model_cant_kernels2],
+                                                    stddev=1e-4,
+                                                    wd=0.0)
         bias_conv2 = tf.get_variable("bias_conv2", [FLAGS.model_cant_kernels2], initializer=tf.constant_initializer(0.1))
         conv2 = tf.nn.relu(_conv2d(norm1, kernels_conv2) + bias_conv2, name="conv2")
 
-    # normalización 2
-    with tf.name_scope("NORM-2"):
-        norm2 = tf.nn.lrn(conv2, 4, bias=1.0, alpha=0.001 / 9.0, beta=0.75, name='norm2')
-
     # max pool 1
     with tf.name_scope("MAXPOOL-2"):
-        pool2 = _max_pool_2x2(norm2, "pool2")
+        pool2 = _max_pool_2x2(conv2, "pool2")
+
+    # normalización 2
+    with tf.name_scope("NORM-2"):
+        norm2 = tf.nn.lrn(pool2, 4, bias=1.0, alpha=0.001 / 9.0, beta=0.75, name='norm2')
 
     # primer capa full conected
     with tf.name_scope("FC-1"):
-        pool2_flat = tf.reshape(pool2, [-1, 10 * 10 * FLAGS.model_cant_kernels2])
-        W_fc1 = _variable_with_weight_decay("W_fc1", shape=[10 * 10 * FLAGS.model_cant_kernels2, FLAGS.model_cant_fc1], stddev=0.04, wd=0.004)
+        pool2_flat = tf.reshape(norm2, [-1, 10 * 10 * FLAGS.model_cant_kernels2])
+        W_fc1 = _variable_with_weight_decay("W_fc1",
+                                            shape=[10 * 10 * FLAGS.model_cant_kernels2, FLAGS.model_cant_fc1],
+                                            stddev=0.04,
+                                            wd=0.004)
         b_fc1 = tf.get_variable("b_fc1", [FLAGS.model_cant_fc1], initializer=tf.constant_initializer(0.1))
         local1 = tf.nn.relu(tf.matmul(pool2_flat, W_fc1) + b_fc1, name="local1")
 
     # segunda capa full conected
     with tf.name_scope("FC-2"):
-        W_fc2 = _variable_with_weight_decay("W_fc2", shape=[FLAGS.model_cant_fc1, FLAGS.cantidad_clases], stddev=0.04, wd=0.004)
+        W_fc2 = _variable_with_weight_decay("W_fc2",
+                                            shape=[FLAGS.model_cant_fc1, FLAGS.cantidad_clases],
+                                            stddev=0.04,
+                                            wd=0.004)
         b_fc2 = tf.get_variable("b_fc2", [FLAGS.cantidad_clases], initializer=tf.constant_initializer(0.1))
         logits = tf.matmul(local1, W_fc2) + b_fc2
 
@@ -191,24 +203,25 @@ def train(total_loss, global_step):
     with tf.control_dependencies([loss_averages_op]):
         # Computa los gradientes
         grads = opt.compute_gradients(total_loss)
-        # aplica los gradientes.
-        apply_gradient_op = opt.apply_gradients(grads, global_step=global_step)
+
+    # aplica los gradientes.
+    apply_gradient_op = opt.apply_gradients(grads, global_step=global_step)
 
     # Agrega el histograma para las variables de entrenamiento
-    #for var in tf.trainable_variables():
-    #    tf.summary.histogram(var.op.name, var)
+    for var in tf.trainable_variables():
+        tf.summary.histogram(var.op.name, var)
 
     # Agrega el histograma para los gradientes
-    #for grad, var in grads:
-    #    if grad is not None:
-    #        tf.summary.histogram(var.op.name + '/gradients', grad)
+    for grad, var in grads:
+        if grad is not None:
+            tf.summary.histogram(var.op.name + '/gradients', grad)
 
     # guardamos el promedio movil de las variables, es util para mejorar la eficiencia del optimizador.
     variable_averages = tf.train.ExponentialMovingAverage(FLAGS.moving_average_decay, global_step)
-    variables_averages_op = variable_averages.apply(tf.trainable_variables())
+    maintain_averages_op = variable_averages.apply(tf.trainable_variables())
 
-    with tf.control_dependencies([apply_gradient_op, variables_averages_op]):
-        train_op = tf.no_op(name='train')
+    with tf.control_dependencies([apply_gradient_op]):
+        train_op = tf.group(maintain_averages_op )
 
     return train_op
 

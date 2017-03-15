@@ -67,6 +67,8 @@ def train(dataset):
         tf.train.start_queue_runners(sess=sess)
 
         # Creamos la operación que va a guardar el resumen para luego visualizarlo desde tensorboard
+        run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
+        run_metadata = tf.RunMetadata()
         summary_op = tf.summary.merge_all()
         summary_writer = tf.summary.FileWriter(FLAGS.summary_dir_train, sess.graph)
 
@@ -87,8 +89,9 @@ def train(dataset):
             # Guardar el summary para verlo en tensorboard
             if step % FLAGS.steps_to_guardar_summary == 0:
                 summary_str = sess.run(summary_op)
+                # summary_writer.add_run_metadata(run_metadata, 'step%d' % step)
                 summary_writer.add_summary(summary_str, step)
-                print("---> Guardado Summary ")
+                print("---> Guardado Summary Train ")
 
             # Guardar el modelo en el estado actual y lo evaluamos para los 3 sets de datos
             if step % FLAGS.steps_to_guardar_checkpoint == 0 or (step + 1) == FLAGS.train_max_steps:
@@ -102,6 +105,7 @@ def train(dataset):
                 print("--- ---- ---- ---- ---")
                 reconobook_eval.evaluate('test', FLAGS.eval_num_examples_mini)
                 print("--- ---- ---- ---- ---")
+                print("---> Guardado Summary Eval ")
 
 
 def main(_):

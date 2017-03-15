@@ -69,6 +69,8 @@ def evaluate(datasetname, eval_num_examples):
         top_k_op = tf.nn.in_top_k(logits, labels, FLAGS.top_k_prediction)
 
         # Build the summary operation based on the TF collection of Summaries.
+        #run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
+        #run_metadata = tf.RunMetadata()
         summary_op = tf.summary.merge_all()
         summary_writer = tf.summary.FileWriter(FLAGS.summary_dir_eval, g)
 
@@ -76,7 +78,10 @@ def evaluate(datasetname, eval_num_examples):
             # Restore del modelo guardado (checkpoint)
             ckpt = tf.train.get_checkpoint_state(FLAGS.checkpoint_dir)
             if ckpt and ckpt.model_checkpoint_path:
-                tf.train.Saver().restore(sess, ckpt.model_checkpoint_path)
+                variable_averages = tf.train.ExponentialMovingAverage(FLAGS.moving_average_decay)
+                variables_to_restore = variable_averages.variables_to_restore()
+                saver = tf.train.Saver(variables_to_restore)
+                saver.restore(sess, ckpt.model_checkpoint_path)
                 global_step = ckpt.model_checkpoint_path.split('/')[-1].split('-')[-1]
                 print('Modelo restaurado: global step = %s' % global_step)
             else:
@@ -118,6 +123,7 @@ def evaluate(datasetname, eval_num_examples):
             summary = tf.Summary()
             summary.ParseFromString(sess.run(summary_op))
             summary.value.add(tag=datasetname + '_precision', simple_value=precision)
+            # summary_writer.add_run_metadata(run_metadata, 'step' + global_step)
             summary_writer.add_summary(summary, global_step)
 
             # Cerramos los hilos de lectura
