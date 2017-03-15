@@ -23,7 +23,7 @@
 - [Indice del repositorio](./doc/indicerepo.md)
 - [Paso a paso para obtener el modelo entrenado y evaluarlo](./doc/pasos.md)
 - [Script instalación de Tensorflow](./doc/ubuntu.md)
-- <a href="https://www.jetbrains.com/pycharm/" target="_blank">IDE utilizado</a>
+- [IDE utilizado](https://www.jetbrains.com/pycharm/)
 - [Programa para separar frames en .jpg a partir de un video](https://www.dvdvideosoft.com/es/products/dvd/Free-Video-to-JPG-Converter.htm)
 - [Atajos rapidos desde consola](./doc/atajos.md)
 - [Links de interes](./doc/links.md)
