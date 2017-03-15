@@ -16,6 +16,7 @@
 7.  [Entrenamiento del modelo](./doc/entrenamiento.md)
 8.  [Evaluación del modelo](./doc/evaluacion.md)
 9. [Lista TODOs](./doc/TODO.md)
+10. [Bitacora](./doc/bitacora.md)
 
 
 ####Extras:
