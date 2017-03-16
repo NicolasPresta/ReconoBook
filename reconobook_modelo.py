@@ -211,7 +211,18 @@ def train(total_loss, global_step):
                                     staircase=True)
 
     # Definimos el optimizador a utilizar
-    opt = tf.train.GradientDescentOptimizer(lr)
+    if FLAGS.optimezer == "GradientDescentOptimizer":
+        opt = tf.train.GradientDescentOptimizer(lr)
+    if FLAGS.optimezer == "AdamOptimizer":
+        opt = tf.train.AdamOptimizer(lr)
+    if FLAGS.optimezer == "AdadeltaOptimizer":
+        opt = tf.train.AdadeltaOptimizer(lr)
+    if FLAGS.optimezer == "RMSPropOptimizer":
+        opt = tf.train.RMSPropOptimizer(lr)
+    if FLAGS.optimezer == "ProximalGradientDescentOptimizer":
+        opt = tf.train.ProximalGradientDescentOptimizer(lr)
+
+
 
     # Agrega summaries
     tf.summary.scalar('learning_rate', lr)

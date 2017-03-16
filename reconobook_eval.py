@@ -142,6 +142,7 @@ def evaluate_unique(datasetname):
 
         # definimos placeholders
         _images = tf.placeholder(tf.float32, shape=[None, FLAGS.image_height, FLAGS.image_width, 3])
+        keep_prob = tf.placeholder(tf.float32)
 
         # Obtenemos imagenes --(se cargan desde archivo, no desde dataset)
         if FLAGS.eval_unique_from_dataset:
@@ -195,7 +196,7 @@ def evaluate_unique(datasetname):
                         imagenCargada = load_image(FLAGS.manual_test_folder + "%d.jpg" % (step + 1))
 
                     # La pasamos por el modelo de predicción
-                    prediccion = sess.run([logits], feed_dict={_images: imagenCargada})
+                    prediccion = sess.run([logits], feed_dict={keep_prob: 1, _images: imagenCargada})
 
                     # Imprimios por consola
                     activaciones = prediccion[0][0]

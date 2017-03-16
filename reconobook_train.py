@@ -78,7 +78,7 @@ def train(dataset):
         for step in range(FLAGS.train_max_steps):
             start_time = time.time()
             sess.run([train_op],
-                     feed_dict={keep_prob:FLAGS.keep_drop_prob},
+                     feed_dict={keep_prob: FLAGS.keep_drop_prob},
                      run_metadata=run_metadata,
                      options=run_options)
             duration = time.time() - start_time
