@@ -23,9 +23,9 @@ Vemos que el modelo no lo está haciendo bien para las imagenes de la captura F.
 
 Se cambia la estructura del modelo agregando más kernels y se reentrena:
 
-model_cant_kernels1 = 60
-model_cant_kernels2 = 120
-model_cant_fc1 = 250
+model_cant_kernels1 = 60  
+model_cant_kernels2 = 120  
+model_cant_fc1 = 250  
 
 ![Bitacora](./img/bitacora1b.JPG "Bitacora")
 ![Bitacora](./img/bitacora1c.JPG "Bitacora")
@@ -40,13 +40,13 @@ Vemos que el modelo lo hace muy bien con los sets de test y validacion, pero mal
 
 Se cambia la estructura, disminuyendo la cantidad de kernels a la mitad y se reentrena
 
-model_cant_kernels1 = 30
-model_cant_kernels2 = 60
-model_cant_fc1 = 125
+model_cant_kernels1 = 30  
+model_cant_kernels2 = 60  
+model_cant_fc1 = 125  
 
 ![Bitacora](./img/bitacora2b.PNG "Bitacora")
 ![Bitacora](./img/bitacora2c.PNG "Bitacora")
-![Bitacora](./img/bicatora2a.PNG "Bitacora")
+![Bitacora](./img/bicatora2a.PNG "Bitacora")  
 
 Vemos que el modelo lo hace muy bien con los sets de test y validacion, pero mal con el de test, aunque mejoró respecto de la estructura anterior, ademas de que mejoró el tiempo de entrenamiento.  
 En el paso 10000 se obtiene la mejor precisión, luego comienza a disminuir producto del sobreajuste.  
