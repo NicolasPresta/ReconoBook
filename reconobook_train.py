@@ -74,7 +74,7 @@ def train(dataset):
 
         for step in range(FLAGS.train_max_steps):
             start_time = time.time()
-            sess.run([train_op])
+            sess.run([train_op], run_metadata=run_metadata, options=run_options)
             duration = time.time() - start_time
 
             # Imprimir el avance
@@ -89,7 +89,7 @@ def train(dataset):
             # Guardar el summary para verlo en tensorboard
             if step % FLAGS.steps_to_guardar_summary == 0:
                 summary_str = sess.run(summary_op)
-                # summary_writer.add_run_metadata(run_metadata, 'step%d' % step)
+                summary_writer.add_run_metadata(run_metadata, 'step%d' % step)
                 summary_writer.add_summary(summary_str, step)
                 print("---> Guardado Summary Train ")
 

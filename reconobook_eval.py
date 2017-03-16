@@ -69,8 +69,8 @@ def evaluate(datasetname, eval_num_examples):
         top_k_op = tf.nn.in_top_k(logits, labels, FLAGS.top_k_prediction)
 
         # Build the summary operation based on the TF collection of Summaries.
-        #run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
-        #run_metadata = tf.RunMetadata()
+        run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
+        run_metadata = tf.RunMetadata()
         summary_op = tf.summary.merge_all()
         summary_writer = tf.summary.FileWriter(FLAGS.summary_dir_eval, g)
 
@@ -106,7 +106,7 @@ def evaluate(datasetname, eval_num_examples):
                 threads.extend(qr.create_threads(sess, coord=coord, daemon=True, start=True))
 
             # Evaluamos las imagenes
-            predictions = sess.run([top_k_op])
+            predictions = sess.run([top_k_op], run_metadata=run_metadata, options=run_options)
 
             # Totalizamos el númer de predicciones correctas
             true_count = np.sum(predictions)
@@ -123,7 +123,7 @@ def evaluate(datasetname, eval_num_examples):
             summary = tf.Summary()
             summary.ParseFromString(sess.run(summary_op))
             summary.value.add(tag=datasetname + '_precision', simple_value=precision)
-            # summary_writer.add_run_metadata(run_metadata, 'step' + global_step)
+            summary_writer.add_run_metadata(run_metadata, 'step' + global_step)
             summary_writer.add_summary(summary, global_step)
 
             # Cerramos los hilos de lectura

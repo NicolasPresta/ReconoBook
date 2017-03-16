@@ -51,16 +51,16 @@ tf.app.flags.DEFINE_integer('image_width', 40, 'Ancho imagen')
 
 
 # -------------------------------- MODELO --------------------------------
-tf.app.flags.DEFINE_integer('model_cant_kernels1', 60, 'Cantidad de kernels de convolución en la capa 1')
-tf.app.flags.DEFINE_integer('model_cant_kernels2', 120, 'Cantidad de kernels de convolución en la capa 2')
-tf.app.flags.DEFINE_integer('model_cant_fc1', 250, 'Cantidad de neurolas full conected en capa 3')
+tf.app.flags.DEFINE_integer('model_cant_kernels1', 30, 'Cantidad de kernels de convolución en la capa 1')
+tf.app.flags.DEFINE_integer('model_cant_kernels2', 60, 'Cantidad de kernels de convolución en la capa 2')
+tf.app.flags.DEFINE_integer('model_cant_fc1', 125, 'Cantidad de neurolas full conected en capa 3')
 
 
 # -------------------------------- ENTRENAMIENTO --------------------------------
 tf.app.flags.DEFINE_integer("moving_average_decay", 0.9999, "The decay to use for the moving average.")
-tf.app.flags.DEFINE_integer("initial_learning_rate", 0.1, "Initial learning rate.")
-tf.app.flags.DEFINE_integer("decay_steps", 2000, "Epochs after which learning rate decays.")
-tf.app.flags.DEFINE_integer("decay_rate", 0.5, "Learning rate decay factor.")
+tf.app.flags.DEFINE_integer("initial_learning_rate", 0.07, "Initial learning rate.")
+tf.app.flags.DEFINE_integer("decay_steps", 1000, "Epochs after which learning rate decays.")
+tf.app.flags.DEFINE_integer("decay_rate", 0.95, "Learning rate decay factor.")
 tf.app.flags.DEFINE_boolean('log_device_placement', False, "Si logea la ubicación de variables al inciar la ejecución")
 tf.app.flags.DEFINE_boolean('allow_soft_placement', True, "Si permite una asignación de variables flexible")
 tf.app.flags.DEFINE_boolean('train_distort', True, "Distorcionar imagenes al evaluar")
@@ -70,7 +70,7 @@ tf.app.flags.DEFINE_integer("steps_to_imprimir_avance", 50, "Cantidad de pasos c
 tf.app.flags.DEFINE_integer("steps_to_guardar_summary", 100, "Cantidad de pasos cada los cuales se guarda summary")
 tf.app.flags.DEFINE_integer("steps_to_guardar_checkpoint", 500, "Cantidad de pasos cada los cuales se guarda checkpoint")
 tf.app.flags.DEFINE_integer("saver_max_to_keep", 100, "Cantidad de checkouts a concervar")
-tf.app.flags.DEFINE_integer("train_batch_size", 50, "Cantidad de imagenes que se procesan por batch")
+tf.app.flags.DEFINE_integer("train_batch_size", 64, "Cantidad de imagenes que se procesan por batch")
 
 
 # -------------------------------- EVALUACION --------------------------------
@@ -79,9 +79,9 @@ tf.app.flags.DEFINE_boolean('eval_unique_from_dataset', True, "Evaluar imagen po
 tf.app.flags.DEFINE_integer('eval_unique_cantidad_img', 3, "Cantidad de imagenes a evaluar si eval_unique = true")
 tf.app.flags.DEFINE_boolean('eval_distort', False, "Distorcionar imagenes al evaluar")
 tf.app.flags.DEFINE_boolean('eval_crop', False, "Distorcionar imagenes al evaluar")
-tf.app.flags.DEFINE_integer('eval_num_examples', 1000, "Número de imagenes a evaluar")
+tf.app.flags.DEFINE_integer('eval_num_examples', 2200, "Número de imagenes a evaluar")
 tf.app.flags.DEFINE_integer("top_k_prediction", 1, "La predicción correcta si esta entre los k primeros resultados")
-tf.app.flags.DEFINE_string('eval_dataset', 'train', 'Data set usado para validacion (train, validation o test')
+tf.app.flags.DEFINE_string('eval_dataset', 'test', 'Data set usado para validacion (train, validation o test')
 tf.app.flags.DEFINE_integer('eval_num_examples_mini', 1000, "Número de imagenes a evaluar durante el entrenamiento")
 
 titulosStr = ("Fisica universita,"
