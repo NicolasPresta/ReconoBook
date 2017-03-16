@@ -12,6 +12,7 @@
 - [Introducción a DeepLearning por Ruben Lopez](https://rubenlopezg.wordpress.com/2014/05/07/que-es-y-como-funciona-deep-learning/)
 - [Introducción a DeepLearning por Michael Nielsen](http://neuralnetworksanddeeplearning.com/chap6.html)
 - [Guia de Hardware para DeepLearning por Tim Dettmers](http://timdettmers.com/2015/03/09/deep-learning-hardware-guide/)  
+- [Convolutional Neural Networks for Visual Recognition Course for Stanford](http://cs231n.stanford.edu/)  
 
 ***
 [<- Volver Home](../README.md)
