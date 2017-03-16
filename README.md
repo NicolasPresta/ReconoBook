@@ -57,7 +57,7 @@ Sobre el Autor:
 
 
 **Desarollador** Fullstack  
-**Estudiante** de Ingenieria en Sistemas en UTN FRBA
+**Estudiante** de Ingenieria en Sistemas en UTN FRBA  
 **Entusiasta** de Machine Learning  
 
 
