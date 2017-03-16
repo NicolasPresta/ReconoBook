@@ -61,21 +61,27 @@ tf.app.flags.DEFINE_integer("moving_average_decay", 0.9999, "The decay to use fo
 tf.app.flags.DEFINE_integer("initial_learning_rate", 0.01, "Initial learning rate.")
 tf.app.flags.DEFINE_integer("decay_steps", 1000, "Epochs after which learning rate decays.")
 tf.app.flags.DEFINE_integer("decay_rate", 0.95, "Learning rate decay factor.")
+
 tf.app.flags.DEFINE_boolean('log_device_placement', False, "Si logea la ubicación de variables al inciar la ejecución")
 tf.app.flags.DEFINE_boolean('allow_soft_placement', True, "Si permite una asignación de variables flexible")
+
 tf.app.flags.DEFINE_boolean('train_distort', True, "Distorcionar imagenes al evaluar")
 tf.app.flags.DEFINE_boolean('train_crop', True, "Distorcionar imagenes al evaluar")
+
 tf.app.flags.DEFINE_integer('train_max_steps', 1000000, "Number of batches to run.")
+tf.app.flags.DEFINE_integer("train_batch_size", 64, "Cantidad de imagenes que se procesan por batch")
+
 tf.app.flags.DEFINE_integer("steps_to_imprimir_avance", 50, "Cantidad de pasos cada los cuales se imprimer por consola")
 tf.app.flags.DEFINE_integer("steps_to_guardar_summary", 100, "Cantidad de pasos cada los cuales se guarda summary")
 tf.app.flags.DEFINE_integer("steps_to_guardar_checkpoint", 500, "Cantidad de pasos cada los cuales se guarda checkpoint")
 tf.app.flags.DEFINE_integer("saver_max_to_keep", 100, "Cantidad de checkouts a concervar")
-tf.app.flags.DEFINE_integer("train_batch_size", 64, "Cantidad de imagenes que se procesan por batch")
+
 tf.app.flags.DEFINE_boolean('use_dropout_1', False, "Si usa drop out en capa 1")
 tf.app.flags.DEFINE_boolean('use_dropout_2', False, "Si usa drop out en capa 2")
 tf.app.flags.DEFINE_boolean('use_dropout_3', True, "Si usa drop out en capa 3")
 tf.app.flags.DEFINE_boolean('use_dropout_4', False, "Si usa drop out en capa 4")
 tf.app.flags.DEFINE_integer("keep_drop_prob", 0.6, "probabilidad de quedar en el drop out")
+
 tf.app.flags.DEFINE_string('optimezer', 'AdamOptimizer', 'Optimizador a usar: GradientDescentOptimizer, AdamOptimizer, '
                                                 'AdadeltaOptimizer, RMSPropOptimizer, ProximalGradientDescentOptimizer')
 
@@ -84,12 +90,16 @@ tf.app.flags.DEFINE_string('optimezer', 'AdamOptimizer', 'Optimizador a usar: Gr
 tf.app.flags.DEFINE_boolean('eval_unique', False, "Ejecutar revisión imagen por imagen")
 tf.app.flags.DEFINE_boolean('eval_unique_from_dataset', True, "Evaluar imagen por imagen desde dataset")
 tf.app.flags.DEFINE_integer('eval_unique_cantidad_img', 3, "Cantidad de imagenes a evaluar si eval_unique = true")
+tf.app.flags.DEFINE_string('eval_dataset', 'test', 'Data set usado para validacion (train, validation o test')
+
 tf.app.flags.DEFINE_boolean('eval_distort', False, "Distorcionar imagenes al evaluar")
 tf.app.flags.DEFINE_boolean('eval_crop', False, "Distorcionar imagenes al evaluar")
+
 tf.app.flags.DEFINE_integer('eval_num_examples', 2200, "Número de imagenes a evaluar")
-tf.app.flags.DEFINE_integer("top_k_prediction", 1, "La predicción correcta si esta entre los k primeros resultados")
-tf.app.flags.DEFINE_string('eval_dataset', 'test', 'Data set usado para validacion (train, validation o test')
 tf.app.flags.DEFINE_integer('eval_num_examples_mini', 1000, "Número de imagenes a evaluar durante el entrenamiento")
+
+tf.app.flags.DEFINE_integer("top_k_prediction", 1, "La predicción correcta si esta entre los k primeros resultados")
+
 
 titulosStr = ("Fisica universita,"
               "Patrones de diseño,"

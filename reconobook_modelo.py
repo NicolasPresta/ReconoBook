@@ -210,6 +210,7 @@ def train(total_loss, global_step):
                                     FLAGS.decay_rate,
                                     staircase=True)
 
+
     # Definimos el optimizador a utilizar
     if FLAGS.optimezer == "GradientDescentOptimizer":
         opt = tf.train.GradientDescentOptimizer(lr)
@@ -221,7 +222,6 @@ def train(total_loss, global_step):
         opt = tf.train.RMSPropOptimizer(lr)
     if FLAGS.optimezer == "ProximalGradientDescentOptimizer":
         opt = tf.train.ProximalGradientDescentOptimizer(lr)
-
 
 
     # Agrega summaries
