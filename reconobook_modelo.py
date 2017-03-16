@@ -101,13 +101,15 @@ def inference(images):
         Logits.
     """
 
+    keep_prob = tf.placeholder(tf.float32)
+
     # Primer capa convolucional
     with tf.name_scope("CONV-1"):
         kernels_conv1 = _variable_with_weight_decay("kernels_conv1",
                                                     shape=[5, 5, 3, FLAGS.model_cant_kernels1],
                                                     stddev=1e-4,
                                                     wd=0.0)
-        bias_conv1 = tf.get_variable("bias_conv1", [FLAGS.model_cant_kernels1], initializer=tf.constant_initializer(0.0))
+        bias_conv1 = tf.get_variable("bias_conv1", [FLAGS.model_cant_kernels1], initializer=tf.constant_initializer(0.1))
         conv1 = tf.nn.relu(_conv2d(images, kernels_conv1) + bias_conv1, name="conv1")
 
     # max pool 1
@@ -117,6 +119,11 @@ def inference(images):
     # normalización 1
     with tf.name_scope("NORM-1"):
         norm1 = tf.nn.lrn(pool1, 4, bias=1.0, alpha=0.001 / 9.0, beta=0.75, name='norm1')
+
+    # dropout 1
+    if FLAGS.use_dropout_1:
+        with tf.name_scope("DROPOUT-1"):
+            norm1 = tf.nn.dropout(norm1, keep_prob)
 
     # Segunda capa convolucional
     with tf.name_scope("CONV-2"):
@@ -134,6 +141,11 @@ def inference(images):
     # normalización 2
     with tf.name_scope("NORM-2"):
         norm2 = tf.nn.lrn(pool2, 4, bias=1.0, alpha=0.001 / 9.0, beta=0.75, name='norm2')
+
+    # dropout 2
+    if FLAGS.use_dropout_2:
+        with tf.name_scope("DROPOUT-2"):
+            norm2 = tf.nn.dropout(norm2, keep_prob)
 
     # primer capa full conected
     with tf.name_scope("FC-1"):
@@ -153,6 +165,11 @@ def inference(images):
                                             wd=0.004)
         b_fc2 = tf.get_variable("b_fc2", [FLAGS.cantidad_clases], initializer=tf.constant_initializer(0.1))
         logits = tf.matmul(local1, W_fc2) + b_fc2
+
+    # dropout 4
+    if FLAGS.use_dropout_4:
+        with tf.name_scope("DROPOUT-4"):
+            logits = tf.nn.dropout(logits, keep_prob)
 
     return logits
 

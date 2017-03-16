@@ -27,6 +27,7 @@ import sys
 FLAGS = tf.app.flags.FLAGS
 titulos = FLAGS.titulos.split(",")
 
+
 # ==============================================================================
 
 
@@ -40,7 +41,7 @@ def load_image(filename):
         data = tf.image.random_hue(data, 0.15)
         data = tf.image.random_saturation(data, 0.5, 1)
     if FLAGS.eval_crop:
-        data = tf.image.central_crop(data, (random.randint(7, 10)/10))
+        data = tf.image.central_crop(data, (random.randint(7, 10) / 10))
     data = tf.expand_dims(data, 0)
     data = tf.image.resize_bilinear(data, [FLAGS.image_height, FLAGS.image_width], align_corners=False)
     data = tf.image.convert_image_dtype(data, dtype=tf.float32)
@@ -51,7 +52,6 @@ def load_image(filename):
 
 
 def evaluate(datasetname, eval_num_examples):
-
     dataset = ReconoBookData(subset=datasetname)
 
     with tf.Graph().as_default() as g:
@@ -61,6 +61,7 @@ def evaluate(datasetname, eval_num_examples):
         # Definimos los placeholder para el input
         _images = tf.placeholder(tf.float32, shape=[eval_num_examples, FLAGS.image_height, FLAGS.image_width, 3])
         _labels = tf.placeholder(tf.int32, shape=[eval_num_examples])
+        keep_prob = tf.placeholder(tf.float32)
 
         # Le pasamos las imagenes al modelo para que nos de su predicción
         logits = reconobook_modelo.inference(images)
@@ -106,7 +107,10 @@ def evaluate(datasetname, eval_num_examples):
                 threads.extend(qr.create_threads(sess, coord=coord, daemon=True, start=True))
 
             # Evaluamos las imagenes
-            predictions = sess.run([top_k_op], run_metadata=run_metadata, options=run_options)
+            predictions = sess.run([top_k_op],
+                                   feed_dict={keep_prob: 1},
+                                   run_metadata=run_metadata,
+                                   options=run_options)
 
             # Totalizamos el númer de predicciones correctas
             true_count = np.sum(predictions)
@@ -232,7 +236,6 @@ def evaluate_unique(datasetname):
 
 
 def main(argv=None):
-    
     # creamos el directorio de checkpoint_dir si no existe, y si existe lo borramos y creamos de nuevo
     if not os.path.exists(FLAGS.summary_dir_eval):
         os.mkdir(FLAGS.summary_dir_eval)
@@ -246,6 +249,7 @@ def main(argv=None):
         evaluate(FLAGS.eval_dataset, FLAGS.eval_num_examples)
 
     input = sys.stdin.readline()
+
 
 if __name__ == '__main__':
     tf.app.run()

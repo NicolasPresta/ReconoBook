@@ -71,6 +71,12 @@ tf.app.flags.DEFINE_integer("steps_to_guardar_summary", 100, "Cantidad de pasos 
 tf.app.flags.DEFINE_integer("steps_to_guardar_checkpoint", 500, "Cantidad de pasos cada los cuales se guarda checkpoint")
 tf.app.flags.DEFINE_integer("saver_max_to_keep", 100, "Cantidad de checkouts a concervar")
 tf.app.flags.DEFINE_integer("train_batch_size", 64, "Cantidad de imagenes que se procesan por batch")
+tf.app.flags.DEFINE_boolean('use_dropout_1', False, "Si usa drop out en capa 1")
+tf.app.flags.DEFINE_boolean('use_dropout_2', False, "Si usa drop out en capa 2")
+tf.app.flags.DEFINE_boolean('use_dropout_3', True, "Si usa drop out en capa 3")
+tf.app.flags.DEFINE_boolean('use_dropout_4', False, "Si usa drop out en capa 4")
+tf.app.flags.DEFINE_integer("keep_drop_prob", 0.6, "probabilidad de quedar en el drop out")
+
 
 
 # -------------------------------- EVALUACION --------------------------------
