@@ -19,7 +19,7 @@
 10. [Bitacora](./doc/bitacora.md)
 
 
-####Extras:
+###Extras:
 - [Indice del repositorio](./doc/indicerepo.md)
 - [Paso a paso para obtener el modelo entrenado y evaluarlo](./doc/pasos.md)
 - [Script instalación de Tensorflow](./doc/ubuntu.md)
@@ -69,7 +69,7 @@ Sobre el Autor:
 ***
 
 <p align="center"> 
-    <a href="https://www.tensorflow.org/" target="_blank">
+    <a href="https://www.tensorflow.org/">
         <img src ="https://i.ytimg.com/vi/oZikw5k_2FM/maxresdefault.jpg" height="250"/>
     </a>
 </p>
