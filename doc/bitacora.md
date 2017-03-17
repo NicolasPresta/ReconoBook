@@ -63,7 +63,7 @@ Los resultados son estos:
 
 ![Bitacora](./img/bitacora3b.JPG "Bitacora")
 ![Bitacora](./img/bitacora3c.JPG "Bitacora")
-![Bitacora](./img/bicatora3a.JPG "Bitacora")  
+![Bitacora](./img/bitacora3a.JPG "Bitacora")  
 
 Vemos que no hay mejoras en la captura de test, llega hasta un 65% de acierto, frente al 99% del set de entrenamiento y 95% del set de validación.
 
