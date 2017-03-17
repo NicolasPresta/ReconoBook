@@ -54,4 +54,20 @@ Aun el modelo no lo hace como quisieramos para el set de test, osea para las cap
 
 
 *** 
+
+**17/03/2017**
+
+La estructura del modelo es igual a la del punto anterior, pero se agrega un dropout de la capa FC1, con un 50% de probabilidades de que se activen o no las neuronas (buscamos regularizar el modelo para que generalice mejor)
+
+Los resultados son estos:
+
+![Bitacora](./img/bitacora3b.JPG "Bitacora")
+![Bitacora](./img/bitacora3c.JPG "Bitacora")
+![Bitacora](./img/bicatora3a.JPG "Bitacora")  
+
+Vemos que no hay mejoras en la captura de test, llega hasta un 65% de acierto, frente al 99% del set de entrenamiento y 95% del set de validación.
+
+
+
+***
 [<- Volver Home](../README.md)  
