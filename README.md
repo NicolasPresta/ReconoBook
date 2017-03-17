@@ -30,6 +30,9 @@
 
 ***
 
+<img src="./doc/img/1B.jpg" width="84">
+<img src="./doc/img/2A.jpg" width="84">
+<img src="./doc/img/3E.jpg" width="84">
 <img src="./doc/img/4F.jpg" width="84">
 <img src="./doc/img/5B.jpg" width="84"> 
 <img src="./doc/img/6A.jpg" width="84"> 
