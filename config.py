@@ -58,7 +58,7 @@ tf.app.flags.DEFINE_integer('model_cant_fc1', 125, 'Cantidad de neurolas full co
 
 # -------------------------------- ENTRENAMIENTO --------------------------------
 tf.app.flags.DEFINE_integer("moving_average_decay", 0.9999, "The decay to use for the moving average.")
-tf.app.flags.DEFINE_integer("initial_learning_rate", 0.01, "Initial learning rate.")
+tf.app.flags.DEFINE_integer("initial_learning_rate", 0.09, "Initial learning rate.")
 tf.app.flags.DEFINE_integer("decay_steps", 1000, "Epochs after which learning rate decays.")
 tf.app.flags.DEFINE_integer("decay_rate", 0.95, "Learning rate decay factor.")
 
@@ -76,21 +76,25 @@ tf.app.flags.DEFINE_integer("steps_to_guardar_summary", 100, "Cantidad de pasos 
 tf.app.flags.DEFINE_integer("steps_to_guardar_checkpoint", 500, "Cantidad de pasos cada los cuales se guarda checkpoint")
 tf.app.flags.DEFINE_integer("saver_max_to_keep", 100, "Cantidad de checkouts a concervar")
 
-tf.app.flags.DEFINE_boolean('use_dropout_1', False, "Si usa drop out en capa 1")
+tf.app.flags.DEFINE_boolean('use_dropout_1', True, "Si usa drop out en capa 1")
 tf.app.flags.DEFINE_boolean('use_dropout_2', False, "Si usa drop out en capa 2")
 tf.app.flags.DEFINE_boolean('use_dropout_3', True, "Si usa drop out en capa 3")
 tf.app.flags.DEFINE_boolean('use_dropout_4', False, "Si usa drop out en capa 4")
-tf.app.flags.DEFINE_integer("keep_drop_prob", 0.6, "probabilidad de quedar en el drop out")
+tf.app.flags.DEFINE_integer("keep_drop_prob", 0.5, "probabilidad de quedar en el drop out")
 
-tf.app.flags.DEFINE_string('optimezer', 'AdamOptimizer', 'Optimizador a usar: GradientDescentOptimizer, AdamOptimizer, '
-                                                'AdadeltaOptimizer, RMSPropOptimizer, ProximalGradientDescentOptimizer')
+tf.app.flags.DEFINE_string('optimezer', 'GradientDescentOptimizer', 'Optimizador a usar: '
+                                                                    'GradientDescentOptimizer, '
+                                                                    'AdamOptimizer, '
+                                                                    'AdadeltaOptimizer, '
+                                                                    'RMSPropOptimizer, '
+                                                                    'ProximalGradientDescentOptimizer')
 
 
 # -------------------------------- EVALUACION --------------------------------
-tf.app.flags.DEFINE_boolean('eval_unique', True, "Ejecutar revisión imagen por imagen")
+tf.app.flags.DEFINE_boolean('eval_unique', False, "Ejecutar revisión imagen por imagen")
 tf.app.flags.DEFINE_boolean('eval_unique_from_dataset', True, "Evaluar imagen por imagen desde dataset")
-tf.app.flags.DEFINE_integer('eval_unique_cantidad_img', 10, "Cantidad de imagenes a evaluar si eval_unique = true")
-tf.app.flags.DEFINE_string('eval_dataset', 'validation', 'Data set usado para validacion (train, validation o test')
+tf.app.flags.DEFINE_integer('eval_unique_cantidad_img', 3, "Cantidad de imagenes a evaluar si eval_unique = true")
+tf.app.flags.DEFINE_string('eval_dataset', 'test', 'Data set usado para validacion (train, validation o test')
 
 tf.app.flags.DEFINE_boolean('eval_distort', False, "Distorcionar imagenes al evaluar")
 tf.app.flags.DEFINE_boolean('eval_crop', False, "Distorcionar imagenes al evaluar")
