@@ -87,10 +87,10 @@ tf.app.flags.DEFINE_string('optimezer', 'AdamOptimizer', 'Optimizador a usar: Gr
 
 
 # -------------------------------- EVALUACION --------------------------------
-tf.app.flags.DEFINE_boolean('eval_unique', False, "Ejecutar revisión imagen por imagen")
+tf.app.flags.DEFINE_boolean('eval_unique', True, "Ejecutar revisión imagen por imagen")
 tf.app.flags.DEFINE_boolean('eval_unique_from_dataset', True, "Evaluar imagen por imagen desde dataset")
-tf.app.flags.DEFINE_integer('eval_unique_cantidad_img', 3, "Cantidad de imagenes a evaluar si eval_unique = true")
-tf.app.flags.DEFINE_string('eval_dataset', 'test', 'Data set usado para validacion (train, validation o test')
+tf.app.flags.DEFINE_integer('eval_unique_cantidad_img', 10, "Cantidad de imagenes a evaluar si eval_unique = true")
+tf.app.flags.DEFINE_string('eval_dataset', 'validation', 'Data set usado para validacion (train, validation o test')
 
 tf.app.flags.DEFINE_boolean('eval_distort', False, "Distorcionar imagenes al evaluar")
 tf.app.flags.DEFINE_boolean('eval_crop', False, "Distorcionar imagenes al evaluar")

@@ -35,14 +35,11 @@ def train(dataset):
         # Definimos la variable que tiene el paso actual.
         global_step = tf.Variable(0, trainable=False)
 
-        # Defnimos los parametros de input al modelo
-        keep_prob = tf.placeholder(tf.float32)
-
         # Obtenemos imagenes y labels.
         images, labels = reconobook_modelo.train_inputs(dataset, FLAGS.train_batch_size)
 
         # Dadas las imagenes obtiene la probabilidad que tiene cada imagen de pertener a cada clase.
-        logits = reconobook_modelo.inference(images)
+        logits = reconobook_modelo.inference(images, FLAGS.keep_drop_prob)
 
         # Calulamos el costo.
         loss = reconobook_modelo.loss(logits, labels)
@@ -78,7 +75,6 @@ def train(dataset):
         for step in range(FLAGS.train_max_steps):
             start_time = time.time()
             sess.run([train_op],
-                     feed_dict={keep_prob: FLAGS.keep_drop_prob},
                      run_metadata=run_metadata,
                      options=run_options)
             duration = time.time() - start_time

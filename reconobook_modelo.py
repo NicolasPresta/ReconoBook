@@ -92,16 +92,15 @@ def unique_input(dataset):
 
 
 # Armado del modelo:
-def inference(images):
+def inference(images, keep_prob=1):
     """ Armamos el modelo.
     Contrucción de la red neuronal profunda
     Args:
         images: Images returned from distorted_inputs() or inputs().
+        keep_prob: drop out prob
     Returns:
         Logits.
     """
-
-    keep_prob = tf.placeholder(tf.float32)
 
     # Primer capa convolucional
     with tf.name_scope("CONV-1"):

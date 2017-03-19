@@ -61,7 +61,6 @@ def evaluate(datasetname, eval_num_examples):
         # Definimos los placeholder para el input
         _images = tf.placeholder(tf.float32, shape=[eval_num_examples, FLAGS.image_height, FLAGS.image_width, 3])
         _labels = tf.placeholder(tf.int32, shape=[eval_num_examples])
-        keep_prob = tf.placeholder(tf.float32)
 
         # Le pasamos las imagenes al modelo para que nos de su predicción
         logits = reconobook_modelo.inference(images)
@@ -108,7 +107,6 @@ def evaluate(datasetname, eval_num_examples):
 
             # Evaluamos las imagenes
             predictions = sess.run([top_k_op],
-                                   feed_dict={keep_prob: 1},
                                    run_metadata=run_metadata,
                                    options=run_options)
 
@@ -142,7 +140,6 @@ def evaluate_unique(datasetname):
 
         # definimos placeholders
         _images = tf.placeholder(tf.float32, shape=[None, FLAGS.image_height, FLAGS.image_width, 3])
-        keep_prob = tf.placeholder(tf.float32)
 
         # Obtenemos imagenes --(se cargan desde archivo, no desde dataset)
         if FLAGS.eval_unique_from_dataset:
@@ -151,9 +148,6 @@ def evaluate_unique(datasetname):
         # Build a Graph that computes the logits predictions from the
         # inference model.
         logits = reconobook_modelo.inference(_images)
-
-        # Calculate predictions.
-        maximaActivacion = tf.argmax(logits, 1)
 
         # Restore the moving average version of the learned variables for eval.
         variable_averages = tf.train.ExponentialMovingAverage(FLAGS.moving_average_decay)
@@ -196,7 +190,7 @@ def evaluate_unique(datasetname):
                         imagenCargada = load_image(FLAGS.manual_test_folder + "%d.jpg" % (step + 1))
 
                     # La pasamos por el modelo de predicción
-                    prediccion = sess.run([logits], feed_dict={keep_prob: 1, _images: imagenCargada})
+                    prediccion = sess.run([logits], feed_dict={_images: imagenCargada})
 
                     # Imprimios por consola
                     activaciones = prediccion[0][0]
@@ -234,6 +228,31 @@ def evaluate_unique(datasetname):
 
             coord.request_stop()
             coord.join(threads, stop_grace_period_secs=10)
+
+
+def eval_img(img):
+    with tf.Graph().as_default():
+        # definimos placeholders
+        _images = tf.placeholder(tf.float32, shape=[None, FLAGS.image_height, FLAGS.image_width, 3])
+        
+        # Inference.
+        logits = reconobook_modelo.inference(_images)
+
+        with tf.Session() as sess:
+            # Cargar modelo
+            ckpt = tf.train.get_checkpoint_state(FLAGS.checkpoint_dir)
+            saver.restore(sess, ckpt.model_checkpoint_path)
+            # Predecir
+            prediccion = sess.run([logits], feed_dict={_images: img})
+
+            activaciones = prediccion[0][0]
+            activacionesDesc = np.sort(activaciones)[::-1]
+            top1Activacion = activacionesDesc[0]
+            top1Clase = np.where(activaciones == top1Activacion)[0]
+
+            print('Top 1 => Clase: %d, Activación: %s, Libro: %s' % (top1Clase[0],
+                                                                     top1Activacion,
+                                                                     titulos[top1Clase[0]]))
 
 
 def main(argv=None):
