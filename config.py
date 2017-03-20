@@ -58,7 +58,7 @@ tf.app.flags.DEFINE_integer('model_cant_fc1', 125, 'Cantidad de neurolas full co
 
 # -------------------------------- ENTRENAMIENTO --------------------------------
 tf.app.flags.DEFINE_integer("moving_average_decay", 0.9999, "The decay to use for the moving average.")
-tf.app.flags.DEFINE_integer("initial_learning_rate", 0.09, "Initial learning rate.")
+tf.app.flags.DEFINE_integer("initial_learning_rate", 0.01, "Initial learning rate.")
 tf.app.flags.DEFINE_integer("decay_steps", 1000, "Epochs after which learning rate decays.")
 tf.app.flags.DEFINE_integer("decay_rate", 0.95, "Learning rate decay factor.")
 
@@ -76,9 +76,9 @@ tf.app.flags.DEFINE_integer("steps_to_guardar_summary", 100, "Cantidad de pasos 
 tf.app.flags.DEFINE_integer("steps_to_guardar_checkpoint", 500, "Cantidad de pasos cada los cuales se guarda checkpoint")
 tf.app.flags.DEFINE_integer("saver_max_to_keep", 100, "Cantidad de checkouts a concervar")
 
-tf.app.flags.DEFINE_boolean('use_dropout_1', True, "Si usa drop out en capa 1")
+tf.app.flags.DEFINE_boolean('use_dropout_1', False, "Si usa drop out en capa 1")
 tf.app.flags.DEFINE_boolean('use_dropout_2', False, "Si usa drop out en capa 2")
-tf.app.flags.DEFINE_boolean('use_dropout_3', True, "Si usa drop out en capa 3")
+tf.app.flags.DEFINE_boolean('use_dropout_3', False, "Si usa drop out en capa 3")
 tf.app.flags.DEFINE_boolean('use_dropout_4', False, "Si usa drop out en capa 4")
 tf.app.flags.DEFINE_integer("keep_drop_prob", 0.5, "probabilidad de quedar en el drop out")
 
