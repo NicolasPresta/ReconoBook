@@ -74,7 +74,7 @@ Vemos que no hay mejoras en la captura de test, llega hasta un 65% de acierto, f
 Usando la misma estructura, se agrega regularización a los parametros de los kernels de convolución. 
 wd=0.0004 (weight decay)
 
-Se entrena el modeo por 42900 pasos y se evalua:
+Se entrena el modeo por 42900 pasos (35 horas de entrenamineto) y se evalua:
 
 ![Bitacora](./img/bitacora4b.JPG "Bitacora")
 ![Bitacora](./img/bitacora4c.JPG "Bitacora")
