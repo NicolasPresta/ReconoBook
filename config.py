@@ -58,7 +58,7 @@ tf.app.flags.DEFINE_integer('model_cant_fc1', 125, 'Cantidad de neurolas full co
 
 # -------------------------------- ENTRENAMIENTO --------------------------------
 tf.app.flags.DEFINE_integer("moving_average_decay", 0.9999, "The decay to use for the moving average.")
-tf.app.flags.DEFINE_integer("initial_learning_rate", 0.01, "Initial learning rate.")
+tf.app.flags.DEFINE_integer("initial_learning_rate", 0.09, "Initial learning rate.")
 tf.app.flags.DEFINE_integer("decay_steps", 1000, "Epochs after which learning rate decays.")
 tf.app.flags.DEFINE_integer("decay_rate", 0.95, "Learning rate decay factor.")
 
@@ -91,19 +91,20 @@ tf.app.flags.DEFINE_string('optimezer', 'GradientDescentOptimizer', 'Optimizador
 
 
 # -------------------------------- EVALUACION --------------------------------
-tf.app.flags.DEFINE_boolean('eval_unique', False, "Ejecutar revisión imagen por imagen")
+tf.app.flags.DEFINE_boolean('eval_unique', True, "Ejecutar revisión imagen por imagen")
 tf.app.flags.DEFINE_boolean('eval_unique_from_dataset', True, "Evaluar imagen por imagen desde dataset")
 tf.app.flags.DEFINE_integer('eval_unique_cantidad_img', 3, "Cantidad de imagenes a evaluar si eval_unique = true")
 tf.app.flags.DEFINE_string('eval_dataset', 'test', 'Data set usado para validacion (train, validation o test')
 
 tf.app.flags.DEFINE_boolean('eval_distort', False, "Distorcionar imagenes al evaluar")
-tf.app.flags.DEFINE_boolean('eval_crop', False, "Distorcionar imagenes al evaluar")
+tf.app.flags.DEFINE_boolean('eval_crop', True, "Distorcionar imagenes al evaluar")
 
-tf.app.flags.DEFINE_integer('eval_num_examples', 2200, "Número de imagenes a evaluar")
+tf.app.flags.DEFINE_integer('eval_num_examples', 2000, "Número de imagenes a evaluar")
 tf.app.flags.DEFINE_integer('eval_num_examples_mini', 1000, "Número de imagenes a evaluar durante el entrenamiento")
 
 tf.app.flags.DEFINE_integer("top_k_prediction", 1, "La predicción correcta si esta entre los k primeros resultados")
 
+tf.app.flags.DEFINE_boolean('visualice_conv1_kernels', True, "Hacer Summary de kernels")
 
 titulosStr = ("Fisica universita,"
               "Patrones de diseño,"

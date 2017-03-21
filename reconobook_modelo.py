@@ -12,6 +12,7 @@ from __future__ import print_function
 
 import tensorflow as tf
 import reconobook_input
+import numpy as np
 import re
 import config
 
@@ -107,9 +108,26 @@ def inference(images, keep_prob=1):
         kernels_conv1 = _variable_with_weight_decay("kernels_conv1",
                                                     shape=[5, 5, 3, FLAGS.model_cant_kernels1],
                                                     stddev=0.004,
-                                                    wd=0.0004)
+                                                    wd=0.0008)
         bias_conv1 = tf.get_variable("bias_conv1", [FLAGS.model_cant_kernels1], initializer=tf.constant_initializer(0.1))
         conv1 = tf.nn.relu(_conv2d(images, kernels_conv1) + bias_conv1, name="conv1")
+
+    if FLAGS.visualice_conv1_kernels:
+        with tf.variable_scope('CONV-1-visualization'):
+            # scale weights to [0 1], type is still float
+            x_min = tf.reduce_min(kernels_conv1)
+            x_max = tf.reduce_max(kernels_conv1)
+            kernel_0_to_1 = (kernels_conv1 - x_min) / (x_max - x_min)
+
+            # to tf.image_summary format [batch_size, height, width, channels]
+            kernel_transposed = tf.transpose(kernel_0_to_1, [3, 0, 1, 2])
+
+            # this will display filters from conv1
+            tf.summary.image('conv1/filters', kernel_transposed, max_outputs=FLAGS.model_cant_kernels1)
+
+            activations = _conv2d(images, kernels_conv1)[1, :, :, :]
+            activations_transposed = tf.transpose(tf.expand_dims(activations, 0), [3, 1, 2, 0])
+            tf.summary.image('conv1/activations', activations_transposed, max_outputs=FLAGS.model_cant_kernels1)
 
     # max pool 1
     with tf.name_scope("MAXPOOL-1"):
@@ -129,9 +147,10 @@ def inference(images, keep_prob=1):
         kernels_conv2 = _variable_with_weight_decay("kernels_conv2",
                                                     shape=[3, 3, FLAGS.model_cant_kernels1, FLAGS.model_cant_kernels2],
                                                     stddev=0.004,
-                                                    wd=0.0004)
+                                                    wd=0.0008)
         bias_conv2 = tf.get_variable("bias_conv2", [FLAGS.model_cant_kernels2], initializer=tf.constant_initializer(0.1))
         conv2 = tf.nn.relu(_conv2d(norm1, kernels_conv2) + bias_conv2, name="conv2")
+
 
     # max pool 1
     with tf.name_scope("MAXPOOL-2"):
