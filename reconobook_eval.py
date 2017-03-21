@@ -125,25 +125,6 @@ def EvalularImagenes(images, labels, eval_num_examples):
             summary_writer.add_summary(summary, global_step)
             summary_writer.add_run_metadata(run_metadata, 'step' + global_step)
 
-            # Summary de imagenes erroneas
-
-            # clases = tf.argmax(logits, axis=1)
-            # for i in range(FLAGS.eval_num_examples):
-            #    tf.summary.image(str(clases[i].eval())+'_clase', tf.expand_dims(images[i, :, :, :], 0))
-
-            # to tf.image_summary format [batch_size, height, width, channels]
-            # summaryImg = tf.Summary.Image()
-            # for i in range(eval_num_examples):
-            #    if predictions[0][i]:
-            #        summary = tf.Summary()
-            #        tf.summary.image('img_ok_' + str(i), images[i, :, :, :], 1)
-            #    else:
-            #        tf.summary.image('img_error_' + str(i), images[i, :, :, :], 1)
-
-
-            # summary_writer.add_summary(summary, global_step)
-            # summary_writer.add_summary(summaryImg, global_step)
-
             return global_step, predictions, activaciones
 
 
@@ -160,7 +141,7 @@ def ImprimirEncabezado(datasetname, eval_num_examples):
     print("  ")
 
 
-def ImprimirResumen(predictions, labels, datasetname, global_step):
+def ImprimirResumen(predictions, labels, images, datasetname, global_step, saveImg):
 
     with tf.Graph().as_default() as g:
         summary = tf.Summary()
@@ -205,8 +186,17 @@ def ImprimirResumen(predictions, labels, datasetname, global_step):
         # Guardamos en el summary el resultado
         summary_writer.add_summary(summary, global_step)
 
+        # Guardamos summary de img
+        if saveImg:
+            true_img = images[predictions]
+            false_img = images[[not i for i in predictions]]
+            sumImg = tf.summary.image('false-img_' + datasetname, false_img, max_outputs=len(false_img))
+            mergeOp = tf.summary.merge([sumImg])
+            sum = tf.Session().run(mergeOp)
+            summary_writer.add_summary(sum, global_step)
 
-def evaluate(datasetname, eval_num_examples):
+
+def evaluate(datasetname, eval_num_examples, saveImg=False):
     # Mostramos por consola la configuración de evaluación
     ImprimirEncabezado(datasetname, eval_num_examples)
 
@@ -217,7 +207,7 @@ def evaluate(datasetname, eval_num_examples):
     global_step, predictions, _ = EvalularImagenes(images, labels, eval_num_examples)
 
     # Imprime por consola y en el summary el resultado
-    ImprimirResumen(predictions, labels, datasetname, global_step)
+    ImprimirResumen(predictions, labels, images, datasetname, global_step, saveImg)
 
 
 def evaluate_unique(datasetname):
@@ -272,7 +262,7 @@ def main(argv=None):
     if FLAGS.eval_unique:
         evaluate_unique(FLAGS.eval_dataset)
     else:
-        evaluate(FLAGS.eval_dataset, FLAGS.eval_num_examples)
+        evaluate(FLAGS.eval_dataset, FLAGS.eval_num_examples, saveImg=True)
 
     input = sys.stdin.readline()
 

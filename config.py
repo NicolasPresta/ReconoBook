@@ -99,7 +99,7 @@ tf.app.flags.DEFINE_string('eval_dataset', 'test', 'Data set usado para validaci
 tf.app.flags.DEFINE_boolean('eval_distort', False, "Distorcionar imagenes al evaluar")
 tf.app.flags.DEFINE_boolean('eval_crop', True, "Distorcionar imagenes al evaluar")
 
-tf.app.flags.DEFINE_integer('eval_num_examples', 2000, "Número de imagenes a evaluar")
+tf.app.flags.DEFINE_integer('eval_num_examples', 2200, "Número de imagenes a evaluar")
 tf.app.flags.DEFINE_integer('eval_num_examples_mini', 1000, "Número de imagenes a evaluar durante el entrenamiento")
 
 tf.app.flags.DEFINE_integer("top_k_prediction", 1, "La predicción correcta si esta entre los k primeros resultados")

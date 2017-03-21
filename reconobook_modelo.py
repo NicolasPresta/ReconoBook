@@ -125,6 +125,10 @@ def inference(images, keep_prob=1):
             # this will display filters from conv1
             tf.summary.image('conv1/filters', kernel_transposed, max_outputs=FLAGS.model_cant_kernels1)
 
+        with tf.variable_scope('CONV-1-img-activation'):
+            tf.summary.image('conv1/img', tf.expand_dims(images[1, :, :, :], 0), max_outputs=1)
+
+        with tf.variable_scope('CONV-1-activations'):
             activations = _conv2d(images, kernels_conv1)[1, :, :, :]
             activations_transposed = tf.transpose(tf.expand_dims(activations, 0), [3, 1, 2, 0])
             tf.summary.image('conv1/activations', activations_transposed, max_outputs=FLAGS.model_cant_kernels1)
