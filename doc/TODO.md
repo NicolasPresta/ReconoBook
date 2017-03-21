@@ -12,6 +12,7 @@
 - [ ] Correr el modelo en Android.
 - [ ] Ampliar a 30 Libros.
 - [ ] Agregar más capturas utilizando otras cámaras.
+- [x] Agregar resumen de precición por clase (para evaluar que tan bien aprende cada clase).
 - [ ] Poder obtener una lista de input y predicción al evalular, para analisar mejor que está aprendiendo mal.
 
 
