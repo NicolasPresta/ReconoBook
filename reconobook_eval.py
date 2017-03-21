@@ -166,12 +166,10 @@ def ImprimirResumen(predictions, labels, datasetname, global_step):
         summary = tf.Summary()
         summary_writer = tf.summary.FileWriter(FLAGS.summary_dir_eval, g)
 
-        predictions = predictions[0]
-
         # Total Count
         total_count = len(predictions)
 
-        # Totalizamos el númer de predicciones correctas
+        # Totalizamos el númer de# predicciones correctas
         true_count = np.sum(predictions)
 
         # Calculamos la precisión
