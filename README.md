@@ -1,12 +1,13 @@
-#RECONOBOOK
+# RECONOBOOK  
 
-##Un proyecto open source de visión artificial para reconocer la portada de libros.  
+## Un proyecto open source de visión artificial para reconocer la portada de libros  
 
-![Portada](./doc/img/portada2.jpg "Portada")
 
-***
+![Portada](./doc/img/portada2.jpg "Portada")  
 
-###INDICE
+***  
+
+### INDICE
 1.  [Introducción y Objetivos](./doc/objetivos.md)
 2.  [Herramientas utilizadas](./doc/herramientas.md)
 3.  [Descripción del problema](./doc/problema.md)
@@ -19,7 +20,7 @@
 10. [Bitacora](./doc/bitacora.md)
 
 
-###Extras:
+### Extras:
 - [Indice del repositorio](./doc/indicerepo.md)
 - [Paso a paso para obtener el modelo entrenado y evaluarlo](./doc/pasos.md)
 - [Script instalación de Tensorflow](./doc/ubuntu.md)
@@ -30,26 +31,9 @@
 
 ***
 
-<img src="./doc/img/1B.jpg" width="84">
-<img src="./doc/img/2A.jpg" width="84">
-<img src="./doc/img/3E.jpg" width="84">
-<img src="./doc/img/4F.jpg" width="84">
-<img src="./doc/img/5B.jpg" width="84"> 
-<img src="./doc/img/6A.jpg" width="84"> 
-<img src="./doc/img/7C.jpg" width="84"> 
-<img src="./doc/img/8F.jpg" width="84"> 
-<img src="./doc/img/9E.jpg" width="84"> 
-<img src="./doc/img/10E.jpg" width="84"> 
-<img src="./doc/img/11A.jpg" width="84"> 
-<img src="./doc/img/12B.jpg" width="84">
-<img src="./doc/img/13C.jpg" width="84"> 
-<img src="./doc/img/14C.jpg" width="84"> 
-<img src="./doc/img/15D.jpg" width="84"> 
-<img src="./doc/img/16F.jpg" width="84"> 
-<img src="./doc/img/17E.jpg" width="84"> 
-<img src="./doc/img/18B.jpg" width="84"> 
-<img src="./doc/img/19B.jpg" width="84"> 
-<img src="./doc/img/20C.jpg" width="84">
+<img src="./doc/img/1B.jpg" width="84"><img src="./doc/img/2A.jpg" width="84"><img src="./doc/img/3E.jpg" width="84"><img src="./doc/img/4F.jpg" width="84"><img src="./doc/img/5B.jpg" width="84"><img src="./doc/img/6A.jpg" width="84">
+<img src="./doc/img/7C.jpg" width="84"><img src="./doc/img/8F.jpg" width="84"><img src="./doc/img/9E.jpg" width="84"><img src="./doc/img/10E.jpg" width="84"><img src="./doc/img/11A.jpg" width="84"><img src="./doc/img/12B.jpg" width="84"><img src="./doc/img/13C.jpg" width="84"><img src="./doc/img/14C.jpg" width="84"><img src="./doc/img/15D.jpg" width="84"><img src="./doc/img/16F.jpg" width="84"><img src="./doc/img/17E.jpg" width="84"><img src="./doc/img/18B.jpg" width="84"> 
+<img src="./doc/img/19B.jpg" width="84"><img src="./doc/img/20C.jpg" width="84">
 
 
 ***
