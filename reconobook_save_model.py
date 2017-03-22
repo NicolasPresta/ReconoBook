@@ -19,6 +19,7 @@ from tensorflow.python.saved_model import signature_def_utils
 from tensorflow.python.saved_model import tag_constants
 from tensorflow.python.saved_model import utils
 from tensorflow.python.util import compat
+from tensorflow.python.ops.data_flow_ops import initialize_all_tables
 import numpy as np
 from reconobook_dataset import ReconoBookData
 import reconobook_modelo
@@ -45,7 +46,7 @@ def save_model():
         # Inference.
         logits = reconobook_modelo.inference(_images)
 
-        clase = tf.argmax(logits, 1)
+        # clase = tf.argmax(logits, 1)
 
         values, indices = tf.nn.top_k(logits, 10)
         prediction_classes = tf.contrib.lookup.index_to_string(
@@ -59,11 +60,18 @@ def save_model():
             saver = tf.train.Saver(variables_to_restore)
             saver.restore(sess, ckpt.model_checkpoint_path)
 
-            export_path_base = sys.argv[-1]
+            # Definimos la ruta donde se guardará el modelo
             export_path = os.path.join(
-                compat.as_bytes(export_path_base),
+                compat.as_bytes(FLAGS.export_model_dir),
                 compat.as_bytes(str(FLAGS.model_version)))
+
+            # creamos el directorio de export si no existe, y si existe lo borramos y creamos de nuevo
+            if os.path.exists(export_path):
+                shutil.rmtree(export_path)
+
             print('Exportando modelo a %s' % export_path)
+
+            # Creamos el "builder"
             builder = saved_model_builder.SavedModelBuilder(export_path)
 
             # Build the signature_def_map.
@@ -81,8 +89,8 @@ def save_model():
                 },
                 method_name=signature_constants.CLASSIFY_METHOD_NAME)
 
-            tensor_info_x = utils.build_tensor_info(x)
-            tensor_info_y = utils.build_tensor_info(y)
+            tensor_info_x = utils.build_tensor_info(_images)
+            tensor_info_y = utils.build_tensor_info(logits)
             
             prediction_signature = signature_def_utils.build_signature_def(
                 inputs={'images': tensor_info_x},
@@ -102,8 +110,7 @@ def save_model():
 
             builder.save()
 
-            print
-            'Done exporting!'
+            print('Modelo exportado')
 
 
 
@@ -113,5 +120,3 @@ def main(argv=None):
 
 if __name__ == '__main__':
     tf.app.run()
-
-    

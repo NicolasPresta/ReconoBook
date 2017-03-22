@@ -25,6 +25,7 @@ tf.app.flags.DEFINE_string('test_folder', 'test', 'Nombre Directorio con las ima
 
 tf.app.flags.DEFINE_string('labels_file_name', 'labels.txt', 'Labels file')
 
+tf.app.flags.DEFINE_string('export_model_dir', './export_model/', 'Carpeta donde se exporta el modelo')
 
 # -------------------------------- DATASET --------------------------------
 tf.app.flags.DEFINE_string('porcentaje_img_validation', 20, 'Porcentaje de imagenes que van al set de validation')
@@ -54,6 +55,8 @@ tf.app.flags.DEFINE_integer('image_width', 40, 'Ancho imagen')
 tf.app.flags.DEFINE_integer('model_cant_kernels1', 30, 'Cantidad de kernels de convolución en la capa 1')
 tf.app.flags.DEFINE_integer('model_cant_kernels2', 60, 'Cantidad de kernels de convolución en la capa 2')
 tf.app.flags.DEFINE_integer('model_cant_fc1', 125, 'Cantidad de neurolas full conected en capa 3')
+
+tf.app.flags.DEFINE_integer('model_version', 1, 'Versión del modelo')
 
 
 # -------------------------------- ENTRENAMIENTO --------------------------------
