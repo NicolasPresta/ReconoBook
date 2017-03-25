@@ -72,7 +72,7 @@ tf.app.flags.DEFINE_boolean('train_distort', True, "Distorcionar imagenes al eva
 tf.app.flags.DEFINE_boolean('train_crop', True, "Distorcionar imagenes al evaluar")
 
 tf.app.flags.DEFINE_integer('train_max_steps', 1000000, "Number of batches to run.")
-tf.app.flags.DEFINE_integer("train_batch_size", 64, "Cantidad de imagenes que se procesan por batch")
+tf.app.flags.DEFINE_integer("train_batch_size", 128, "Cantidad de imagenes que se procesan por batch")
 
 tf.app.flags.DEFINE_integer("steps_to_imprimir_avance", 50, "Cantidad de pasos cada los cuales se imprimer por consola")
 tf.app.flags.DEFINE_integer("steps_to_guardar_summary", 100, "Cantidad de pasos cada los cuales se guarda summary")
@@ -107,7 +107,7 @@ tf.app.flags.DEFINE_integer('eval_num_examples_mini', 1000, "Número de imagenes
 
 tf.app.flags.DEFINE_integer("top_k_prediction", 1, "La predicción correcta si esta entre los k primeros resultados")
 
-tf.app.flags.DEFINE_boolean('visualice_conv1_kernels', True, "Hacer Summary de kernels")
+tf.app.flags.DEFINE_boolean('visualice_conv1_kernels', False, "Hacer Summary de kernels")
 
 titulosStr = ("Fisica universita,"
               "Patrones de diseño,"

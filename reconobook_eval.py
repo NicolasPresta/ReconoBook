@@ -100,10 +100,10 @@ def EvalularImagenes(images, labels, eval_num_examples):
         top_k_op = tf.nn.in_top_k(logits, _labels, FLAGS.top_k_prediction)
 
         # Build the summary operation based on the TF collection of Summaries.
-        run_options = tf.RunOptions(trace_level=tf.RunOptions.NO_TRACE)
+        run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
         run_metadata = tf.RunMetadata()
-        summary_op = tf.summary.merge_all()
-        summary_writer = tf.summary.FileWriter(FLAGS.summary_dir_eval, g)
+        # summary_op = tf.summary.merge_all()
+        # summary_writer = tf.summary.FileWriter(FLAGS.summary_dir_eval, g)
 
         with tf.Session() as sess:
             # Restore del modelo guardado (checkpoint)
@@ -115,15 +115,14 @@ def EvalularImagenes(images, labels, eval_num_examples):
 
             # Evaluamos las imagenes
             predictions, activaciones = sess.run([top_k_op, logits],
-                                                feed_dict={_images: images, _labels: labels},
-                                                run_metadata=run_metadata,
-                                                options=run_options)
+                                                 feed_dict={_images: images, _labels: labels},
+                                                 run_metadata=run_metadata,
+                                                 options=run_options)
 
             # Guardamos el summary
-            summary = tf.Summary()
-            summary.ParseFromString(sess.run(summary_op, feed_dict={_images: images, _labels: labels}))
-            summary_writer.add_summary(summary, global_step)
-            summary_writer.add_run_metadata(run_metadata, 'step' + global_step)
+            # summary_str = sess.run(summary_op)
+            # summary_writer.add_run_metadata(run_metadata, 'step' + global_step)
+            #summary_writer.add_summary(summary_str, global_step)
 
             return global_step, predictions, activaciones
 

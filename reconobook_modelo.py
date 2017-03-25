@@ -107,8 +107,8 @@ def inference(images, keep_prob=1):
     with tf.name_scope("CONV-1"):
         kernels_conv1 = _variable_with_weight_decay("kernels_conv1",
                                                     shape=[5, 5, 3, FLAGS.model_cant_kernels1],
-                                                    stddev=0.004,
-                                                    wd=0.0004)
+                                                    stddev=0.01,
+                                                    wd=0.001)
         bias_conv1 = tf.get_variable("bias_conv1", [FLAGS.model_cant_kernels1], initializer=tf.constant_initializer(0.1))
         conv1 = tf.nn.relu(_conv2d(images, kernels_conv1) + bias_conv1, name="conv1")
 
@@ -150,8 +150,8 @@ def inference(images, keep_prob=1):
     with tf.name_scope("CONV-2"):
         kernels_conv2 = _variable_with_weight_decay("kernels_conv2",
                                                     shape=[3, 3, FLAGS.model_cant_kernels1, FLAGS.model_cant_kernels2],
-                                                    stddev=0.004,
-                                                    wd=0.0004)
+                                                    stddev=0.01,
+                                                    wd=0.001)
         bias_conv2 = tf.get_variable("bias_conv2", [FLAGS.model_cant_kernels2], initializer=tf.constant_initializer(0.1))
         conv2 = tf.nn.relu(_conv2d(norm1, kernels_conv2) + bias_conv2, name="conv2")
 
