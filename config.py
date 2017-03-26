@@ -35,8 +35,8 @@ tf.app.flags.DEFINE_boolean('modo_procesar', False, 'Al ejecutar analize_jpg rea
 tf.app.flags.DEFINE_integer('img_por_captura', 110, 'Cantidad de imagenes a conservar por captura')
 
 tf.app.flags.DEFINE_string('capturas_id', 'A,B,C,D,E,F', 'Ids de todas las capturas realizadas')
-tf.app.flags.DEFINE_string('capturasEntrenamiento_id', 'A,B,C,D,E', 'Ids de todas las capturas para entrenar')
-tf.app.flags.DEFINE_string('capturasTest_id', 'F', 'Ids de todas las capturas para test')
+tf.app.flags.DEFINE_string('capturasEntrenamiento_id', 'A,C,D,E,F', 'Ids de todas las capturas para entrenar')
+tf.app.flags.DEFINE_string('capturasTest_id', 'B', 'Ids de todas las capturas para test')
 
 tf.app.flags.DEFINE_integer('train_shards', 1, 'Numero de particiones del dataset de entrenamiento')
 tf.app.flags.DEFINE_integer('validation_shards', 1, 'Numero de particiones del dataset de validación')
@@ -72,7 +72,7 @@ tf.app.flags.DEFINE_boolean('train_distort', True, "Distorcionar imagenes al eva
 tf.app.flags.DEFINE_boolean('train_crop', True, "Distorcionar imagenes al evaluar")
 
 tf.app.flags.DEFINE_integer('train_max_steps', 1000000, "Number of batches to run.")
-tf.app.flags.DEFINE_integer("train_batch_size", 128, "Cantidad de imagenes que se procesan por batch")
+tf.app.flags.DEFINE_integer("train_batch_size", 256, "Cantidad de imagenes que se procesan por batch")
 
 tf.app.flags.DEFINE_integer("steps_to_imprimir_avance", 50, "Cantidad de pasos cada los cuales se imprimer por consola")
 tf.app.flags.DEFINE_integer("steps_to_guardar_summary", 100, "Cantidad de pasos cada los cuales se guarda summary")
@@ -84,6 +84,9 @@ tf.app.flags.DEFINE_boolean('use_dropout_2', False, "Si usa drop out en capa 2")
 tf.app.flags.DEFINE_boolean('use_dropout_3', False, "Si usa drop out en capa 3")
 tf.app.flags.DEFINE_boolean('use_dropout_4', False, "Si usa drop out en capa 4")
 tf.app.flags.DEFINE_integer("keep_drop_prob", 0.5, "probabilidad de quedar en el drop out")
+
+tf.app.flags.DEFINE_integer("initializer_stddev", 0.004, "desviación estandar con la que se inician los variables")
+tf.app.flags.DEFINE_integer("variable_wd", 0.0004, "weigth decay de las variables, regularización")
 
 tf.app.flags.DEFINE_string('optimezer', 'GradientDescentOptimizer', 'Optimizador a usar: '
                                                                     'GradientDescentOptimizer, '
@@ -97,17 +100,17 @@ tf.app.flags.DEFINE_string('optimezer', 'GradientDescentOptimizer', 'Optimizador
 tf.app.flags.DEFINE_boolean('eval_unique', False, "Ejecutar revisión imagen por imagen")
 tf.app.flags.DEFINE_boolean('eval_unique_from_dataset', True, "Evaluar imagen por imagen desde dataset")
 tf.app.flags.DEFINE_integer('eval_unique_cantidad_img', 3, "Cantidad de imagenes a evaluar si eval_unique = true")
-tf.app.flags.DEFINE_string('eval_dataset', 'test', 'Data set usado para validacion (train, validation o test')
+tf.app.flags.DEFINE_string('eval_dataset', 'validation', 'Data set usado para validacion (train, validation o test')
 
 tf.app.flags.DEFINE_boolean('eval_distort', False, "Distorcionar imagenes al evaluar")
-tf.app.flags.DEFINE_boolean('eval_crop', True, "Distorcionar imagenes al evaluar")
+tf.app.flags.DEFINE_boolean('eval_crop', False, "Distorcionar imagenes al evaluar")
 
 tf.app.flags.DEFINE_integer('eval_num_examples', 2200, "Número de imagenes a evaluar")
 tf.app.flags.DEFINE_integer('eval_num_examples_mini', 1000, "Número de imagenes a evaluar durante el entrenamiento")
 
 tf.app.flags.DEFINE_integer("top_k_prediction", 1, "La predicción correcta si esta entre los k primeros resultados")
 
-tf.app.flags.DEFINE_boolean('visualice_conv1_kernels', False, "Hacer Summary de kernels")
+tf.app.flags.DEFINE_boolean('visualice_conv1_kernels', True, "Hacer Summary de kernels")
 
 titulosStr = ("Fisica universita,"
               "Patrones de diseño,"
